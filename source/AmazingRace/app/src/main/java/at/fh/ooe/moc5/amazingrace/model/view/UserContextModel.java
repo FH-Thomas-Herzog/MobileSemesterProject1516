@@ -1,4 +1,4 @@
-package at.fh.ooe.moc5.amazingrace.model;
+package at.fh.ooe.moc5.amazingrace.model.view;
 
 import java.io.Serializable;
 import java.util.Calendar;

@@ -4,11 +4,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 
-import org.apache.commons.lang3.StringUtils;
-
 import at.fh.ooe.moc5.amazingrace.R;
 import at.fh.ooe.moc5.amazingrace.activity.LoginActivity;
-import at.fh.ooe.moc5.amazingrace.model.LoginViewModel;
+import at.fh.ooe.moc5.amazingrace.model.view.LoginViewModel;
 
 /**
  * Created by Thomas on 12/24/2015.

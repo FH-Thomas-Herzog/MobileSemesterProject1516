@@ -1,6 +1,4 @@
-package at.fh.ooe.moc5.amazingrace.model;
-
-import android.app.Service;
+package at.fh.ooe.moc5.amazingrace.model.view;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,6 +23,11 @@ public class LoginViewModel {
         return (((username != null) && (!StringUtils.isEmpty(username))) && ((password != null) && (!StringUtils.isEmpty(password))));
     }
 
+    public void reset() {
+        username = null;
+        password = null;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -43,8 +46,12 @@ public class LoginViewModel {
 
 
     // <editor-fold desc="Actions">
-    public boolean loginAction() throws RestServiceProxy.ServiceException {
-        return restProxy.checkCredentials(username, password);
+    public UserContextModel loginAction() throws RestServiceProxy.ServiceException {
+        final boolean isValidCredentials = restProxy.checkCredentials(username, password);
+        if (isValidCredentials) {
+            return new UserContextModel(username);
+        }
+        return null;
     }
     // <editor-fold>
 }
