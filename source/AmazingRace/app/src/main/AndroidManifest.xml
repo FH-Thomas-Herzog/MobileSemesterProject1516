@@ -2,16 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="at.fh.ooe.moc5.amazingrace">
 
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".AmazingRaceApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/application_title"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".AmazingRaceApplication">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="@string/activity_title_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,12 +25,10 @@
         </activity>
         <activity
             android:name=".activity.RouteActivity"
-            android:label="@string/title_activity_route" />
-
+            android:label="@string/activity_title_route" />
+        <activity
+            android:name=".activity.CheckpointActivity"
+            android:label="@string/activity_title_checkpoint" />
     </application>
 
-    <!-- Permissions -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

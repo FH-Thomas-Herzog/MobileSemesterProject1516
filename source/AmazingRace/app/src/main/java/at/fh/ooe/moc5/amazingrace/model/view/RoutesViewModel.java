@@ -11,7 +11,7 @@ import at.fh.ooe.moc5.amazingrace.service.ServiceFactory;
 /**
  * Created by Thomas on 12/25/2015.
  */
-public class RouteViewModel implements Serializable {
+public class RoutesViewModel implements Serializable {
 
     private UserContextModel userContext;
     private RouteModel selectedRoute;
@@ -19,7 +19,7 @@ public class RouteViewModel implements Serializable {
 
     private RestServiceProxy proxy;
 
-    public RouteViewModel(UserContextModel userContext) {
+    public RoutesViewModel(UserContextModel userContext) {
         Objects.requireNonNull(userContext, "UserContext must not be null");
         this.userContext = userContext;
         proxy = ServiceFactory.createRestServiceProxy();

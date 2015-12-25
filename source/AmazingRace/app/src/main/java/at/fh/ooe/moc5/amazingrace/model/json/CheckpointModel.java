@@ -2,10 +2,12 @@ package at.fh.ooe.moc5.amazingrace.model.json;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Thomas on 12/25/2015.
  */
-public class CheckpointModel {
+public class CheckpointModel implements Serializable {
 
     @SerializedName("Id")
     private String id;
@@ -23,6 +25,7 @@ public class CheckpointModel {
     public CheckpointModel() {
     }
 
+    //region Getter and Setter
     public String getId() {
         return id;
     }
@@ -70,4 +73,5 @@ public class CheckpointModel {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+    //endregion
 }

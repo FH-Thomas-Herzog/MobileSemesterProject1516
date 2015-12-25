@@ -2,19 +2,21 @@ package at.fh.ooe.moc5.amazingrace.model.json;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Created by Thomas on 12/25/2015.
  */
-public class RouteModel {
+public class RouteModel implements Serializable {
 
     @SerializedName("Id")
     private String id;
     @SerializedName("Name")
     private String name;
     @SerializedName("VisitedCheckpoints")
-    private CheckpointModel[] visitedCheckpoints;
+    private List<CheckpointModel> visitedCheckpoints;
     @SerializedName("NextCheckpoint")
     private CheckpointModel nextCheckpoint;
 
@@ -38,11 +40,11 @@ public class RouteModel {
         this.name = name;
     }
 
-    public CheckpointModel[] getVisitedCheckpoints() {
+    public List<CheckpointModel> getVisitedCheckpoints() {
         return visitedCheckpoints;
     }
 
-    public void setVisitedCheckpoints(CheckpointModel[] visitedCheckpoints) {
+    public void setVisitedCheckpoints(List<CheckpointModel> visitedCheckpoints) {
         this.visitedCheckpoints = visitedCheckpoints;
     }
 
@@ -69,7 +71,7 @@ public class RouteModel {
         if (isDone()) {
             sb.append(finishedString);
         } else {
-            sb.append(visitedCheckpoints.length).append("x").append(doneString);
+            sb.append(visitedCheckpoints.size()).append("x").append(doneString);
         }
         sb.append(")");
         return sb.toString();

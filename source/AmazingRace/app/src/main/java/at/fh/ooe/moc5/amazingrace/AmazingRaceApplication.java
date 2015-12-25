@@ -17,6 +17,8 @@ public class AmazingRaceApplication extends Application {
         return loggedUser;
     }
 
+    public static final String EXTRA_ROUTE = "EXTRA_ROUTE";
+
     public void onCreate() {
         super.onCreate();
         // Setup handler for uncaught exceptions.

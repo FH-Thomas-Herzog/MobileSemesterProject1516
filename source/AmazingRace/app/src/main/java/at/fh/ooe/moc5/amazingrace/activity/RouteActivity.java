@@ -20,13 +20,13 @@ import at.fh.ooe.moc5.amazingrace.R;
 import at.fh.ooe.moc5.amazingrace.adaptor.RouteArrayAdapter;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 import at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult;
-import at.fh.ooe.moc5.amazingrace.model.view.RouteViewModel;
+import at.fh.ooe.moc5.amazingrace.model.view.RoutesViewModel;
 import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
 import at.fh.ooe.moc5.amazingrace.util.DialogUtil;
 
 public class RouteActivity extends AppCompatActivity implements DialogInterface.OnClickListener, AdapterView.OnItemClickListener {
 
-    private RouteViewModel viewModel;
+    private RoutesViewModel viewModel;
     private AmazingRaceApplication application;
 
     private AlertDialog backButtonDialog;
@@ -39,13 +39,13 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
         application = (AmazingRaceApplication) getApplication();
-        viewModel = new RouteViewModel(application.getLoggedUser());
+        viewModel = new RoutesViewModel(application.getLoggedUser());
         prepareView(Boolean.TRUE);
     }
 
     @Override
     public void onBackPressed() {
-        backButtonDialog = DialogUtil.createAlertDialog(this, getString(R.string.warning_dialog_title), getString(R.string.warning_want_quit), this);
+        backButtonDialog = DialogUtil.createAlertDialog(this, getString(R.string.dialog_title_warning), getString(R.string.warning_want_quit), this);
         backButtonDialog.show();
     }
     //endregion
@@ -156,9 +156,8 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(RouteActivity.this, null);
-        intent.putExtra("route", ((RouteModel) parent.getItemAtPosition(position)).getId());
-
+        Intent intent = new Intent(RouteActivity.this, CheckpointActivity.class);
+        intent.putExtra(AmazingRaceApplication.EXTRA_ROUTE, ((RouteModel) parent.getItemAtPosition(position)));
         startActivity(intent);
     }
     //endregion

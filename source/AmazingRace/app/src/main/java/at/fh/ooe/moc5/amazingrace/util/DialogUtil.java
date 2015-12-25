@@ -1,7 +1,6 @@
 package at.fh.ooe.moc5.amazingrace.util;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
@@ -16,9 +15,9 @@ public class DialogUtil {
 
     public static AlertDialog createErrorDialog(final Context ctx, final String message, final DialogInterface.OnClickListener listener) {
         return new AlertDialog.Builder(ctx)
-                .setTitle(ctx.getString(R.string.error_dialog_title))
+                .setTitle(ctx.getString(R.string.dialog_title_error))
                 .setMessage(message)
-                .setPositiveButton(ctx.getText(R.string.ok_action), listener)
+                .setPositiveButton(ctx.getText(R.string.action_ok), listener)
                 .create();
     }
 
@@ -27,8 +26,8 @@ public class DialogUtil {
         return new AlertDialog.Builder(ctx)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton(ctx.getText(R.string.yes_action), listener)
-                .setNegativeButton(ctx.getText(R.string.no_action), listener)
+                .setPositiveButton(ctx.getText(R.string.action_yes), listener)
+                .setNegativeButton(ctx.getText(R.string.action_no), listener)
                 .create();
     }
 }
