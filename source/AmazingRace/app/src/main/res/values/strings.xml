@@ -13,6 +13,8 @@
     <string name="label_username">Username</string>
     <string name="label_password">Password</string>
     <string name="progress_login">Logging in ...</string>
+    <string name="progress_loading_routes">Loading routes ...</string>
+    <string name="progress_validating_secred">Validating secret</string>
     <string name="progress_title">Processing</string>
     <string name="dialog_title_error">Error</string>
     <string name="dialog_title_warning">Warning</string>
@@ -22,9 +24,12 @@
     <string name="error_unknown">Sorry. An unknown error occurred</string>
     <string name="error_login_failed">User and/or password not correct</string>
     <string name="error_user_became_invalid">Your user is not valid anymore. You will be logged out.</string>
-    <string name="warning_want_quit">Do you realy want to quit ?</string>
+    <string name="error_user_not_logged">Your are no longer logged in. You will be returned to the login page</string>
+    <string name="warning_want_quit">Do you really want to quit ?</string>
+    <string name="info_secret_wrong">Sorry wrong secret. Guess again</string>
     <string name="finished">finished</string>
     <string name="done">done</string>
-    <string name="accordion_list_view">List view</string>
-    <string name="accordion_map_view">Map view</string>
+    <string name="checkpoint_group_secret">Checkpoint Secret</string>
+    <string name="checkpoint_group_list">Checkpoint List</string>
+    <string name="checkpoint_group_map">Checkpoint Map</string>
 </resources>

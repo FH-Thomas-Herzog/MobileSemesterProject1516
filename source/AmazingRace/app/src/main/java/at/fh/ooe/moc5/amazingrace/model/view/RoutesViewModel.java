@@ -7,6 +7,7 @@ import java.util.Objects;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceFactory;
+import at.fh.ooe.moc5.amazingrace.service.ServiceException;
 
 /**
  * Created by Thomas on 12/25/2015.
@@ -26,7 +27,7 @@ public class RoutesViewModel implements Serializable {
     }
 
     //region
-    public List<RouteModel> loadRoutes() throws RestServiceProxy.ServiceException {
+    public List<RouteModel> loadRoutes() throws ServiceException {
         routes = proxy.getRoutes(userContext.getCredentialsModel());
         return routes;
     }

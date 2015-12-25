@@ -2,10 +2,12 @@ package at.fh.ooe.moc5.amazingrace.model.json;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Thomas on 12/25/2015.
  */
-public class CredentialsRequestModel {
+public class CredentialsRequestModel implements Serializable {
 
     @SerializedName("UserName")
     public final String userName;
@@ -17,7 +19,7 @@ public class CredentialsRequestModel {
         this.password = password;
     }
 
-    public String toQueryString(){
+    public String toQueryString() {
         return String.format("userName=%s&password=%s", userName, password);
     }
 }

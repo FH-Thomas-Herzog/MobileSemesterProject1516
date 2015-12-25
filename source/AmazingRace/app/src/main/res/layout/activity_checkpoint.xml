@@ -16,7 +16,19 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/routeCheckpointContainerLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10pt"
+            android:clickable="true"
+            android:onClick="toggleAccordion"
+            android:text="@string/checkpoint_group_secret"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
         <LinearLayout
+            android:id="@+id/routeCheckpointContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -52,25 +64,27 @@
                 android:text="@string/action_answer" />
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/routeCheckpointListContainerLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:scrollbars="vertical">
+            android:layout_marginBottom="10pt"
+            android:clickable="true"
+            android:onClick="toggleAccordion"
+            android:text="@string/checkpoint_group_list"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/routeListTitleTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10pt"
-                android:clickable="true"
-                android:onClick="toggleAccordion"
-                android:text="@string/accordion_list_view"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/routeCheckpointListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
 
             <ListView
-                android:id="@+id/routeListContentList"
+                android:id="@+id/routeCheckpointListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

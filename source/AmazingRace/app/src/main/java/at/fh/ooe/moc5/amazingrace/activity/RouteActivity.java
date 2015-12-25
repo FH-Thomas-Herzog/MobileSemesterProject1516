@@ -22,6 +22,8 @@ import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 import at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult;
 import at.fh.ooe.moc5.amazingrace.model.view.RoutesViewModel;
 import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
+import at.fh.ooe.moc5.amazingrace.service.ServiceException;
+import at.fh.ooe.moc5.amazingrace.service.ServiceException.ServiceErrorCode;
 import at.fh.ooe.moc5.amazingrace.util.DialogUtil;
 
 public class RouteActivity extends AppCompatActivity implements DialogInterface.OnClickListener, AdapterView.OnItemClickListener {
@@ -39,8 +41,20 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
         application = (AmazingRaceApplication) getApplication();
-        viewModel = new RoutesViewModel(application.getLoggedUser());
-        prepareView(Boolean.TRUE);
+        if (application.getLoggedUser() != null) {
+            viewModel = new RoutesViewModel(application.getLoggedUser());
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (viewModel == null) {
+            invalidUserDialog = DialogUtil.createErrorDialog(RouteActivity.this, getString(R.string.error_user_not_logged), RouteActivity.this);
+            invalidUserDialog.show();
+        } else {
+            prepareView(Boolean.TRUE);
+        }
     }
 
     @Override
@@ -82,7 +96,7 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progress = ProgressDialog.show(RouteActivity.this, getString(R.string.progress_title), getString(R.string.progress_login), Boolean.TRUE);
+                progress = ProgressDialog.show(RouteActivity.this, getString(R.string.progress_title), getString(R.string.progress_loading_routes), Boolean.TRUE);
             }
 
             @Override
@@ -92,18 +106,18 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
                 // Error occurred
                 if (result.exception != null) {
                     // ServiceException occurred
-                    if (result.exception instanceof RestServiceProxy.ServiceException) {
-                        RestServiceProxy.ServiceErrorCode errorCode = ((RestServiceProxy.ServiceException) result.exception).getErrorCode();
+                    if (result.exception instanceof ServiceException) {
+                        ServiceErrorCode errorCode = ((ServiceException) result.exception).getErrorCode();
                         if (errorCode != null) {
                             switch (errorCode) {
                                 case INVALID_REQUEST:
                                     Toast.makeText(RouteActivity.this, R.string.error_request_invalid, Toast.LENGTH_LONG).show();
                                     break;
                                 case TIMEOUT:
-                                    Toast.makeText(RouteActivity.this, R.string.error_request_timeout, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RouteActivity.this, R.string.error_request_timeout, Toast.LENGTH_LONG).show();
                                     break;
                                 case UNKNOWN:
-                                    Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
                                     break;
                                 case INVALID_CREDENTIALS:
                                     invalidUserDialog = DialogUtil.createErrorDialog(RouteActivity.this, getString(R.string.error_user_became_invalid), RouteActivity.this);
@@ -111,10 +125,10 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
                                     return;
                             }
                         } else {
-                            Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
                     }
                 }
                 // Lists where loaded

@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
 import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
+import at.fh.ooe.moc5.amazingrace.service.ServiceException;
 import at.fh.ooe.moc5.amazingrace.service.ServiceFactory;
 
 /**
@@ -26,7 +27,7 @@ public class LoginViewModel {
 
 
     //region Actions
-    public UserContextModel loginAction() throws RestServiceProxy.ServiceException {
+    public UserContextModel loginAction() throws ServiceException {
         final CredentialsRequestModel model = new CredentialsRequestModel(username, password);
         final boolean isValidCredentials = restProxy.checkCredentials(model);
         if (isValidCredentials) {

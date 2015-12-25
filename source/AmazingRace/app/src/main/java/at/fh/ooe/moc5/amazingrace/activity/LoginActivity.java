@@ -16,7 +16,8 @@ import at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult;
 import at.fh.ooe.moc5.amazingrace.model.view.LoginViewModel;
 import at.fh.ooe.moc5.amazingrace.model.view.UserContextModel;
 import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
-import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy.ServiceErrorCode;
+import at.fh.ooe.moc5.amazingrace.service.ServiceException;
+import at.fh.ooe.moc5.amazingrace.service.ServiceException.ServiceErrorCode;
 import at.fh.ooe.moc5.amazingrace.watcher.LoginButtonTextWatcher;
 import at.fh.ooe.moc5.amazingrace.watcher.LoginViewModelBindingTextWatcher;
 
@@ -101,8 +102,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         // Exception occurred
                         if (result.exception != null) {
                             resetView();
-                            if (result.exception instanceof RestServiceProxy.ServiceException) {
-                                ServiceErrorCode errorCode = ((RestServiceProxy.ServiceException) result.exception).getErrorCode();
+                            if (result.exception instanceof ServiceException) {
+                                ServiceErrorCode errorCode = ((ServiceException) result.exception).getErrorCode();
                                 if (errorCode != null) {
                                     switch (errorCode) {
                                         case INVALID_REQUEST:

@@ -8,6 +8,6 @@ public class ServiceFactory {
     }
 
     public static RestServiceProxy createRestServiceProxy() {
-        return new RestServiceProxy();
+        return new RestServiceProxyImpl();
     }
 }
