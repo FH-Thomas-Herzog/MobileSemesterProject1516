@@ -1,15 +1,27 @@
 package at.fh.ooe.moc5.amazingrace.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
+import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
+
 /**
  * Created by Thomas on 12/24/2015.
+ * <p/>
+ * Class for communicating with the rest backend.
  */
 public class RestServiceProxy {
 
@@ -22,30 +34,29 @@ public class RestServiceProxy {
 
     public static final int DEFAULT_TIME_OUT = 3000;
 
-    public boolean checkCredentials(String username, String password) throws ServiceException {
-        Objects.requireNonNull(username, "Cannot check credentials for null username");
-        Objects.requireNonNull(password, "Cannot check credentials for null password");
+    /**
+     * Checks the credentials if they map to an valid user.
+     *
+     * @param model the model holding the user credentials
+     * @return true if the credentials map to an valid user
+     * @throws ServiceException if the request failed.
+     * @see at.fh.ooe.moc5.amazingrace.service.RestServiceProxy.ServiceErrorCode for the ServiceException contained error codes
+     */
+    public boolean checkCredentials(CredentialsRequestModel model) throws ServiceException {
+        Objects.requireNonNull(model, "Cannot check credentials for null model");
 
         try {
-            URL url = new URL(new StringBuilder(REST_URL).append(CHECK_CREDENTIALS).append("?userName=").append(username).append("&password=").append(password).toString());
-            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setConnectTimeout(DEFAULT_TIME_OUT);
-            urlConnection.setUseCaches(Boolean.FALSE);
+            URL url = new URL(new StringBuilder(REST_URL).append(CHECK_CREDENTIALS).append("?").append(model.toQueryString()).toString());
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(DEFAULT_TIME_OUT);
+            connection.setUseCaches(Boolean.FALSE);
 
-            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))) {
-                final String response = reader.readLine();
-                if ((!"true".equals(response)) && (!"false".equals(response))) {
-                    throw new ServiceException(ServiceErrorCode.INVALID_REQUEST);
-                }
-                return Boolean.parseBoolean(response);
-            } catch (ServiceException se) {
-                throw se;
-            } catch (SocketTimeoutException ste) {
-                throw new ServiceException(ServiceErrorCode.TIMEOUT, ste);
-            } catch (Exception e) {
-                throw new ServiceException(ServiceErrorCode.UNKNOWN, e);
+            final String response = readResponse(connection);
+            if ((!"true".equals(response)) && (!"false".equals(response))) {
+                throw new ServiceException(ServiceErrorCode.INVALID_REQUEST);
             }
+            return Boolean.parseBoolean(response);
         } catch (ServiceException e) {
             throw e;
         } catch (Exception e) {
@@ -53,12 +64,82 @@ public class RestServiceProxy {
         }
     }
 
+    /**
+     * Gets the available routes for the given user.
+     *
+     * @param model the model holding the user credentials
+     * @return the list of found routes
+     * @throws ServiceException if an error occurs during the request
+     * @see at.fh.ooe.moc5.amazingrace.service.RestServiceProxy.ServiceErrorCode for the ServiceException contained error code
+     */
+    public List<RouteModel> getRoutes(CredentialsRequestModel model) throws ServiceException {
+        Objects.requireNonNull(model, "Cannot get routes with missing credentials");
+
+        if (!checkCredentials(model)) {
+            throw new ServiceException(ServiceErrorCode.INVALID_CREDENTIALS);
+        }
+
+        try {
+            URL url = new URL(new StringBuilder(REST_URL).append(GET_ROUTES_METHOD).append("?").append(model.toQueryString()).toString());
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(DEFAULT_TIME_OUT);
+            connection.setUseCaches(Boolean.FALSE);
+
+            final String response = readResponse(connection);
+            GsonBuilder builder = new GsonBuilder();
+            return builder.create().fromJson(response, new TypeToken<List<RouteModel>>() {
+            }.getType());
+        } catch (JsonSyntaxException e) {
+            throw new ServiceException(ServiceErrorCode.INVALID_REQUEST, e);
+        } catch (Exception e) {
+            throw new ServiceException(ServiceErrorCode.UNKNOWN, e);
+        }
+    }
+
+    /**
+     * Reads the response from the connection.
+     *
+     * @param connection the connection to read response from
+     * @return the response string
+     * @throws ServiceException if an error occurs
+     * @see at.fh.ooe.moc5.amazingrace.service.RestServiceProxy.ServiceErrorCode for the ServiceException contained error code
+     */
+    private String readResponse(HttpsURLConnection connection) throws ServiceException {
+        Objects.requireNonNull(connection, "Cannot read from null connection");
+        try {
+            if (connection.getResponseCode() != 200) {
+                throw new ServiceException(ServiceErrorCode.REQUEST_NOT_OK);
+            }
+            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                final StringBuilder builder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+                return builder.toString();
+            }
+        } catch (SocketTimeoutException ste) {
+            throw new ServiceException(ServiceErrorCode.TIMEOUT, ste);
+        } catch (Exception e) {
+            throw new ServiceException(ServiceErrorCode.UNKNOWN, e);
+        }
+    }
+
+    /**
+     * Enumeration which defines the common service errors
+     */
     public static enum ServiceErrorCode {
         INVALID_REQUEST,
         TIMEOUT,
-        UNKNOWN
+        UNKNOWN,
+        REQUEST_NOT_OK,
+        INVALID_CREDENTIALS
     }
 
+    /**
+     * Exception class for exception thrown in Service classes
+     */
     public static final class ServiceException extends Exception {
 
         private ServiceErrorCode errorCode;

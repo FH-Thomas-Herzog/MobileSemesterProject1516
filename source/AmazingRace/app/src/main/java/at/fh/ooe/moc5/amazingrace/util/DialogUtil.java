@@ -14,7 +14,7 @@ import at.fh.ooe.moc5.amazingrace.R;
  */
 public class DialogUtil {
 
-    public static Dialog createErrorDialog(final Context ctx, final String message, final DialogInterface.OnClickListener listener) {
+    public static AlertDialog createErrorDialog(final Context ctx, final String message, final DialogInterface.OnClickListener listener) {
         return new AlertDialog.Builder(ctx)
                 .setTitle(ctx.getString(R.string.error_dialog_title))
                 .setMessage(message)
@@ -22,7 +22,7 @@ public class DialogUtil {
                 .create();
     }
 
-    public static Dialog createAlertDialog(final Context ctx, final String title, final String message, final DialogInterface.OnClickListener listener) {
+    public static AlertDialog createAlertDialog(final Context ctx, final String title, final String message, final DialogInterface.OnClickListener listener) {
         Objects.requireNonNull(ctx, "Cannot create dialog for null context");
         return new AlertDialog.Builder(ctx)
                 .setTitle(title)

@@ -2,25 +2,31 @@ package at.fh.ooe.moc5.amazingrace.model.view;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Objects;
+
+import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
 
 /**
  * Created by Thomas on 12/24/2015.
  */
 public class UserContextModel implements Serializable {
 
-    private final String username;
+    private final CredentialsRequestModel model;
     private final Calendar loginDate;
 
-    public UserContextModel(String username) {
-        this.username = username;
+    public UserContextModel(CredentialsRequestModel model) {
+        Objects.requireNonNull(model);
+        this.model = model;
         this.loginDate = Calendar.getInstance();
     }
 
-    public String getUsername() {
-        return username;
+    //region Getter and Setter
+    public CredentialsRequestModel getCredentialsModel() {
+        return model;
     }
 
     public Calendar getLoginDate() {
         return loginDate;
     }
+    //endregion
 }

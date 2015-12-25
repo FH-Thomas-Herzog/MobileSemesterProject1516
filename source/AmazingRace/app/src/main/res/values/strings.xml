@@ -18,5 +18,8 @@
     <string name="error_request_timeout">Sorry. Request failed because of an timeout</string>
     <string name="error_unknown">Sorry. An unknown error occurred</string>
     <string name="error_login_failed">User and/or password not correct</string>
+    <string name="error_user_became_invalid">Your user is not valid anymore. You will be logged out.</string>
     <string name="warning_want_quit">Do you realy want to quit ?</string>
+    <string name="finished">finished</string>
+    <string name="done">done</string>
 </resources>
