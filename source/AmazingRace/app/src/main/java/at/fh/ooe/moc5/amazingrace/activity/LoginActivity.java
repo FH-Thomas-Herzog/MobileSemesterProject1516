@@ -1,7 +1,5 @@
 package at.fh.ooe.moc5.amazingrace.activity;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,12 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import at.fh.ooe.moc5.amazingrace.AmazingRaceApplication;
 import at.fh.ooe.moc5.amazingrace.R;
 import at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult;
 import at.fh.ooe.moc5.amazingrace.model.view.LoginViewModel;
 import at.fh.ooe.moc5.amazingrace.model.view.UserContextModel;
-import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException.ServiceErrorCode;
 import at.fh.ooe.moc5.amazingrace.watcher.LoginButtonTextWatcher;
@@ -24,32 +20,31 @@ import at.fh.ooe.moc5.amazingrace.watcher.LoginViewModelBindingTextWatcher;
 /**
  * This class represents the login activity where an user need to login.
  */
-public class LoginActivity extends Activity implements View.OnClickListener {
-
-    private ProgressDialog progress;
-    private AmazingRaceApplication application;
-    private LoginViewModel loginView;
+public class LoginActivity extends AbstractActivity<LoginViewModel> implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginView = new LoginViewModel();
-        application = ((AmazingRaceApplication) getApplication());
+        viewModel = new LoginViewModel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         prepareViews();
-        // Nothing to restore on login activity
     }
 
     //region utilities
     public void prepareViews() {
-        loginView.reset();
+        viewModel.reset();
         // Register text change listeners
         EditText username = (EditText) findViewById(R.id.usernameEdTxt);
-        username.addTextChangedListener(new LoginViewModelBindingTextWatcher(loginView, username));
-        username.addTextChangedListener(new LoginButtonTextWatcher(this, loginView));
+        username.addTextChangedListener(new LoginViewModelBindingTextWatcher(viewModel, username));
+        username.addTextChangedListener(new LoginButtonTextWatcher(this, viewModel));
         EditText password = (EditText) findViewById(R.id.passwordEdTxt);
-        password.addTextChangedListener(new LoginViewModelBindingTextWatcher(loginView, password));
-        password.addTextChangedListener(new LoginButtonTextWatcher(this, loginView));
+        password.addTextChangedListener(new LoginViewModelBindingTextWatcher(viewModel, password));
+        password.addTextChangedListener(new LoginButtonTextWatcher(this, viewModel));
 
         // Register Login action
         Button loginButton = (Button) findViewById(R.id.loginBtn);
@@ -81,7 +76,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         UserContextModel model = null;
                         Exception exception = null;
                         try {
-                            model = loginView.loginAction();
+                            model = viewModel.loginAction();
                         } catch (Exception e) {
                             exception = e;
                         }
@@ -92,33 +87,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     @Override
                     protected void onPreExecute() {
                         super.onPreExecute();
-                        progress = ProgressDialog.show(LoginActivity.this, getString(R.string.progress_title), getString(R.string.progress_login), Boolean.TRUE);
+                        openProgressDialog(R.string.progress_login);
                     }
 
                     @Override
                     protected void onPostExecute(AsyncTaskResult<UserContextModel> result) {
                         super.onPostExecute(result);
-                        progress.dismiss();
+                        closeProgressDialog();
                         // Exception occurred
                         if (result.exception != null) {
                             resetView();
                             if (result.exception instanceof ServiceException) {
-                                ServiceErrorCode errorCode = ((ServiceException) result.exception).getErrorCode();
-                                if (errorCode != null) {
-                                    switch (errorCode) {
-                                        case INVALID_REQUEST:
-                                            Toast.makeText(LoginActivity.this, R.string.error_request_invalid, Toast.LENGTH_LONG).show();
-                                            break;
-                                        case TIMEOUT:
-                                            Toast.makeText(LoginActivity.this, R.string.error_request_timeout, Toast.LENGTH_SHORT).show();
-                                            break;
-                                        case UNKNOWN:
-                                            Toast.makeText(LoginActivity.this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
-                                            break;
-                                    }
-                                } else {
-                                    Toast.makeText(LoginActivity.this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
-                                }
+                                handleServiceException(((ServiceException) result.exception));
                             } else {
                                 Toast.makeText(LoginActivity.this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
                             }
@@ -139,7 +119,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 }.execute();
                 break;
             case R.id.cancelBtn:
-                finishAffinity();
+                openCloseApplicationDialog();
                 break;
         }
     }

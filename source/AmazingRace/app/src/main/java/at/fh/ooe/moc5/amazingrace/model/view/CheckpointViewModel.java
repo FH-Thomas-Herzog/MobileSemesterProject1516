@@ -18,7 +18,7 @@ public class CheckpointViewModel implements Serializable {
 
     private String answer;
     private final UserContextModel userContext;
-    private final RouteModel route;
+    private RouteModel route;
 
     private RestServiceProxy proxy;
 
@@ -40,8 +40,14 @@ public class CheckpointViewModel implements Serializable {
         return proxy.visitCheckpoint(new SecretRequestModel(userContext.getCredentialsModel().userName, userContext.getCredentialsModel().password, getNextCheckpoint().getId(), answer));
     }
 
-    public void reloadRoute() {
+    public boolean reloadRoute() throws ServiceException {
+        final List<RouteModel> routes = proxy.getRoutes(userContext.getCredentialsModel());
+        int idx = -1;
+        if((idx = routes.indexOf(route)) != -1) {
+            route = routes.get(idx);
+        }
 
+        return (route != null);
     }
 
     public boolean isValid() {

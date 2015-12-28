@@ -27,13 +27,7 @@ import at.fh.ooe.moc5.amazingrace.util.DialogUtil;
 import at.fh.ooe.moc5.amazingrace.watcher.AnswerButtonTextWatcher;
 import at.fh.ooe.moc5.amazingrace.watcher.CheckpointViewModelBindingTextWatcher;
 
-public class CheckpointActivity extends Activity implements DialogInterface.OnClickListener, AdapterView.OnItemClickListener, View.OnClickListener {
-
-    private CheckpointViewModel viewModel;
-    private AmazingRaceApplication application;
-
-    private AlertDialog invalidUserDialog;
-    private ProgressDialog progress;
+public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private static final String BUNDLE_ROUTE_DETAIL_VIEW = "EXTRA_ROUTE_DETAIL_VIEW";
 
@@ -41,7 +35,6 @@ public class CheckpointActivity extends Activity implements DialogInterface.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        application = (AmazingRaceApplication) getApplication();
         setContentView(R.layout.activity_checkpoint);
         if (application.getLoggedUser() != null) {
             final Intent intent = getIntent();
@@ -58,8 +51,7 @@ public class CheckpointActivity extends Activity implements DialogInterface.OnCl
     protected void onResume() {
         super.onResume();
         if (viewModel == null) {
-            invalidUserDialog = DialogUtil.createErrorDialog(this, getString(R.string.error_user_not_logged), this);
-            invalidUserDialog.show();
+            openInvalidUserAccountDialog();
         } else {
             prepareView();
         }
@@ -98,6 +90,7 @@ public class CheckpointActivity extends Activity implements DialogInterface.OnCl
             ((TextView) findViewById(R.id.nextCheckpointTxt)).setText(viewModel.getNextCheckpoint().getName());
             ((TextView) findViewById(R.id.nextCheckpointHintTxt)).setText(viewModel.getNextCheckpoint().getHint());
             EditText answer = (EditText) findViewById(R.id.hintAnswerEdTxt);
+            answer.setText("");
             answer.addTextChangedListener(new CheckpointViewModelBindingTextWatcher(viewModel));
             answer.addTextChangedListener(new AnswerButtonTextWatcher(this, viewModel));
         }
@@ -130,27 +123,12 @@ public class CheckpointActivity extends Activity implements DialogInterface.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.answerBtn:
-                onAnserButtonClick((Button) v);
+                onAnswerButtonClick((Button) v);
                 break;
         }
     }
 
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        dialog.dismiss();
-        if (dialog.equals(invalidUserDialog)) {
-            onInvalidUserDialogClick(dialog, which);
-        }
-    }
-
-    private void onInvalidUserDialogClick(DialogInterface dialog, int which) {
-        application.setLoggedUser(null);
-        finishAffinity();
-        final Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    private void onAnserButtonClick(Button button) {
+    private void onAnswerButtonClick(Button button) {
         new AsyncTask<Object, Object, AsyncTaskResult<Boolean>>() {
             @Override
             protected AsyncTaskResult<Boolean> doInBackground(Object... params) {
@@ -168,44 +146,70 @@ public class CheckpointActivity extends Activity implements DialogInterface.OnCl
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progress = ProgressDialog.show(CheckpointActivity.this, getString(R.string.progress_title), getString(R.string.progress_validating_secred), Boolean.TRUE);
+                openProgressDialog(R.string.progress_validating_secred);
             }
 
             @Override
             protected void onPostExecute(AsyncTaskResult<Boolean> result) {
                 super.onPostExecute(result);
-                progress.dismiss();// Error occurred
+                closeProgressDialog();
                 if (result.exception != null) {
                     // ServiceException occurred
                     if (result.exception instanceof ServiceException) {
-                        ServiceErrorCode errorCode = ((ServiceException) result.exception).getErrorCode();
-                        if (errorCode != null) {
-                            switch (errorCode) {
-                                case INVALID_REQUEST:
-                                    Toast.makeText(CheckpointActivity.this, R.string.error_request_invalid, Toast.LENGTH_LONG).show();
-                                    break;
-                                case TIMEOUT:
-                                    Toast.makeText(CheckpointActivity.this, R.string.error_request_timeout, Toast.LENGTH_LONG).show();
-                                    break;
-                                case UNKNOWN:
-                                    Toast.makeText(CheckpointActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
-                                    break;
-                                case INVALID_CREDENTIALS:
-                                    invalidUserDialog = DialogUtil.createErrorDialog(CheckpointActivity.this, getString(R.string.error_user_became_invalid), CheckpointActivity.this);
-                                    invalidUserDialog.show();
-                                    return;
-                            }
-                        } else {
-                            Toast.makeText(CheckpointActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
-                        }
+                        handleServiceException(((ServiceException) result.exception));
                     } else {
                         Toast.makeText(CheckpointActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
                     }
                 } else if (result.result) {
-                    // Reload data here
+                    reloadRoute();
                 } else {
                     Toast.makeText(CheckpointActivity.this, R.string.info_secret_wrong, Toast.LENGTH_LONG).show();
                 }
+            }
+        }.execute();
+    }
+
+    private void reloadRoute() {
+        new AsyncTask<Object, Object, AsyncTaskResult<Boolean>>() {
+            @Override
+            protected AsyncTaskResult<Boolean> doInBackground(Object... params) {
+                Boolean found = null;
+                Exception exception = null;
+                try {
+                    found = viewModel.reloadRoute();
+                } catch (Exception e) {
+                    exception = e;
+                }
+                return new AsyncTaskResult<Boolean>(found, exception);
+            }
+
+            @Override
+            protected void onPostExecute(AsyncTaskResult<Boolean> result) {
+                super.onPostExecute(result);
+                closeProgressDialog();
+                // Exception occurred
+                if (result.exception != null) {
+                    if (result.exception instanceof ServiceException) {
+                        handleServiceException(((ServiceException) result.exception));
+                    } else {
+                        Toast.makeText(CheckpointActivity.this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                // Route found
+                else if (result.result) {
+                    prepareView();
+                }
+                // Route not found, go back to routes activity
+                else {
+                    startActivity(new Intent(CheckpointActivity.this, RouteActivity.class));
+                    finish();
+                }
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                openProgressDialog(R.string.progress_updating_route);
             }
         }.execute();
     }

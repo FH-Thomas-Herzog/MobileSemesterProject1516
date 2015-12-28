@@ -1,5 +1,6 @@
 package at.fh.ooe.moc5.amazingrace.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
@@ -9,7 +10,7 @@ import at.fh.ooe.moc5.amazingrace.model.json.SecretRequestModel;
 /**
  * Created by Thomas on 12/25/2015.
  */
-public interface RestServiceProxy {
+public interface RestServiceProxy extends Serializable {
     boolean checkCredentials(CredentialsRequestModel model) throws ServiceException;
 
     boolean visitCheckpoint(SecretRequestModel model) throws ServiceException;

@@ -79,6 +79,7 @@ public class RestServiceProxyImpl implements RestServiceProxy {
             URL url = new URL(new StringBuilder(REST_URL).append(METHOD_VISIT_CHECKPOINT).toString());
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
             connection.setConnectTimeout(DEFAULT_TIME_OUT);
             connection.setUseCaches(Boolean.FALSE);
             connection.setDoInput(Boolean.TRUE);

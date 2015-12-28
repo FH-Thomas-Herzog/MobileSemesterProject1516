@@ -26,8 +26,7 @@ public class CheckpointArrayAdapter extends ArrayAdapter<CheckpointModel> {
         }
 
         CheckpointModel checkpoint = getItem(position);
-        ((TextView) convertView.findViewById(R.id.checkpointOrdinalLabel)).setText(checkpoint.getNumber());
-        ((TextView) convertView.findViewById(R.id.checkpointNameLabel)).setText(checkpoint.getName());
+        ((TextView) convertView.findViewById(R.id.visitedCheckpointNameLabel)).setText(checkpoint.getName());
 
         return convertView;
     }

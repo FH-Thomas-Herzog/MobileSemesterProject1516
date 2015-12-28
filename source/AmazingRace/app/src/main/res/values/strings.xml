@@ -14,6 +14,7 @@
     <string name="label_password">Password</string>
     <string name="progress_login">Logging in ...</string>
     <string name="progress_loading_routes">Loading routes ...</string>
+    <string name="progress_updating_route">Updating route ...</string>
     <string name="progress_validating_secred">Validating secret</string>
     <string name="progress_title">Processing</string>
     <string name="dialog_title_error">Error</string>

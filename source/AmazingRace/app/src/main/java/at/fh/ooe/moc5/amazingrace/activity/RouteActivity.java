@@ -1,11 +1,8 @@
 package at.fh.ooe.moc5.amazingrace.activity;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,26 +18,16 @@ import at.fh.ooe.moc5.amazingrace.adaptor.RouteArrayAdapter;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 import at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult;
 import at.fh.ooe.moc5.amazingrace.model.view.RoutesViewModel;
-import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException.ServiceErrorCode;
-import at.fh.ooe.moc5.amazingrace.util.DialogUtil;
 
-public class RouteActivity extends AppCompatActivity implements DialogInterface.OnClickListener, AdapterView.OnItemClickListener {
-
-    private RoutesViewModel viewModel;
-    private AmazingRaceApplication application;
-
-    private AlertDialog backButtonDialog;
-    private AlertDialog invalidUserDialog;
-    private ProgressDialog progress;
+public class RouteActivity extends AbstractActivity<RoutesViewModel> implements AdapterView.OnItemClickListener {
 
     //region Activity Methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
-        application = (AmazingRaceApplication) getApplication();
         if (application.getLoggedUser() != null) {
             viewModel = new RoutesViewModel(application.getLoggedUser());
         }
@@ -50,8 +37,7 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
     protected void onResume() {
         super.onResume();
         if (viewModel == null) {
-            invalidUserDialog = DialogUtil.createErrorDialog(RouteActivity.this, getString(R.string.error_user_not_logged), RouteActivity.this);
-            invalidUserDialog.show();
+            openInvalidUserAccountDialog();
         } else {
             prepareView(Boolean.TRUE);
         }
@@ -59,8 +45,7 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
 
     @Override
     public void onBackPressed() {
-        backButtonDialog = DialogUtil.createAlertDialog(this, getString(R.string.dialog_title_warning), getString(R.string.warning_want_quit), this);
-        backButtonDialog.show();
+        openCloseApplicationDialog();
     }
     //endregion
 
@@ -96,37 +81,18 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progress = ProgressDialog.show(RouteActivity.this, getString(R.string.progress_title), getString(R.string.progress_loading_routes), Boolean.TRUE);
+                openProgressDialog(R.string.progress_loading_routes);
             }
 
             @Override
             protected void onPostExecute(AsyncTaskResult<List<RouteModel>> result) {
                 super.onPostExecute(result);
-                progress.dismiss();
+                closeProgressDialog();
                 // Error occurred
                 if (result.exception != null) {
                     // ServiceException occurred
                     if (result.exception instanceof ServiceException) {
-                        ServiceErrorCode errorCode = ((ServiceException) result.exception).getErrorCode();
-                        if (errorCode != null) {
-                            switch (errorCode) {
-                                case INVALID_REQUEST:
-                                    Toast.makeText(RouteActivity.this, R.string.error_request_invalid, Toast.LENGTH_LONG).show();
-                                    break;
-                                case TIMEOUT:
-                                    Toast.makeText(RouteActivity.this, R.string.error_request_timeout, Toast.LENGTH_LONG).show();
-                                    break;
-                                case UNKNOWN:
-                                    Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
-                                    break;
-                                case INVALID_CREDENTIALS:
-                                    invalidUserDialog = DialogUtil.createErrorDialog(RouteActivity.this, getString(R.string.error_user_became_invalid), RouteActivity.this);
-                                    invalidUserDialog.show();
-                                    return;
-                            }
-                        } else {
-                            Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
-                        }
+                        handleServiceException(((ServiceException) result.exception));
                     } else {
                         Toast.makeText(RouteActivity.this, R.string.error_unknown, Toast.LENGTH_LONG).show();
                     }
@@ -143,31 +109,6 @@ public class RouteActivity extends AppCompatActivity implements DialogInterface.
 
 
     //region Listener
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        dialog.dismiss();
-        if (dialog.equals(backButtonDialog)) {
-            onBackButtonDialogClick(dialog, which);
-        } else if (dialog.equals(invalidUserDialog)) {
-            onInvalidUserDialogClick(dialog, which);
-        }
-    }
-
-    private void onBackButtonDialogClick(DialogInterface dialog, int which) {
-        switch (which) {
-            case DialogInterface.BUTTON_POSITIVE:
-                finishAffinity();
-                break;
-        }
-    }
-
-    private void onInvalidUserDialogClick(DialogInterface dialog, int which) {
-        application.setLoggedUser(null);
-        finishAffinity();
-        final Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(RouteActivity.this, CheckpointActivity.class);
