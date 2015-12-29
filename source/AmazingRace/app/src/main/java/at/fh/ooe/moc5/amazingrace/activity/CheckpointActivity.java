@@ -1,10 +1,7 @@
 package at.fh.ooe.moc5.amazingrace.activity;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -15,15 +12,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+
 import at.fh.ooe.moc5.amazingrace.AmazingRaceApplication;
 import at.fh.ooe.moc5.amazingrace.R;
 import at.fh.ooe.moc5.amazingrace.adaptor.CheckpointArrayAdapter;
+import at.fh.ooe.moc5.amazingrace.model.json.CheckpointModel;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 import at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult;
 import at.fh.ooe.moc5.amazingrace.model.view.CheckpointViewModel;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
-import at.fh.ooe.moc5.amazingrace.service.ServiceException.ServiceErrorCode;
-import at.fh.ooe.moc5.amazingrace.util.DialogUtil;
 import at.fh.ooe.moc5.amazingrace.watcher.AnswerButtonTextWatcher;
 import at.fh.ooe.moc5.amazingrace.watcher.CheckpointViewModelBindingTextWatcher;
 
@@ -68,6 +73,7 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
     public void prepareView() {
         // set default container visibility
         findViewById(R.id.routeCheckpointContainer).setVisibility(View.VISIBLE);
+        findViewById(R.id.routeCheckpointMapContainer).setVisibility(View.VISIBLE);
         findViewById(R.id.routeCheckpointListContainer).setVisibility(View.GONE);
 
         // prepare list view of visited checkpoints
@@ -94,22 +100,71 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
             answer.addTextChangedListener(new CheckpointViewModelBindingTextWatcher(viewModel));
             answer.addTextChangedListener(new AnswerButtonTextWatcher(this, viewModel));
         }
+
+        // Prepare maps
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.routeCheckpointMap);
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap map) {
+                map.getUiSettings().setZoomControlsEnabled(Boolean.TRUE);
+                map.getUiSettings().setAllGesturesEnabled(Boolean.TRUE);
+                map.getUiSettings().setCompassEnabled(Boolean.TRUE);
+                LatLng zoomLocation = null;
+                PolylineOptions lineOptions = null;
+                // Get visited points
+                if (!viewModel.getRoute().getVisitedCheckpoints().isEmpty()) {
+                    lineOptions = new PolylineOptions();
+                    for (int i = 0; i < viewModel.getRoute().getVisitedCheckpoints().size(); i++) {
+                        CheckpointModel model = viewModel.getRoute().getVisitedCheckpoints().get(i);
+                        LatLng location = new LatLng(model.getLatitude(), model.getLongitude());
+                        map.addMarker(new MarkerOptions().position(location)
+                                .title(model.getName())
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                        lineOptions.add(location);
+                        // Remember last for focusing on it
+                        if (i == (viewModel.getVisitedCheckpoints().size() - 1)) {
+                            zoomLocation = location;
+                        }
+                    }
+                    map.addPolyline(lineOptions.color(Color.GREEN));
+                }
+                if (viewModel.getRoute().getNextCheckpoint() != null) {
+                    zoomLocation = new LatLng(viewModel.getRoute().getNextCheckpoint().getLatitude(), viewModel.getRoute().getNextCheckpoint().getLongitude());
+                    map.addMarker(new MarkerOptions().position(zoomLocation)
+                            .title(viewModel.getNextCheckpoint().getName())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    // If visited checkpoints exist
+                    if (!viewModel.getRoute().getVisitedCheckpoints().isEmpty()) {
+                        map.addPolyline(new PolylineOptions().add(lineOptions.getPoints().get(lineOptions.getPoints().size() - 1), zoomLocation).color(Color.RED));
+                    }
+                }
+
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(zoomLocation, 17));
+            }
+        });
     }
     //endregion
 
     //region Listeners
+
     public void toggleAccordion(View view) {
+        View checkpointListContainerLabel = findViewById(R.id.routeCheckpointListContainerLabel);
+        View checkpointMapContainerLabel = findViewById(R.id.routeCheckpointMapContainerLabel);
         View checkpointListContainer = findViewById(R.id.routeCheckpointListContainer);
-        View checkpointContainer = findViewById(R.id.routeCheckpointContainer);
+        View checkpointMapContainer = findViewById(R.id.routeCheckpointMapContainer);
 
         switch (view.getId()) {
-            case R.id.routeCheckpointContainerLabel:
-                checkpointContainer.setVisibility((View.VISIBLE == checkpointContainer.getVisibility()) ? View.GONE : View.VISIBLE);
-                checkpointListContainer.setVisibility(View.GONE);
-                break;
             case R.id.routeCheckpointListContainerLabel:
                 checkpointListContainer.setVisibility((View.VISIBLE == checkpointListContainer.getVisibility()) ? View.GONE : View.VISIBLE);
-                checkpointContainer.setVisibility(View.GONE);
+                checkpointListContainerLabel.setVisibility((View.GONE == checkpointListContainer.getVisibility()) ? View.GONE : View.VISIBLE);
+                checkpointMapContainerLabel.setVisibility((View.GONE == checkpointListContainer.getVisibility()) ? View.VISIBLE : View.GONE);
+                checkpointMapContainer.setVisibility((View.GONE == checkpointListContainer.getVisibility()) ? View.VISIBLE : View.GONE);
+                break;
+            case R.id.routeCheckpointMapContainerLabel:
+                checkpointMapContainer.setVisibility((View.VISIBLE == checkpointMapContainer.getVisibility()) ? View.GONE : View.VISIBLE);
+                checkpointMapContainerLabel.setVisibility((View.GONE == checkpointMapContainer.getVisibility()) ? View.GONE : View.VISIBLE);
+                checkpointListContainerLabel.setVisibility((View.GONE == checkpointMapContainer.getVisibility()) ? View.VISIBLE : View.GONE);
+                checkpointListContainer.setVisibility((View.GONE == checkpointMapContainer.getVisibility()) ? View.VISIBLE : View.GONE);
                 break;
         }
     }

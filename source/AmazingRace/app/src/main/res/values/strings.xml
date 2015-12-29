@@ -33,4 +33,5 @@
     <string name="checkpoint_group_secret">Checkpoint Secret</string>
     <string name="checkpoint_group_list">Checkpoint List</string>
     <string name="checkpoint_group_map">Checkpoint Map</string>
+    <string name="google_maps_key">AIzaSyCcr5Wa5d26Skkb7n7Nw6sQonfJ6pcNCxk</string>
 </resources>
