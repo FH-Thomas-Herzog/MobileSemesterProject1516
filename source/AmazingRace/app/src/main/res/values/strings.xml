@@ -10,6 +10,10 @@
     <string name="action_login">Login</string>
     <string name="action_settings">Settings</string>
     <string name="action_no">No</string>
+    <string name="action_play">Play</string>
+    <string name="action_reset">Reset</string>
+    <string name="action_reset_all">Reset All</string>
+    <string name="action_close">Close</string>
     <string name="label_username">Username</string>
     <string name="label_password">Password</string>
     <string name="progress_login">Logging in ...</string>
@@ -17,6 +21,7 @@
     <string name="progress_updating_route">Updating route ...</string>
     <string name="progress_validating_secred">Validating secret</string>
     <string name="progress_title">Processing</string>
+    <string name="progress_resetting_routes">Resetting route(s) ...</string>
     <string name="dialog_title_error">Error</string>
     <string name="dialog_title_warning">Warning</string>
     <string name="dialog_title_info">Info</string>
@@ -26,10 +31,13 @@
     <string name="error_login_failed">User and/or password not correct</string>
     <string name="error_user_became_invalid">Your user is not valid anymore. You will be logged out.</string>
     <string name="error_user_not_logged">Your are no longer logged in. You will be returned to the login page</string>
+    <string name="error_route_reset_failed">The route(s) could not be reset. Please try again</string>
     <string name="warning_want_quit">Do you really want to quit ?</string>
+    <string name="info_secret_ok">Secret ok. Next checkpoint has been enabled</string>
     <string name="info_secret_wrong">Sorry wrong secret. Guess again</string>
     <string name="finished">finished</string>
     <string name="done">done</string>
+    <string name="open">open</string>
     <string name="checkpoint_group_secret">Checkpoint Secret</string>
     <string name="checkpoint_group_list">Checkpoint List</string>
     <string name="checkpoint_group_map">Checkpoint Map</string>

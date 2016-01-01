@@ -5,6 +5,7 @@ import java.util.List;
 
 import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
+import at.fh.ooe.moc5.amazingrace.model.json.RouteRequestModel;
 import at.fh.ooe.moc5.amazingrace.model.json.SecretRequestModel;
 
 /**
@@ -16,4 +17,8 @@ public interface RestServiceProxy extends Serializable {
     boolean visitCheckpoint(SecretRequestModel model) throws ServiceException;
 
     List<RouteModel> getRoutes(CredentialsRequestModel model) throws ServiceException;
+
+    boolean resetRoute(RouteRequestModel model) throws ServiceException;
+
+    boolean resetAllRoutes(CredentialsRequestModel model) throws ServiceException;
 }

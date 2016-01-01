@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
+import at.fh.ooe.moc5.amazingrace.model.json.RouteRequestModel;
 import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceFactory;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
@@ -26,13 +27,21 @@ public class RoutesViewModel implements Serializable {
         proxy = ServiceFactory.createRestServiceProxy();
     }
 
-    //region
+    //region Actions
     public List<RouteModel> loadRoutes() throws ServiceException {
         routes = proxy.getRoutes(userContext.getCredentialsModel());
         return routes;
     }
 
+    public boolean resetRoute(RouteModel model) throws ServiceException {
+        return proxy.resetRoute(new RouteRequestModel(userContext.getCredentialsModel(), model.getId()));
+    }
+
+    public boolean resetAllRoutes() throws ServiceException {
+        return proxy.resetAllRoutes(userContext.getCredentialsModel());
+    }
     //endregion
+
     //region Getter and Setter
     public RouteModel getSelectedRoute() {
         return selectedRoute;

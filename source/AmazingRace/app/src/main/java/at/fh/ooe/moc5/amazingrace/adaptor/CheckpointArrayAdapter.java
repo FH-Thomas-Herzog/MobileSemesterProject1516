@@ -25,8 +25,9 @@ public class CheckpointArrayAdapter extends ArrayAdapter<CheckpointModel> {
             convertView = View.inflate(getContext(), R.layout.view_checkpoint_item, null);
         }
 
-        CheckpointModel checkpoint = getItem(position);
-        ((TextView) convertView.findViewById(R.id.visitedCheckpointNameLabel)).setText(checkpoint.getName());
+        final CheckpointModel checkpoint = getItem(position);
+        final String label = (checkpoint.isUnvisited()) ? (new StringBuilder(checkpoint.getName()).append(" (").append(getContext().getText(R.string.open)).append(")").toString()) : checkpoint.getName();
+        ((TextView) convertView.findViewById(R.id.visitedCheckpointNameLabel)).setText(label);
 
         return convertView;
     }

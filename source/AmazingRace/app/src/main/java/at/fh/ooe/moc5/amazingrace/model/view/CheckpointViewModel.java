@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import at.fh.ooe.moc5.amazingrace.model.json.CheckpointModel;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
+import at.fh.ooe.moc5.amazingrace.model.json.RouteRequestModel;
 import at.fh.ooe.moc5.amazingrace.model.json.SecretRequestModel;
 import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
@@ -43,11 +44,15 @@ public class CheckpointViewModel implements Serializable {
     public boolean reloadRoute() throws ServiceException {
         final List<RouteModel> routes = proxy.getRoutes(userContext.getCredentialsModel());
         int idx = -1;
-        if((idx = routes.indexOf(route)) != -1) {
+        if ((idx = routes.indexOf(route)) != -1) {
             route = routes.get(idx);
         }
 
         return (route != null);
+    }
+
+    public boolean resetRoute() throws ServiceException {
+        return proxy.resetRoute(new RouteRequestModel(userContext.getCredentialsModel(), route.getId()));
     }
 
     public boolean isValid() {

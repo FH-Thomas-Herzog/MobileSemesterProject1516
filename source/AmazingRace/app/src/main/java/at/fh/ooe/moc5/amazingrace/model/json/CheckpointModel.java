@@ -21,6 +21,7 @@ public class CheckpointModel implements Serializable {
     private double latitude;
     @SerializedName("Longitude")
     private double longitude;
+    private transient boolean unvisited = Boolean.FALSE;
 
     public CheckpointModel() {
     }
@@ -72,6 +73,14 @@ public class CheckpointModel implements Serializable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public boolean isUnvisited() {
+        return unvisited;
+    }
+
+    public void setUnvisited(boolean unvisited) {
+        this.unvisited = unvisited;
     }
     //endregion
 }

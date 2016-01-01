@@ -2,6 +2,8 @@ package at.fh.ooe.moc5.amazingrace.model.view;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
+
 import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
 import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
@@ -10,7 +12,7 @@ import at.fh.ooe.moc5.amazingrace.service.ServiceFactory;
 /**
  * Created by Thomas on 12/24/2015.
  */
-public class LoginViewModel {
+public class LoginViewModel implements Serializable {
 
     private String username;
     private String password;
