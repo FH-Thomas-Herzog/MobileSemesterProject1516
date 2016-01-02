@@ -78,7 +78,7 @@
                     android:layout_width="20pt"
                     android:layout_height="20pt"
                     android:clickable="true"
-                    android:onClick="toggleAccordion"
+                    android:onClick="toggleVisibility"
                     android:src="@drawable/map_icon" />
 
                 <TextView
@@ -87,7 +87,7 @@
                     android:layout_marginLeft="5pt"
                     android:clickable="true"
                     android:gravity="left|center"
-                    android:onClick="toggleAccordion"
+                    android:onClick="toggleVisibility"
                     android:text="@string/checkpoint_group_map"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textStyle="bold" />
@@ -120,7 +120,7 @@
                     android:layout_width="20pt"
                     android:layout_height="20pt"
                     android:clickable="true"
-                    android:onClick="toggleAccordion"
+                    android:onClick="toggleVisibility"
                     android:src="@drawable/list_icon" />
 
                 <TextView
@@ -129,7 +129,7 @@
                     android:layout_marginLeft="5pt"
                     android:clickable="true"
                     android:gravity="left|center"
-                    android:onClick="toggleAccordion"
+                    android:onClick="toggleVisibility"
                     android:text="@string/checkpoint_group_list"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textStyle="bold" />

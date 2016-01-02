@@ -18,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
 import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteRequestModel;
-import at.fh.ooe.moc5.amazingrace.model.json.SecretRequestModel;
+import at.fh.ooe.moc5.amazingrace.model.json.CheckpointRequestModel;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException.ServiceErrorCode;
 
 /**
@@ -26,7 +26,7 @@ import at.fh.ooe.moc5.amazingrace.service.ServiceException.ServiceErrorCode;
  * <p/>
  * Class for communicating with the rest backend.
  */
-public class RestServiceProxyImpl implements RestServiceProxy {
+public class RestServiceProxyImpl implements ServiceProxy {
 
     public static final String REST_URL = "https://demo.nexperts.com/MOC5/AmazingRaceService/AmazingRaceService.svc";
     public static final String CHECK_CREDENTIALS = "/CheckCredentials";
@@ -37,16 +37,8 @@ public class RestServiceProxyImpl implements RestServiceProxy {
 
     public static final int DEFAULT_TIME_OUT = 3000;
 
-    /**
-     * Checks the credentials if they map to an validViewModel user.
-     *
-     * @param model the model holding the user credentials
-     * @return true if the credentials map to an validViewModel user
-     * @throws ServiceException if the request failed.
-     * @see ServiceErrorCode for the ServiceException contained error codes
-     */
     @Override
-    public boolean checkCredentials(CredentialsRequestModel model) throws ServiceException {
+    public boolean validateCredentials(CredentialsRequestModel model) throws ServiceException {
         Objects.requireNonNull(model, "Cannot check credentials for null model");
 
         try {
@@ -56,7 +48,7 @@ public class RestServiceProxyImpl implements RestServiceProxy {
             connection.setConnectTimeout(DEFAULT_TIME_OUT);
             connection.setUseCaches(Boolean.FALSE);
 
-            return invokeBooleanResultMethod(connection, model, Boolean.FALSE);
+            return invokeBooleanResultMethod(connection, null, Boolean.FALSE);
         } catch (ServiceException e) {
             throw e;
         } catch (Exception e) {
@@ -65,7 +57,7 @@ public class RestServiceProxyImpl implements RestServiceProxy {
     }
 
     @Override
-    public boolean visitCheckpoint(SecretRequestModel model) throws ServiceException {
+    public boolean validateCheckpointSecret(CheckpointRequestModel model) throws ServiceException {
         Objects.requireNonNull(model, "Cannot check checkpoint for null model");
 
         try {
@@ -86,20 +78,11 @@ public class RestServiceProxyImpl implements RestServiceProxy {
         }
     }
 
-
-    /**
-     * Gets the available routes for the given user.
-     *
-     * @param model the model holding the user credentials
-     * @return the list of found routes
-     * @throws ServiceException if an error occurs during the request
-     * @see ServiceErrorCode for the ServiceException contained error code
-     */
     @Override
-    public List<RouteModel> getRoutes(CredentialsRequestModel model) throws ServiceException {
+    public List<RouteModel> loadRoutes(CredentialsRequestModel model) throws ServiceException {
         Objects.requireNonNull(model, "Cannot get routes with missing credentials");
 
-        if (!checkCredentials(model)) {
+        if (!validateCredentials(model)) {
             throw new ServiceException(ServiceErrorCode.INVALID_CREDENTIALS);
         }
 
@@ -165,18 +148,31 @@ public class RestServiceProxyImpl implements RestServiceProxy {
         }
     }
 
-    public <T extends CredentialsRequestModel> boolean invokeBooleanResultMethod(HttpsURLConnection connection, T model, boolean checkCredentials) throws ServiceException {
-        Objects.requireNonNull(model, "Cannot invoke method with null model");
-        Objects.requireNonNull(connection, "Cannot invoke method on null connection");
+    // region Helper
 
-        if ((checkCredentials) && (!checkCredentials(new CredentialsRequestModel(model.userName, model.password)))) {
+    /**
+     * Invokes a remote service method with an boolean result.
+     *
+     * @param connection       the connection to the service method
+     * @param jsonModel        the jsonModel to write into the connection, maybe null.
+     * @param checkCredentials true if the credentials shall be checked befor calling the actual service
+     * @param <T>              the type of the json model which must be at least the CredentialsModel
+     * @return true or false
+     * @throws ServiceException if the request failed for any reason, see contained error code for details
+     */
+    private <T extends CredentialsRequestModel> boolean invokeBooleanResultMethod(HttpsURLConnection connection, T jsonModel, boolean checkCredentials) throws ServiceException {
+        Objects.requireNonNull(connection, "Cannot invoke method on null connection");
+        if (checkCredentials) {
+            Objects.requireNonNull(jsonModel, "Cannot check credentials for null model");
+        }
+        if ((checkCredentials) && (!validateCredentials(new CredentialsRequestModel(jsonModel.userName, jsonModel.password)))) {
             throw new ServiceException(ServiceErrorCode.INVALID_CREDENTIALS);
         }
 
         try {
             // Write Data for Post requests
-            if (connection.getRequestMethod().equals("POST")) {
-                writeData(connection, model);
+            if ((connection.getRequestMethod().equals("POST")) && (jsonModel != null)) {
+                writeData(connection, jsonModel);
             }
             // Read response
             final String response = readResponse(connection);
@@ -220,6 +216,13 @@ public class RestServiceProxyImpl implements RestServiceProxy {
         }
     }
 
+    /**
+     * Writes data to the connection.
+     *
+     * @param connection        the connection to write to
+     * @param jsonModelInstance the json model instance
+     * @throws ServiceException if the write fails, see contained error code for details
+     */
     private void writeData(HttpsURLConnection connection, Object jsonModelInstance) throws ServiceException {
         Objects.requireNonNull(connection, "Cannot write to null connection");
         try {
@@ -236,5 +239,5 @@ public class RestServiceProxyImpl implements RestServiceProxy {
             throw new ServiceException(ServiceErrorCode.UNKNOWN, e);
         }
     }
-
+    // endregion
 }

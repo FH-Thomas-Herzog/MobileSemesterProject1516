@@ -7,8 +7,8 @@ import java.util.Objects;
 import at.fh.ooe.moc5.amazingrace.model.json.CheckpointModel;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteRequestModel;
-import at.fh.ooe.moc5.amazingrace.model.json.SecretRequestModel;
-import at.fh.ooe.moc5.amazingrace.service.RestServiceProxy;
+import at.fh.ooe.moc5.amazingrace.model.json.CheckpointRequestModel;
+import at.fh.ooe.moc5.amazingrace.service.ServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
 import at.fh.ooe.moc5.amazingrace.service.ServiceFactory;
 
@@ -21,7 +21,7 @@ public class CheckpointViewModel implements Serializable {
     private final UserContextModel userContext;
     private RouteModel route;
 
-    private RestServiceProxy proxy;
+    private ServiceProxy proxy;
 
     public CheckpointViewModel(UserContextModel userContext, RouteModel route) {
         Objects.requireNonNull(userContext, "View model needs user context set");
@@ -29,7 +29,7 @@ public class CheckpointViewModel implements Serializable {
 
         this.userContext = userContext;
         this.route = route;
-        proxy = ServiceFactory.createRestServiceProxy();
+        proxy = ServiceFactory.createServiceProxy();
     }
 
     //region Actions
@@ -38,11 +38,11 @@ public class CheckpointViewModel implements Serializable {
             return Boolean.FALSE;
         }
 
-        return proxy.visitCheckpoint(new SecretRequestModel(userContext.getCredentialsModel().userName, userContext.getCredentialsModel().password, getNextCheckpoint().getId(), answer));
+        return proxy.validateCheckpointSecret(new CheckpointRequestModel(userContext.getCredentialsModel().userName, userContext.getCredentialsModel().password, getNextCheckpoint().getId(), answer));
     }
 
     public boolean reloadRoute() throws ServiceException {
-        final List<RouteModel> routes = proxy.getRoutes(userContext.getCredentialsModel());
+        final List<RouteModel> routes = proxy.loadRoutes(userContext.getCredentialsModel());
         int idx = -1;
         if ((idx = routes.indexOf(route)) != -1) {
             route = routes.get(idx);

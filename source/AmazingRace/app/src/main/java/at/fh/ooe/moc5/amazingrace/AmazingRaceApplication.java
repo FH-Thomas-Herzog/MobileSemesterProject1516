@@ -15,11 +15,7 @@ public class AmazingRaceApplication extends Application {
 
     public UserContextModel loggedUser;
 
-    public UserContextModel getLoggedUser() {
-        return loggedUser;
-    }
-
-    public static final String EXTRA_ROUTE = "EXTRA_ROUTE";
+    public static final String INTENT_EXTRA_ROUTE = "INTENT_EXTRA_ROUTE";
 
     /**
      * Registers an exception handler for uncaught exceptions.
@@ -36,7 +32,7 @@ public class AmazingRaceApplication extends Application {
     }
 
     /**
-     * Handles uncaught excpetions which are considered critical, therefore the application will exist with an error.
+     * Handles uncaught exceptions which are considered critical, therefore the application will exist with an error.
      *
      * @param thread the current thread the exception occurred
      * @param e      the occurred exception
@@ -45,6 +41,15 @@ public class AmazingRaceApplication extends Application {
         e.printStackTrace();
         Log.e("error", "Uncaught exception catched", e);
         System.exit(1);
+    }
+
+    /**
+     * gets the logged user context
+     *
+     * @return the user context representing the logged user
+     */
+    public UserContextModel getLoggedUser() {
+        return loggedUser;
     }
 
     /**

@@ -14,6 +14,7 @@
     <string name="action_reset">Reset</string>
     <string name="action_reset_all">Reset All</string>
     <string name="action_close">Close</string>
+    <string name="action_open">Open</string>
     <string name="label_username">Username</string>
     <string name="label_password">Password</string>
     <string name="progress_login">Logging in ...</string>
@@ -32,14 +33,16 @@
     <string name="error_user_became_invalid">Your user is not valid anymore. You will be logged out.</string>
     <string name="error_user_not_logged">Your are no longer logged in. You will be returned to the login page</string>
     <string name="error_route_reset_failed">The route(s) could not be reset. Please try again</string>
+    <string name="error_no_network">This application needs an active internet connection to work</string>
     <string name="warning_want_quit">Do you really want to quit ?</string>
     <string name="info_secret_ok">Secret ok. Next checkpoint has been enabled</string>
     <string name="info_secret_wrong">Sorry wrong secret. Guess again</string>
+    <string name="info_congratulations">Congratulations, you have finished this route</string>
     <string name="finished">finished</string>
     <string name="done">done</string>
     <string name="open">open</string>
     <string name="checkpoint_group_secret">Checkpoint Secret</string>
     <string name="checkpoint_group_list">Checkpoint List</string>
     <string name="checkpoint_group_map">Checkpoint Map</string>
-    <string name="google_maps_key">AIzaSyCcr5Wa5d26Skkb7n7Nw6sQonfJ6pcNCxk</string>
+    <string name="google_maps_key">AIzaSyCNV6I75G-wopgeM3st0HeUiTzgWcINjy8</string>
 </resources>

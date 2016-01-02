@@ -13,28 +13,30 @@
     <application
         android:name=".AmazingRaceApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/application_title"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
+
+        <!-- Main Activity -->
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/activity_title_login">
+            android:label="@string/application_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- explicit accessible activities -->
         <activity
             android:name=".activity.RouteActivity"
             android:label="@string/activity_title_route" />
         <activity
             android:name=".activity.CheckpointActivity"
             android:label="@string/activity_title_checkpoint" />
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+
+        <!-- Meta-Data for google maps -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -42,5 +44,4 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
-
 </manifest>

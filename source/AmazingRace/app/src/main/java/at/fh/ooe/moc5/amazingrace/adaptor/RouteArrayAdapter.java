@@ -13,6 +13,7 @@ import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 
 /**
  * Created by Thomas on 12/25/2015.
+ * The adapter for the route items
  */
 public class RouteArrayAdapter extends ArrayAdapter<RouteModel> {
 

@@ -8,6 +8,7 @@ import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
 
 /**
  * Created by Thomas on 12/24/2015.
+ * This model represents an logged user for the application.
  */
 public class UserContextModel implements Serializable {
 

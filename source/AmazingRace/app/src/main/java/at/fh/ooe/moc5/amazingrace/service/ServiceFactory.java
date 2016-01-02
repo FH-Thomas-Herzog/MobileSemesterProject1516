@@ -5,12 +5,12 @@ package at.fh.ooe.moc5.amazingrace.service;
  */
 public class ServiceFactory {
 
-    private static RestServiceProxy proxy;
+    private static ServiceProxy proxy;
 
     private ServiceFactory() {
     }
 
-    public static RestServiceProxy createRestServiceProxy() {
+    public static ServiceProxy createServiceProxy() {
         if (proxy == null) {
             proxy = new RestServiceProxyImpl();
         }

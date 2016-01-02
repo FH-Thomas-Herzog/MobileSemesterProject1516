@@ -9,6 +9,7 @@ import at.fh.ooe.moc5.amazingrace.model.view.CheckpointViewModel;
 
 /**
  * Created by Thomas on 12/24/2015.
+ * Performs a binding to the given view model
  */
 public class CheckpointViewModelBindingTextWatcher implements TextWatcher {
 

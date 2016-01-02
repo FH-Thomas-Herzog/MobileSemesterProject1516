@@ -3,6 +3,7 @@ package at.fh.ooe.moc5.amazingrace.model.json;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created by Thomas on 12/25/2015.
@@ -83,4 +84,17 @@ public class CheckpointModel implements Serializable {
         this.unvisited = unvisited;
     }
     //endregion
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CheckpointModel that = (CheckpointModel) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

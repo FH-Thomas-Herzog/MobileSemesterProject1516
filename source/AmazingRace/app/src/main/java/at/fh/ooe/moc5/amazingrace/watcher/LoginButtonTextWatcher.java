@@ -10,6 +10,7 @@ import at.fh.ooe.moc5.amazingrace.model.view.LoginViewModel;
 
 /**
  * Created by Thomas on 12/24/2015.
+ * A watcher which enables the login button if the backed view model is valid, disables it otherwise
  */
 public class LoginButtonTextWatcher implements TextWatcher {
 

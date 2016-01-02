@@ -1,9 +1,11 @@
 package at.fh.ooe.moc5.amazingrace.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -33,6 +35,11 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
 
     private static final String VIEW_MODEL = "AbstractActivity#VIEW_MODEL";
 
+    // region Constants
+
+    /**
+     * Enumeration for specifying the available menu group ids
+     */
     public static enum MenuGroup {
         ROUTE_ITEM(0),
         OPTIONS(1);
@@ -54,6 +61,9 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
         }
     }
 
+    /**
+     * Enumeration for specifying the available menu ids
+     */
     public static enum MenuId {
         PLAY(0),
         RESET(1),
@@ -76,8 +86,9 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
             throw new IllegalArgumentException("MenuGroup with value '" + value + "' not found");
         }
     }
+    //endregion
 
-    //region Activity Methods
+    //region Lifecycle Methods
 
     /**
      * Initializes the backed application so that it can be accessed by the concrete activity application.
@@ -110,7 +121,7 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
     /**
      * Saves the backed view model.
      *
-     * @param outState the outcoming state
+     * @param outState the out coming state
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -156,11 +167,11 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
     }
 
     /**
-     * Opens the invalid user dilaog which indicates that the user has become invalid during application invocation.
-     * After the user clikced ok the user will be logged out.
+     * Opens the invalid user dialog which indicates that the user has become invalid during application invocation.
+     * After the user clicked ok the user will be logged out.
      */
     protected void openInvalidUserAccountDialog() {
-        DialogUtil.createErrorDialog(AbstractActivity.this, getString(R.string.error_user_became_invalid), new DialogInterface.OnClickListener() {
+        DialogUtil.createErrorDialog(AbstractActivity.this, R.string.error_no_network, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -172,10 +183,30 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
     }
 
     /**
+     * This method checks if an internet connection is available for the application.
+     * If a network connection is not available then a dialog is shown to notify the user.
+     *
+     * @return true if network is available false otherwise
+     * @see AbstractActivity#isOnline()
+     */
+    protected boolean checkAndDisplayAvailableNetwork() {
+        final boolean online = isOnline();
+        if (!online) {
+            DialogUtil.createErrorDialog(AbstractActivity.this, R.string.error_no_network, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).show();
+        }
+        return online;
+    }
+
+    /**
      * Opens an dialog to ask the user if he really wants to quit the application.
      */
     protected void openCloseApplicationDialog() {
-        DialogUtil.createAlertDialog(AbstractActivity.this, getString(R.string.dialog_title_warning), getString(R.string.warning_want_quit), new DialogInterface.OnClickListener() {
+        DialogUtil.createYesNoAlertDialog(AbstractActivity.this, R.string.dialog_title_warning, R.string.warning_want_quit, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -206,5 +237,17 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
             progress.dismiss();
             progress = null;
         }
+    }
+
+    /**
+     * Helper method for checking if a network connection is available.
+     *
+     * @return true if a network connection is available, false otherwise
+     */
+    protected boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
     }
 }

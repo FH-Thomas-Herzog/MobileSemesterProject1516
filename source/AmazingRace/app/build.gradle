@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file('C:/Users/Thomas/.android/debug.keystore')
-            storePassword 'android'
+            keyAlias 'amazingrace'
+            keyPassword 'amazingrace'
+            storeFile file('C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/amazingrace.jks')
+            storePassword 'amazingrace'
         }
     }
     compileSdkVersion 22
