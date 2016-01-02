@@ -7,7 +7,7 @@ import java.io.Serializable;
 import at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel;
 import at.fh.ooe.moc5.amazingrace.service.ServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
-import at.fh.ooe.moc5.amazingrace.service.ServiceFactory;
+import at.fh.ooe.moc5.amazingrace.service.ServiceProxyFactory;
 
 /**
  * Created by Thomas on 12/24/2015.
@@ -20,7 +20,7 @@ public class LoginViewModel implements Serializable {
     private final ServiceProxy restProxy;
 
     public LoginViewModel() {
-        restProxy = ServiceFactory.createServiceProxy();
+        restProxy = ServiceProxyFactory.createServiceProxy();
     }
 
     /**

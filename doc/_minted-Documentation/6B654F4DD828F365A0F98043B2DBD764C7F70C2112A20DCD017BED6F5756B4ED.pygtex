@@ -1,0 +1,73 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.view}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{org.apache.commons.lang3.StringUtils}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.Serializable}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service.ServiceProxy}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service.ServiceException}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service.ServiceProxyFactory}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/24/2015.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{LoginViewModel} \PYGdefault{k+kd}{implements} \PYGdefault{n}{Serializable} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{String} \PYGdefault{n}{username}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{String} \PYGdefault{n}{password}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kd}{final} \PYGdefault{n}{ServiceProxy} \PYGdefault{n}{restProxy}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{LoginViewModel}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{restProxy} \PYGdefault{o}{=} \PYGdefault{n}{ServiceProxyFactory}\PYGdefault{o}{.}\PYGdefault{n+na}{createServiceProxy}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Ansers the question if this model is valid whic its is if a username and password are set.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @return true if valid, false otherwise}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{isValid}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{o}{(((}\PYGdefault{n}{username} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZam{}\PYGdefaultZam{}} \PYGdefault{o}{(!}\PYGdefault{n}{StringUtils}\PYGdefault{o}{.}\PYGdefault{n+na}{isEmpty}\PYGdefault{o}{(}\PYGdefault{n}{username}\PYGdefault{o}{)))} \PYGdefault{o}{\PYGdefaultZam{}\PYGdefaultZam{}} \PYGdefault{o}{((}\PYGdefault{n}{password} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZam{}\PYGdefaultZam{}} \PYGdefault{o}{(!}\PYGdefault{n}{StringUtils}\PYGdefault{o}{.}\PYGdefault{n+na}{isEmpty}\PYGdefault{o}{(}\PYGdefault{n}{password}\PYGdefault{o}{))));}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+
+    \PYGdefault{c+c1}{//region Actions}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Logs the user in by validating the user credentials via the proxy service.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @return true if username password are valid, false otherwise}
+\PYGdefault{c+cm}{     * @throws ServiceException if an rpoxy service exception occurred}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{UserContextModel} \PYGdefault{n+nf}{loginAction}\PYGdefault{o}{()} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{final} \PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{CredentialsRequestModel}\PYGdefault{o}{(}\PYGdefault{n}{username}\PYGdefault{o}{,} \PYGdefault{n}{password}\PYGdefault{o}{);}
+        \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{boolean} \PYGdefault{n}{isValidCredentials} \PYGdefault{o}{=} \PYGdefault{n}{restProxy}\PYGdefault{o}{.}\PYGdefault{n+na}{validateCredentials}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{);}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{isValidCredentials}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{return} \PYGdefault{k}{new} \PYGdefault{n}{UserContextModel}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{k}{return} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Resets this model by resetting the username and password}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{reset}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{username} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+        \PYGdefault{n}{password} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+c1}{//endregion}
+    \PYGdefault{c+c1}{//region Getter and Setter}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setUsername}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{username}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{username} \PYGdefault{o}{=} \PYGdefault{n}{username}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setPassword}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{password}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{password} \PYGdefault{o}{=} \PYGdefault{n}{password}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

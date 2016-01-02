@@ -1,0 +1,179 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.activity}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.content.Intent}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.os.*}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.view.View}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.Button}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.EditText}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.Toast}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.R}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.view.LoginViewModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.view.UserContextModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service.ServiceException}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.watcher.LoginButtonTextWatcher}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.watcher.LoginViewModelBindingTextWatcher}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * This class represents the login activity where an user need to login.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{LoginActivity} \PYGdefault{k+kd}{extends} \PYGdefault{n}{AbstractActivity}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{LoginViewModel}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{k+kd}{implements} \PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{c+c1}{// region Lifecycle Methods}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Sets acitivites content layout and initializes the view model}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param savedInstanceState}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onCreate}\PYGdefault{o}{(}\PYGdefault{n}{Bundle} \PYGdefault{n}{savedInstanceState}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onCreate}\PYGdefault{o}{(}\PYGdefault{n}{savedInstanceState}\PYGdefault{o}{);}
+        \PYGdefault{n}{setContentView}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{layout}\PYGdefault{o}{.}\PYGdefault{n+na}{activity\PYGdefaultZus{}login}\PYGdefault{o}{);}
+        \PYGdefault{c+c1}{// Here we want always have an new view model}
+        \PYGdefault{n}{viewModel} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{LoginViewModel}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Prepares the activity views if view model is valid.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onResume}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onResume}\PYGdefault{o}{();}
+        \PYGdefault{c+c1}{// View model will always be valid here}
+        \PYGdefault{n}{prepareViews}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Open dialog when back button is pressed on this activity.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @see AbstractActivity\PYGdefaultZsh{}openCloseApplicationDialog();}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onBackPressed}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onBackPressed}\PYGdefault{o}{();}
+        \PYGdefault{n}{openCloseApplicationDialog}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{// endregion}
+
+    \PYGdefault{c+c1}{//region Listeners}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Onclick implementation which}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param v}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onClick}\PYGdefault{o}{(}\PYGdefault{n}{View} \PYGdefault{n}{v}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{switch} \PYGdefault{o}{(}\PYGdefault{n}{v}\PYGdefault{o}{.}\PYGdefault{n+na}{getId}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{case} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{loginBtn}\PYGdefault{o}{:}
+                \PYGdefault{n}{loginUser}\PYGdefault{o}{();}
+                \PYGdefault{k}{break}\PYGdefault{o}{;}
+            \PYGdefault{k}{case} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{cancelBtn}\PYGdefault{o}{:}
+                \PYGdefault{n}{openCloseApplicationDialog}\PYGdefault{o}{();}
+                \PYGdefault{k}{break}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+
+
+    \PYGdefault{c+c1}{//region Helper}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Prepares the activity views.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{prepareViews}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{reset}\PYGdefault{o}{();}
+        \PYGdefault{c+c1}{// prepare username view}
+        \PYGdefault{n}{EditText} \PYGdefault{n}{username} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{EditText}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{usernameEdTxt}\PYGdefault{o}{);}
+        \PYGdefault{n}{username}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{LoginViewModelBindingTextWatcher}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{,} \PYGdefault{n}{username}\PYGdefault{o}{));}
+        \PYGdefault{n}{username}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{LoginButtonTextWatcher}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{,} \PYGdefault{n}{viewModel}\PYGdefault{o}{));}
+
+        \PYGdefault{c+c1}{// prepare password view}
+        \PYGdefault{n}{EditText} \PYGdefault{n}{password} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{EditText}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{passwordEdTxt}\PYGdefault{o}{);}
+        \PYGdefault{n}{password}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{LoginViewModelBindingTextWatcher}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{,} \PYGdefault{n}{password}\PYGdefault{o}{));}
+        \PYGdefault{n}{password}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{LoginButtonTextWatcher}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{,} \PYGdefault{n}{viewModel}\PYGdefault{o}{));}
+
+        \PYGdefault{c+c1}{// Prepare login button}
+        \PYGdefault{n}{Button} \PYGdefault{n}{loginButton} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{Button}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{loginBtn}\PYGdefault{o}{);}
+        \PYGdefault{n}{loginButton}\PYGdefault{o}{.}\PYGdefault{n+na}{setEnabled}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+        \PYGdefault{n}{loginButton}\PYGdefault{o}{.}\PYGdefault{n+na}{setOnClickListener}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{);}
+
+        \PYGdefault{c+c1}{// prepare cancel button}
+        \PYGdefault{n}{Button} \PYGdefault{n}{cancelButton} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{Button}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{cancelBtn}\PYGdefault{o}{);}
+        \PYGdefault{n}{cancelButton}\PYGdefault{o}{.}\PYGdefault{n+na}{setOnClickListener}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Resets the views by setting string value to empty string.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{resetView}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{EditText} \PYGdefault{n}{username} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{EditText}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{usernameEdTxt}\PYGdefault{o}{);}
+        \PYGdefault{n}{EditText} \PYGdefault{n}{password} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{EditText}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{passwordEdTxt}\PYGdefault{o}{);}
+
+        \PYGdefault{c+c1}{// Could be called on non visible activity}
+        \PYGdefault{k}{if} \PYGdefault{o}{((}\PYGdefault{n}{username} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZam{}\PYGdefaultZam{}} \PYGdefault{o}{(}\PYGdefault{n}{password} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{))} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{username}\PYGdefault{o}{.}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{password}\PYGdefault{o}{.}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Performs asynchronous login service call.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{loginUser}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{checkAndDisplayAvailableNetwork}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{new} \PYGdefault{n}{AsyncTask}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Object}\PYGdefault{o}{,} \PYGdefault{n}{Object}\PYGdefault{o}{,} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{UserContextModel}\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}()} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{UserContextModel}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n+nf}{doInBackground}\PYGdefault{o}{(}\PYGdefault{n}{Object}\PYGdefault{o}{...} \PYGdefault{n}{params}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{n}{UserContextModel} \PYGdefault{n}{model} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                    \PYGdefault{n}{Exception} \PYGdefault{n}{exception} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                    \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{model} \PYGdefault{o}{=} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{loginAction}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{exception} \PYGdefault{o}{=} \PYGdefault{n}{e}\PYGdefault{o}{;}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                    \PYGdefault{k}{return} \PYGdefault{k}{new} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{UserContextModel}\PYGdefault{o}{\PYGdefaultZgt{}(}\PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{n}{exception}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onPreExecute}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onPreExecute}\PYGdefault{o}{();}
+                    \PYGdefault{n}{openProgressDialog}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{progress\PYGdefaultZus{}login}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onPostExecute}\PYGdefault{o}{(}\PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{UserContextModel}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n}{result}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onPostExecute}\PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{);}
+                    \PYGdefault{n}{closeProgressDialog}\PYGdefault{o}{();}
+                    \PYGdefault{c+c1}{// Exception occurred}
+                    \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{resetView}\PYGdefault{o}{();}
+                        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{k}{instanceof} \PYGdefault{n}{ServiceException}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{handleServiceException}\PYGdefault{o}{(((}\PYGdefault{n}{ServiceException}\PYGdefault{o}{)} \PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception}\PYGdefault{o}{));}
+                        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{LoginActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}unknown}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}SHORT}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                        \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{c+c1}{// Login failed due to invalid credentials}
+                    \PYGdefault{k}{else} \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{result} \PYGdefault{o}{==} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{resetView}\PYGdefault{o}{();}
+                        \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{LoginActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}login\PYGdefaultZus{}failed}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}SHORT}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{c+c1}{// Login ok}
+                    \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{application}\PYGdefault{o}{.}\PYGdefault{n+na}{setLoggedUser}\PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{result}\PYGdefault{o}{);}
+                        \PYGdefault{k+kd}{final} \PYGdefault{n}{Intent} \PYGdefault{n}{intent} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{Intent}\PYGdefault{o}{(}\PYGdefault{n}{LoginActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{RouteActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{class}\PYGdefault{o}{);}
+                        \PYGdefault{n}{startActivity}\PYGdefault{o}{(}\PYGdefault{n}{intent}\PYGdefault{o}{);}
+                        \PYGdefault{c+c1}{// Finish this activity because no need to get back to this one}
+                        \PYGdefault{n}{finish}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}.}\PYGdefault{n+na}{execute}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{// endregion}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

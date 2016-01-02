@@ -117,16 +117,19 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
         LinearLayout listViewReplacement = (LinearLayout) findViewById(R.id.routeCheckpointListView);
         listViewReplacement.removeAllViews();
         listViewReplacement.setVisibility(View.VISIBLE);
-        for (CheckpointModel model : viewModel.getRoute().getVisitedCheckpoints()) {
+        for (int i = 0; i < viewModel.getVisitedCheckpoints().size(); i++) {
+            CheckpointModel model = viewModel.getRoute().getVisitedCheckpoints().get(i);
             View view = View.inflate(CheckpointActivity.this, R.layout.view_checkpoint_item, null);
-            ((TextView) view.findViewById(R.id.visitedCheckpointNameLabel)).setText(model.getName());
+            ((TextView) view.findViewById(R.id.visitedCheckpointNameLabel)).setText((i + 1) + ". " + model.getName());
             listViewReplacement.addView(view);
         }
         // Add next checkpoint to list with open marker
         if (viewModel.getNextCheckpoint() != null) {
             final CheckpointModel model = viewModel.getNextCheckpoint();
             View view = View.inflate(CheckpointActivity.this, R.layout.view_checkpoint_item, null);
-            ((TextView) view.findViewById(R.id.visitedCheckpointNameLabel)).setText(new StringBuilder(model.getName()).append(" (").append(getText(R.string.open)).append(")").toString());
+            ((TextView) view.findViewById(R.id.visitedCheckpointNameLabel)).setText(
+                    new StringBuilder(model.getName()).append(" (").append(getText(R.string.open)).append(")").toString()
+            );
             listViewReplacement.addView(view);
         }
 
@@ -134,6 +137,7 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
         if (viewModel.getNextCheckpoint() == null) {
             findViewById(R.id.routeCheckpointContainerLabel).setVisibility(View.GONE);
             findViewById(R.id.routeCheckpointContainer).setVisibility(View.GONE);
+            findViewById(R.id.routeCheckpointListContainer).setVisibility(View.VISIBLE);
         }
         // checkpoints still open
         else {
@@ -141,8 +145,10 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
             answerButton.setEnabled(Boolean.FALSE);
             answerButton.setOnClickListener(this);
 
-            ((TextView) findViewById(R.id.nextCheckpointTxt)).setText(viewModel.getNextCheckpoint().getName());
-            ((TextView) findViewById(R.id.nextCheckpointHintTxt)).setText(viewModel.getNextCheckpoint().getHint());
+            ((TextView) findViewById(R.id.nextCheckpointTxt))
+                    .setText(viewModel.getNextCheckpoint().getName());
+            ((TextView) findViewById(R.id.nextCheckpointHintTxt))
+                    .setText(viewModel.getNextCheckpoint().getHint());
 
             EditText answer = (EditText) findViewById(R.id.hintAnswerEdTxt);
             answer.setText("");
@@ -170,8 +176,12 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
                         CheckpointModel model = viewModel.getRoute().getVisitedCheckpoints().get(i);
                         LatLng location = new LatLng(model.getLatitude(), model.getLongitude());
                         map.addMarker(new MarkerOptions().position(location)
-                                        .title(model.getName())
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                                        .title((i + 1) + ". " + model.getName())
+                                        .icon(
+                                                BitmapDescriptorFactory.defaultMarker(
+                                                        BitmapDescriptorFactory.HUE_GREEN
+                                                )
+                                        )
                         ).showInfoWindow();
                         lineOptions.add(location);
                         // Remember last for focusing on it
@@ -184,13 +194,18 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
                 // Add next checkpoint which is not part of list and gets red line from it to the former marker
                 if (viewModel.getRoute().getNextCheckpoint() != null) {
                     zoomLocation = new LatLng(viewModel.getRoute().getNextCheckpoint().getLatitude(), viewModel.getRoute().getNextCheckpoint().getLongitude());
-                    map.addMarker(new MarkerOptions().position(zoomLocation)
+                    map.addMarker(
+                            new MarkerOptions()
+                                    .position(zoomLocation)
                                     .title(viewModel.getNextCheckpoint().getName())
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                    .icon(BitmapDescriptorFactory
+                                            .defaultMarker(BitmapDescriptorFactory.HUE_RED))
                     ).showInfoWindow();
                     // If visited checkpoints exist
                     if (!viewModel.getRoute().getVisitedCheckpoints().isEmpty()) {
-                        map.addPolyline(new PolylineOptions().add(lineOptions.getPoints().get(lineOptions.getPoints().size() - 1), zoomLocation).color(Color.RED));
+                        map.addPolyline(new PolylineOptions().add(
+                                        lineOptions.getPoints().get(lineOptions.getPoints().size() - 1), zoomLocation).color(Color.RED)
+                        );
                     }
                 }
                 // move camera to last or next checkpoint

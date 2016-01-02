@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{c+cp}{\PYGdefaultZlt{}?xml version=\PYGdefaultZdq{}1.0\PYGdefaultZdq{} encoding=\PYGdefaultZdq{}utf\PYGdefaultZhy{}8\PYGdefaultZdq{}?\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout} \PYGdefault{n+na}{xmlns:android=}\PYGdefault{l+s}{\PYGdefaultZdq{}http://schemas.android.com/apk/res/android\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}centerVertical=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:weightSum=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}ImageView}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}50pt\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}50pt\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:src=}\PYGdefault{l+s}{\PYGdefaultZdq{}@drawable/congratulations\PYGdefaultZus{}icon\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center|center\PYGdefaultZdq{}}\PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}weight=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center|center\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/info\PYGdefaultZus{}congratulations\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+\end{Verbatim}

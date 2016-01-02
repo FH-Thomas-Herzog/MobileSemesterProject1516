@@ -10,7 +10,7 @@ import at.fh.ooe.moc5.amazingrace.model.json.RouteRequestModel;
 import at.fh.ooe.moc5.amazingrace.model.json.CheckpointRequestModel;
 import at.fh.ooe.moc5.amazingrace.service.ServiceProxy;
 import at.fh.ooe.moc5.amazingrace.service.ServiceException;
-import at.fh.ooe.moc5.amazingrace.service.ServiceFactory;
+import at.fh.ooe.moc5.amazingrace.service.ServiceProxyFactory;
 
 /**
  * Created by Thomas on 12/25/2015.
@@ -29,7 +29,7 @@ public class CheckpointViewModel implements Serializable {
 
         this.userContext = userContext;
         this.route = route;
-        proxy = ServiceFactory.createServiceProxy();
+        proxy = ServiceProxyFactory.createServiceProxy();
     }
 
     //region Actions

@@ -1,0 +1,108 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{c+cp}{\PYGdefaultZlt{}?xml version=\PYGdefaultZdq{}1.0\PYGdefaultZdq{} encoding=\PYGdefaultZdq{}utf\PYGdefaultZhy{}8\PYGdefaultZdq{}?\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}RelativeLayout} \PYGdefault{n+na}{xmlns:android=}\PYGdefault{l+s}{\PYGdefaultZdq{}http://schemas.android.com/apk/res/android\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{xmlns:tools=}\PYGdefault{l+s}{\PYGdefaultZdq{}http://schemas.android.com/tools\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}vertical\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingLeft=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}horizontal\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingRight=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}horizontal\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}vertical\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{tools:context=}\PYGdefault{l+s}{\PYGdefaultZdq{}at.fh.ooe.moc5.amazingrace.activity.LoginActivity\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}centerVertical=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:weightSum=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center\PYGdefaultZus{}horizontal\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}horizontal\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/usernameLabel\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}weight=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}left|center\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/label\PYGdefaultZus{}username\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceMedium\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}EditText}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/usernameEdTxt\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center|center\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}weight=}\PYGdefault{l+s}{\PYGdefaultZdq{}8\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center\PYGdefaultZus{}horizontal\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}horizontal\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/passwordLabel\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}left|center\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}weight=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}left|center\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/label\PYGdefaultZus{}password\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceMedium\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}EditText}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/passwordEdTxt\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center|center\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}weight=}\PYGdefault{l+s}{\PYGdefaultZdq{}8\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:inputType=}\PYGdefault{l+s}{\PYGdefaultZdq{}textPassword\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}RelativeLayout}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}weight=}\PYGdefault{l+s}{\PYGdefaultZdq{}0.07\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}horizontal\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:weightSum=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentLeft=}\PYGdefault{l+s}{\PYGdefaultZdq{}false\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}false\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}centerHorizontal=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}centerInParent=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}centerVertical=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}horizontal\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}Button}
+                    \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/loginBtn\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center|center\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/action\PYGdefaultZus{}login\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}Button}
+                    \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/cancelBtn\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center|center\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/action\PYGdefaultZus{}cancel\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}/RelativeLayout\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}/RelativeLayout\PYGdefaultZgt{}}
+\end{Verbatim}

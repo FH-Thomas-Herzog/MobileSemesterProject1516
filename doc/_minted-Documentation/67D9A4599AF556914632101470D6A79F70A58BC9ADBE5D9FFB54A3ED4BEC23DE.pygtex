@@ -1,0 +1,37 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.watcher}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.text.Editable}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.text.TextWatcher}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Objects}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.view.CheckpointViewModel}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/24/2015.}
+\PYGdefault{c+cm}{ * Performs a binding to the given view model}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{CheckpointViewModelBindingTextWatcher} \PYGdefault{k+kd}{implements} \PYGdefault{n}{TextWatcher} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kd}{final} \PYGdefault{n}{CheckpointViewModel} \PYGdefault{n}{view}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{CheckpointViewModelBindingTextWatcher}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointViewModel} \PYGdefault{n}{view}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{view}\PYGdefault{o}{);}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{view} \PYGdefault{o}{=} \PYGdefault{n}{view}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{beforeTextChanged}\PYGdefault{o}{(}\PYGdefault{n}{CharSequence} \PYGdefault{n}{s}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{start}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{count}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{after}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onTextChanged}\PYGdefault{o}{(}\PYGdefault{n}{CharSequence} \PYGdefault{n}{s}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{start}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{before}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{count}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{afterTextChanged}\PYGdefault{o}{(}\PYGdefault{n}{Editable} \PYGdefault{n}{s}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{view}\PYGdefault{o}{.}\PYGdefault{n+na}{setAnswer}\PYGdefault{o}{(}\PYGdefault{n}{s}\PYGdefault{o}{.}\PYGdefault{n+na}{toString}\PYGdefault{o}{());}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

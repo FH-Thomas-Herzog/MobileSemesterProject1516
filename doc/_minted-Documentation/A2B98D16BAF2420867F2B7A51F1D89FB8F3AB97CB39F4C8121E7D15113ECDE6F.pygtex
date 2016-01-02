@@ -1,0 +1,49 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{c+cp}{\PYGdefaultZlt{}?xml version=\PYGdefaultZdq{}1.0\PYGdefaultZdq{} encoding=\PYGdefaultZdq{}utf\PYGdefaultZhy{}8\PYGdefaultZdq{}?\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}manifest} \PYGdefault{n+na}{xmlns:android=}\PYGdefault{l+s}{\PYGdefaultZdq{}http://schemas.android.com/apk/res/android\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{package=}\PYGdefault{l+s}{\PYGdefaultZdq{}at.fh.ooe.moc5.amazingrace\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+    \PYGdefault{c}{\PYGdefaultZlt{}!\PYGdefaultZhy{}\PYGdefaultZhy{} Permissions \PYGdefaultZhy{}\PYGdefaultZhy{}\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}uses\PYGdefaultZhy{}permission} \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}android.permission.ACCESS\PYGdefaultZus{}NETWORK\PYGdefaultZus{}STATE\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}uses\PYGdefaultZhy{}permission} \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}android.permission.ACCESS\PYGdefaultZus{}WIFI\PYGdefaultZus{}STATE\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}uses\PYGdefaultZhy{}permission} \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}android.permission.INTERNET\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}uses\PYGdefaultZhy{}permission} \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}android.permission.LOCATION\PYGdefaultZus{}HARDWARE\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}uses\PYGdefaultZhy{}permission} \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}android.permission.ACCESS\PYGdefaultZus{}COARSE\PYGdefaultZus{}LOCATION\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}uses\PYGdefaultZhy{}permission} \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}android.permission.ACCESS\PYGdefaultZus{}FINE\PYGdefaultZus{}LOCATION\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}application}
+        \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}.AmazingRaceApplication\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:allowBackup=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:icon=}\PYGdefault{l+s}{\PYGdefaultZdq{}@drawable/app\PYGdefaultZus{}icon\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:label=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/application\PYGdefaultZus{}title\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:supportsRtl=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:theme=}\PYGdefault{l+s}{\PYGdefaultZdq{}@style/AppTheme\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+        \PYGdefault{c}{\PYGdefaultZlt{}!\PYGdefaultZhy{}\PYGdefaultZhy{} Main Activity \PYGdefaultZhy{}\PYGdefaultZhy{}\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}activity}
+            \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}.activity.LoginActivity\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:label=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/application\PYGdefaultZus{}title\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}intent\PYGdefaultZhy{}filter\PYGdefaultZgt{}}
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}action} \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}android.intent.action.MAIN\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}category} \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}android.intent.category.LAUNCHER\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}/intent\PYGdefaultZhy{}filter\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}/activity\PYGdefaultZgt{}}
+
+        \PYGdefault{c}{\PYGdefaultZlt{}!\PYGdefaultZhy{}\PYGdefaultZhy{} explicit accessible activities \PYGdefaultZhy{}\PYGdefaultZhy{}\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}activity}
+            \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}.activity.RouteActivity\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:label=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/activity\PYGdefaultZus{}title\PYGdefaultZus{}route\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}activity}
+            \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}.activity.CheckpointActivity\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:label=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/activity\PYGdefaultZus{}title\PYGdefaultZus{}checkpoint\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+        \PYGdefault{c}{\PYGdefaultZlt{}!\PYGdefaultZhy{}\PYGdefaultZhy{} Meta\PYGdefaultZhy{}Data for google maps \PYGdefaultZhy{}\PYGdefaultZhy{}\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}meta\PYGdefaultZhy{}data}
+            \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}com.google.android.gms.version\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:value=}\PYGdefault{l+s}{\PYGdefaultZdq{}@integer/google\PYGdefaultZus{}play\PYGdefaultZus{}services\PYGdefaultZus{}version\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}meta\PYGdefaultZhy{}data}
+            \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}com.google.android.maps.v2.API\PYGdefaultZus{}KEY\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:value=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/google\PYGdefaultZus{}maps\PYGdefaultZus{}key\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}/application\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}/manifest\PYGdefaultZgt{}}
+\end{Verbatim}

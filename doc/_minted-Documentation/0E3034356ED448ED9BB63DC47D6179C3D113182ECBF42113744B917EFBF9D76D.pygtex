@@ -1,0 +1,78 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.util}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.app.AlertDialog}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.content.Context}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.content.DialogInterface}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Objects}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.R}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/24/2015.}
+\PYGdefault{c+cm}{ * Utility for creating dialogs.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{DialogUtil} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Creates a error alert dialog.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param ctx      the context to create the alert dialog for}
+\PYGdefault{c+cm}{     * @param message  the resource id of the alert dialog error message}
+\PYGdefault{c+cm}{     * @param listener the button listener}
+\PYGdefault{c+cm}{     * @return the created alert dialog}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{n}{AlertDialog} \PYGdefault{n+nf}{createErrorDialog}\PYGdefault{o}{(}\PYGdefault{k+kd}{final} \PYGdefault{n}{Context} \PYGdefault{n}{ctx}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{message}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{n}{DialogInterface}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener} \PYGdefault{n}{listener}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{ctx}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot create dialog for null context\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{listener}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Listener for buttons mut be given\PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{return} \PYGdefault{k}{new} \PYGdefault{n}{AlertDialog}\PYGdefault{o}{.}\PYGdefault{n+na}{Builder}\PYGdefault{o}{(}\PYGdefault{n}{ctx}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setTitle}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{dialog\PYGdefaultZus{}title\PYGdefaultZus{}error}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setMessage}\PYGdefault{o}{(}\PYGdefault{n}{message}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setPositiveButton}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{action\PYGdefaultZus{}ok}\PYGdefault{o}{,} \PYGdefault{n}{listener}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{create}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Creates a yes, no alert dialog}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param ctx      the context to create the alert dialog for}
+\PYGdefault{c+cm}{     * @param title    the resource id of the alert dialog title}
+\PYGdefault{c+cm}{     * @param message  the resource id of the alert dialog message}
+\PYGdefault{c+cm}{     * @param listener the yes, no listener}
+\PYGdefault{c+cm}{     * @return the created alert dialog}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{n}{AlertDialog} \PYGdefault{n+nf}{createYesNoAlertDialog}\PYGdefault{o}{(}\PYGdefault{k+kd}{final} \PYGdefault{n}{Context} \PYGdefault{n}{ctx}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{title}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{message}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{n}{DialogInterface}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener} \PYGdefault{n}{listener}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{ctx}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot create dialog for null context\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{listener}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Listener for buttons mut be given\PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{return} \PYGdefault{k}{new} \PYGdefault{n}{AlertDialog}\PYGdefault{o}{.}\PYGdefault{n+na}{Builder}\PYGdefault{o}{(}\PYGdefault{n}{ctx}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setTitle}\PYGdefault{o}{(}\PYGdefault{n}{title}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setMessage}\PYGdefault{o}{(}\PYGdefault{n}{message}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setPositiveButton}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{action\PYGdefaultZus{}yes}\PYGdefault{o}{,} \PYGdefault{n}{listener}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setNegativeButton}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{action\PYGdefaultZus{}no}\PYGdefault{o}{,} \PYGdefault{n}{listener}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{create}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Creates a alert dialog with an custom view as content.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param ctx      the context to create dialog for}
+\PYGdefault{c+cm}{     * @param viewId   the resource id of the view}
+\PYGdefault{c+cm}{     * @param title    the resource id of the alert dialog title}
+\PYGdefault{c+cm}{     * @param listener the button listener}
+\PYGdefault{c+cm}{     * @return the created alert dialog}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{n}{AlertDialog} \PYGdefault{n+nf}{createCustomContentDialog}\PYGdefault{o}{(}\PYGdefault{k+kd}{final} \PYGdefault{n}{Context} \PYGdefault{n}{ctx}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{viewId}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{title}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{n}{DialogInterface}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener} \PYGdefault{n}{listener}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{ctx}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot create dialog for null context\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{listener}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Listener for buttons mut be given\PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{return} \PYGdefault{k}{new} \PYGdefault{n}{AlertDialog}\PYGdefault{o}{.}\PYGdefault{n+na}{Builder}\PYGdefault{o}{(}\PYGdefault{n}{ctx}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setTitle}\PYGdefault{o}{(}\PYGdefault{n}{title}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setView}\PYGdefault{o}{(}\PYGdefault{n}{viewId}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{setPositiveButton}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{action\PYGdefaultZus{}ok}\PYGdefault{o}{,} \PYGdefault{n}{listener}\PYGdefault{o}{)}
+                \PYGdefault{o}{.}\PYGdefault{n+na}{create}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

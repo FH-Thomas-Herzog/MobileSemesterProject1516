@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.watcher}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.text.Editable}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.text.TextWatcher}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.Button}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.R}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.activity.LoginActivity}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.view.LoginViewModel}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/24/2015.}
+\PYGdefault{c+cm}{ * A watcher which enables the login button if the backed view model is valid, disables it otherwise}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{LoginButtonTextWatcher} \PYGdefault{k+kd}{implements} \PYGdefault{n}{TextWatcher} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{LoginViewModel} \PYGdefault{n}{viewModel}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kd}{final} \PYGdefault{n}{LoginActivity} \PYGdefault{n}{activity}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{LoginButtonTextWatcher}\PYGdefault{o}{(}\PYGdefault{n}{LoginActivity} \PYGdefault{n}{activity}\PYGdefault{o}{,} \PYGdefault{n}{LoginViewModel} \PYGdefault{n}{viewModel}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{activity} \PYGdefault{o}{=} \PYGdefault{n}{activity}\PYGdefault{o}{;}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{viewModel} \PYGdefault{o}{=} \PYGdefault{n}{viewModel}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{beforeTextChanged}\PYGdefault{o}{(}\PYGdefault{n}{CharSequence} \PYGdefault{n}{s}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{start}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{count}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{after}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onTextChanged}\PYGdefault{o}{(}\PYGdefault{n}{CharSequence} \PYGdefault{n}{s}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{start}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{before}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{count}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{afterTextChanged}\PYGdefault{o}{(}\PYGdefault{n}{Editable} \PYGdefault{n}{s}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Button} \PYGdefault{n}{loginButton} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{Button}\PYGdefault{o}{)} \PYGdefault{n}{activity}\PYGdefault{o}{.}\PYGdefault{n+na}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{loginBtn}\PYGdefault{o}{);}
+        \PYGdefault{n}{loginButton}\PYGdefault{o}{.}\PYGdefault{n+na}{setEnabled}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{isValid}\PYGdefault{o}{());}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

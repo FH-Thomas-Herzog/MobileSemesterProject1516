@@ -12,11 +12,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.Objects;
 
 import at.fh.ooe.moc5.amazingrace.AmazingRaceApplication;
 import at.fh.ooe.moc5.amazingrace.R;
-import at.fh.ooe.moc5.amazingrace.adaptor.RouteArrayAdapter;
+import at.fh.ooe.moc5.amazingrace.adapter.RouteArrayAdapter;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;
 import at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult;
 import at.fh.ooe.moc5.amazingrace.model.view.RoutesViewModel;
@@ -38,7 +37,8 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
-        if (application.getLoggedUser() != null) {
+        // Only if user is logged and view model hasn't been restored from bundle
+        if ((application.getLoggedUser() != null) && (!restored)) {
             viewModel = new RoutesViewModel(application.getLoggedUser());
         }
         // Register route list for context menu
@@ -53,6 +53,7 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
         super.onResume();
         if (validViewModel) {
             prepareView();
+            loadRoutes();
         }
     }
 
@@ -92,6 +93,7 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(MenuGroup.OPTIONS.value, MenuId.RESET_ALL_ROUTES.value, 0, R.string.action_reset_all);
+        menu.add(MenuGroup.OPTIONS.value, MenuId.RELOAD.value, 0, R.string.action_reload);
         menu.add(MenuGroup.OPTIONS.value, MenuId.CLOSE.value, 0, R.string.action_close);
         return Boolean.TRUE;
     }
@@ -107,6 +109,9 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
         switch (MenuId.getMenuIdForValue(item.getItemId())) {
             case RESET_ALL_ROUTES:
                 resetRoute(null);
+                return Boolean.TRUE;
+            case RELOAD:
+                loadRoutes();
                 return Boolean.TRUE;
             case CLOSE:
                 openCloseApplicationDialog();
@@ -181,25 +186,19 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
      * Prepares this activity views.
      */
     private void prepareView() {
-        // prepare rout elist view
+        // prepare route list view
         ListView listView = (ListView) findViewById(R.id.listRoute);
         if (listView.getAdapter() == null) {
             final RouteArrayAdapter adapter = new RouteArrayAdapter(RouteActivity.this);
             listView.setAdapter(adapter);
+            listView.setOnItemClickListener(this);
         }
-        listView.setOnItemClickListener(this);
-
-        // load items into adapter
-        loadItems((RouteArrayAdapter) listView.getAdapter());
     }
 
     /**
      * Loads the routes into the adapter
-     *
-     * @param adapter
      */
-    private void loadItems(final RouteArrayAdapter adapter) {
-        Objects.requireNonNull(adapter);
+    private void loadRoutes() {
         if (checkAndDisplayAvailableNetwork()) {
             new AsyncTask<Object, Object, AsyncTaskResult<List<RouteModel>>>() {
                 @Override
@@ -236,6 +235,7 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
                     }
                     // Lists where loaded
                     else {
+                        RouteArrayAdapter adapter = (RouteArrayAdapter) ((ListView) findViewById(R.id.listRoute)).getAdapter();
                         adapter.clear();
                         adapter.addAll(result.result);
                     }

@@ -1,0 +1,59 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/25/2015.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{ServiceException} \PYGdefault{k+kd}{extends} \PYGdefault{n}{Exception} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Enumeration which defines the common service errors}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{enum} \PYGdefault{n}{ServiceErrorCode} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{INVALID\PYGdefaultZus{}REQUEST}\PYGdefault{o}{,}
+        \PYGdefault{n}{TIMEOUT}\PYGdefault{o}{,}
+        \PYGdefault{n}{UNKNOWN}\PYGdefault{o}{,}
+        \PYGdefault{n}{REQUEST\PYGdefaultZus{}NOT\PYGdefaultZus{}OK}\PYGdefault{o}{,}
+        \PYGdefault{n}{INVALID\PYGdefaultZus{}CREDENTIALS}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{ServiceErrorCode} \PYGdefault{n}{errorCode}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{ServiceException}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{(}\PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{detailMessage}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{(}\PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{n}{detailMessage}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{detailMessage}\PYGdefault{o}{,} \PYGdefault{n}{Throwable} \PYGdefault{n}{throwable}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{(}\PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{n}{detailMessage}\PYGdefault{o}{,} \PYGdefault{n}{throwable}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{Throwable} \PYGdefault{n}{throwable}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{(}\PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{n}{throwable}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode} \PYGdefault{n}{errorCode}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{(}\PYGdefault{n}{errorCode}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode} \PYGdefault{n}{errorCode}\PYGdefault{o}{,} \PYGdefault{n}{String} \PYGdefault{n}{detailMessage}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{(}\PYGdefault{n}{errorCode}\PYGdefault{o}{,} \PYGdefault{n}{detailMessage}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode} \PYGdefault{n}{errorCode}\PYGdefault{o}{,} \PYGdefault{n}{Throwable} \PYGdefault{n}{throwable}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{(}\PYGdefault{n}{errorCode}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{n}{throwable}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode} \PYGdefault{n}{errorCode}\PYGdefault{o}{,} \PYGdefault{n}{String} \PYGdefault{n}{detailMessage}\PYGdefault{o}{,} \PYGdefault{n}{Throwable} \PYGdefault{n}{throwable}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{(}\PYGdefault{n}{detailMessage}\PYGdefault{o}{,} \PYGdefault{n}{throwable}\PYGdefault{o}{);}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{errorCode} \PYGdefault{o}{=} \PYGdefault{n}{errorCode}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{ServiceErrorCode} \PYGdefault{n+nf}{getErrorCode}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{errorCode}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

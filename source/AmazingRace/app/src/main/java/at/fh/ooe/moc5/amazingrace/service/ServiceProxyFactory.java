@@ -3,11 +3,11 @@ package at.fh.ooe.moc5.amazingrace.service;
 /**
  * Created by Thomas on 12/24/2015.
  */
-public class ServiceFactory {
+public class ServiceProxyFactory {
 
     private static ServiceProxy proxy;
 
-    private ServiceFactory() {
+    private ServiceProxyFactory() {
     }
 
     public static ServiceProxy createServiceProxy() {

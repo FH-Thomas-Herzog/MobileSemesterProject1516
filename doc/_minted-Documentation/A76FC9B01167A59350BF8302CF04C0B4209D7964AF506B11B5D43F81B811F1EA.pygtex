@@ -1,0 +1,65 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.app.Application}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.util.Log}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.Toast}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.view.UserContextModel}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/24/2015.}
+\PYGdefault{c+cm}{ * This is the custom application implementation which handles uncaught exceptions.}
+\PYGdefault{c+cm}{ * The application will get killed on a an uncaught exception.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{AmazingRaceApplication} \PYGdefault{k+kd}{extends} \PYGdefault{n}{Application} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{UserContextModel} \PYGdefault{n}{loggedUser}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{INTENT\PYGdefaultZus{}EXTRA\PYGdefaultZus{}ROUTE} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}INTENT\PYGdefaultZus{}EXTRA\PYGdefaultZus{}ROUTE\PYGdefaultZdq{}}\PYGdefault{o}{;}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Registers an exception handler for uncaught exceptions.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onCreate}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onCreate}\PYGdefault{o}{();}
+        \PYGdefault{c+c1}{// Setup handler for uncaught exceptions.}
+        \PYGdefault{n}{Thread}\PYGdefault{o}{.}\PYGdefault{n+na}{setDefaultUncaughtExceptionHandler}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{Thread}\PYGdefault{o}{.}\PYGdefault{n+na}{UncaughtExceptionHandler}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n+nd}{@Override}
+            \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{uncaughtException}\PYGdefault{o}{(}\PYGdefault{n}{Thread} \PYGdefault{n}{thread}\PYGdefault{o}{,} \PYGdefault{n}{Throwable} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n}{handleUncaughtException}\PYGdefault{o}{(}\PYGdefault{n}{thread}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{\PYGdefaultZcb{});}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Handles uncaught exceptions which are considered critical, therefore the application will exist with an error.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param thread the current thread the exception occurred}
+\PYGdefault{c+cm}{     * @param e      the occurred exception}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{handleUncaughtException}\PYGdefault{o}{(}\PYGdefault{n}{Thread} \PYGdefault{n}{thread}\PYGdefault{o}{,} \PYGdefault{n}{Throwable} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{e}\PYGdefault{o}{.}\PYGdefault{n+na}{printStackTrace}\PYGdefault{o}{();}
+        \PYGdefault{n}{Log}\PYGdefault{o}{.}\PYGdefault{n+na}{e}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}error\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Uncaught exception catched\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{exit}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * gets the logged user context}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @return the user context representing the logged user}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{UserContextModel} \PYGdefault{n+nf}{getLoggedUser}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{loggedUser}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Sets the logged user which can be accessed by all implemented activities.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param loggedUser the logged user}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setLoggedUser}\PYGdefault{o}{(}\PYGdefault{n}{UserContextModel} \PYGdefault{n}{loggedUser}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{loggedUser} \PYGdefault{o}{=} \PYGdefault{n}{loggedUser}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

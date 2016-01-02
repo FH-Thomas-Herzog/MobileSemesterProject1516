@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/24/2015.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{ServiceProxyFactory} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kd}{static} \PYGdefault{n}{ServiceProxy} \PYGdefault{n}{proxy}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{n+nf}{ServiceProxyFactory}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{n}{ServiceProxy} \PYGdefault{n+nf}{createServiceProxy}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{proxy} \PYGdefault{o}{==} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{proxy} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{RestServiceProxyImpl}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{proxy}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

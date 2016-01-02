@@ -28,6 +28,7 @@ import at.fh.ooe.moc5.amazingrace.util.DialogUtil;
 public class AbstractActivity<T extends Serializable> extends AppCompatActivity {
 
     protected T viewModel;
+    protected boolean restored = Boolean.FALSE;
     protected AmazingRaceApplication application;
     protected Boolean validViewModel = Boolean.TRUE;
 
@@ -68,7 +69,8 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
         PLAY(0),
         RESET(1),
         RESET_ALL_ROUTES(2),
-        CLOSE(3);
+        CLOSE(3),
+        RELOAD(4);
 
         public final int value;
 
@@ -102,6 +104,7 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
         application = (AmazingRaceApplication) getApplication();
         if (savedInstanceState != null) {
             viewModel = (T) savedInstanceState.get(VIEW_MODEL);
+            restored = (viewModel != null);
         }
     }
 

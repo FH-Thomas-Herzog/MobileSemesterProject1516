@@ -1,0 +1,39 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.gson.annotations.SerializedName}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.Serializable}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Objects}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/25/2015.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{CheckpointRequestModel} \PYGdefault{k+kd}{extends} \PYGdefault{n}{CredentialsRequestModel} \PYGdefault{k+kd}{implements} \PYGdefault{n}{Serializable} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{n+nd}{@SerializedName}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}CheckpointId\PYGdefaultZdq{}}\PYGdefault{o}{)}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{checkpointId}\PYGdefault{o}{;}
+    \PYGdefault{n+nd}{@SerializedName}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Secret\PYGdefaultZdq{}}\PYGdefault{o}{)}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{secret}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{CheckpointRequestModel}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{username}\PYGdefault{o}{,} \PYGdefault{n}{String} \PYGdefault{n}{password}\PYGdefault{o}{,} \PYGdefault{n}{String} \PYGdefault{n}{checkpointId}\PYGdefault{o}{,} \PYGdefault{n}{String} \PYGdefault{n}{secret}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{(}\PYGdefault{n}{username}\PYGdefault{o}{,} \PYGdefault{n}{password}\PYGdefault{o}{);}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{checkpointId} \PYGdefault{o}{=} \PYGdefault{n}{checkpointId}\PYGdefault{o}{;}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{secret} \PYGdefault{o}{=} \PYGdefault{n}{secret}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{equals}\PYGdefault{o}{(}\PYGdefault{n}{Object} \PYGdefault{n}{o}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{k}{this} \PYGdefault{o}{==} \PYGdefault{n}{o}\PYGdefault{o}{)} \PYGdefault{k}{return} \PYGdefault{k+kc}{true}\PYGdefault{o}{;}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{o} \PYGdefault{o}{==} \PYGdefault{k+kc}{null} \PYGdefault{o}{||} \PYGdefault{n}{getClass}\PYGdefault{o}{()} \PYGdefault{o}{!=} \PYGdefault{n}{o}\PYGdefault{o}{.}\PYGdefault{n+na}{getClass}\PYGdefault{o}{())} \PYGdefault{k}{return} \PYGdefault{k+kc}{false}\PYGdefault{o}{;}
+        \PYGdefault{k}{if} \PYGdefault{o}{(!}\PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{equals}\PYGdefault{o}{(}\PYGdefault{n}{o}\PYGdefault{o}{))} \PYGdefault{k}{return} \PYGdefault{k+kc}{false}\PYGdefault{o}{;}
+        \PYGdefault{n}{CheckpointRequestModel} \PYGdefault{n}{that} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{CheckpointRequestModel}\PYGdefault{o}{)} \PYGdefault{n}{o}\PYGdefault{o}{;}
+        \PYGdefault{k}{return} \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{equals}\PYGdefault{o}{(}\PYGdefault{n}{checkpointId}\PYGdefault{o}{,} \PYGdefault{n}{that}\PYGdefault{o}{.}\PYGdefault{n+na}{checkpointId}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{int} \PYGdefault{n+nf}{hashCode}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{hash}\PYGdefault{o}{(}\PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{hashCode}\PYGdefault{o}{(),} \PYGdefault{n}{checkpointId}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

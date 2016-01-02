@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{c+cp}{\PYGdefaultZlt{}?xml version=\PYGdefaultZdq{}1.0\PYGdefaultZdq{} encoding=\PYGdefaultZdq{}utf\PYGdefaultZhy{}8\PYGdefaultZdq{}?\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}RelativeLayout} \PYGdefault{n+na}{xmlns:android=}\PYGdefault{l+s}{\PYGdefaultZdq{}http://schemas.android.com/apk/res/android\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{xmlns:tools=}\PYGdefault{l+s}{\PYGdefaultZdq{}http://schemas.android.com/tools\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}vertical\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingLeft=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}horizontal\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingRight=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}horizontal\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}vertical\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{tools:context=}\PYGdefault{l+s}{\PYGdefaultZdq{}at.fh.ooe.moc5.amazingrace.activity.RouteActivity\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:weightSum=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}ListView}
+            \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/listRoute\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}\PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}/RelativeLayout\PYGdefaultZgt{}}
+\end{Verbatim}

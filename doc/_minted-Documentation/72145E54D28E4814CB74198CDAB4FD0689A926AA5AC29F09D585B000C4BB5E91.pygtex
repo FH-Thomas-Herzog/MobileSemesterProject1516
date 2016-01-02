@@ -1,0 +1,102 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.gson.annotations.SerializedName}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.Serializable}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Objects}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/25/2015.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{CheckpointModel} \PYGdefault{k+kd}{implements} \PYGdefault{n}{Serializable} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{n+nd}{@SerializedName}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Id\PYGdefaultZdq{}}\PYGdefault{o}{)}
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{String} \PYGdefault{n}{id}\PYGdefault{o}{;}
+    \PYGdefault{n+nd}{@SerializedName}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Number\PYGdefaultZdq{}}\PYGdefault{o}{)}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{int} \PYGdefault{n}{number}\PYGdefault{o}{;}
+    \PYGdefault{n+nd}{@SerializedName}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Name\PYGdefaultZdq{}}\PYGdefault{o}{)}
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{String} \PYGdefault{n}{name}\PYGdefault{o}{;}
+    \PYGdefault{n+nd}{@SerializedName}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Hint\PYGdefaultZdq{}}\PYGdefault{o}{)}
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{String} \PYGdefault{n}{hint}\PYGdefault{o}{;}
+    \PYGdefault{n+nd}{@SerializedName}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Latitude\PYGdefaultZdq{}}\PYGdefault{o}{)}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{double} \PYGdefault{n}{latitude}\PYGdefault{o}{;}
+    \PYGdefault{n+nd}{@SerializedName}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Longitude\PYGdefaultZdq{}}\PYGdefault{o}{)}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{double} \PYGdefault{n}{longitude}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kd}{transient} \PYGdefault{k+kt}{boolean} \PYGdefault{n}{unvisited} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{CheckpointModel}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+c1}{//region Getter and Setter}
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{String} \PYGdefault{n+nf}{getId}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{id}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setId}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{id}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{id} \PYGdefault{o}{=} \PYGdefault{n}{id}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{int} \PYGdefault{n+nf}{getNumber}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{number}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setNumber}\PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{number}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{number} \PYGdefault{o}{=} \PYGdefault{n}{number}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{String} \PYGdefault{n+nf}{getName}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{name}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setName}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{name}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{name} \PYGdefault{o}{=} \PYGdefault{n}{name}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{String} \PYGdefault{n+nf}{getHint}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{hint}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setHint}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{hint}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{hint} \PYGdefault{o}{=} \PYGdefault{n}{hint}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{double} \PYGdefault{n+nf}{getLatitude}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{latitude}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setLatitude}\PYGdefault{o}{(}\PYGdefault{k+kt}{double} \PYGdefault{n}{latitude}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{latitude} \PYGdefault{o}{=} \PYGdefault{n}{latitude}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{double} \PYGdefault{n+nf}{getLongitude}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{longitude}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setLongitude}\PYGdefault{o}{(}\PYGdefault{k+kt}{double} \PYGdefault{n}{longitude}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{longitude} \PYGdefault{o}{=} \PYGdefault{n}{longitude}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{isUnvisited}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{unvisited}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setUnvisited}\PYGdefault{o}{(}\PYGdefault{k+kt}{boolean} \PYGdefault{n}{unvisited}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{unvisited} \PYGdefault{o}{=} \PYGdefault{n}{unvisited}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{equals}\PYGdefault{o}{(}\PYGdefault{n}{Object} \PYGdefault{n}{o}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{k}{this} \PYGdefault{o}{==} \PYGdefault{n}{o}\PYGdefault{o}{)} \PYGdefault{k}{return} \PYGdefault{k+kc}{true}\PYGdefault{o}{;}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{o} \PYGdefault{o}{==} \PYGdefault{k+kc}{null} \PYGdefault{o}{||} \PYGdefault{n}{getClass}\PYGdefault{o}{()} \PYGdefault{o}{!=} \PYGdefault{n}{o}\PYGdefault{o}{.}\PYGdefault{n+na}{getClass}\PYGdefault{o}{())} \PYGdefault{k}{return} \PYGdefault{k+kc}{false}\PYGdefault{o}{;}
+        \PYGdefault{n}{CheckpointModel} \PYGdefault{n}{that} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{CheckpointModel}\PYGdefault{o}{)} \PYGdefault{n}{o}\PYGdefault{o}{;}
+        \PYGdefault{k}{return} \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{equals}\PYGdefault{o}{(}\PYGdefault{n}{id}\PYGdefault{o}{,} \PYGdefault{n}{that}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{int} \PYGdefault{n+nf}{hashCode}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{hash}\PYGdefault{o}{(}\PYGdefault{n}{id}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

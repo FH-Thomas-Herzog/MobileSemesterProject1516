@@ -1,0 +1,157 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{c+cp}{\PYGdefaultZlt{}?xml version=\PYGdefaultZdq{}1.0\PYGdefaultZdq{} encoding=\PYGdefaultZdq{}utf\PYGdefaultZhy{}8\PYGdefaultZdq{}?\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}RelativeLayout} \PYGdefault{n+na}{xmlns:android=}\PYGdefault{l+s}{\PYGdefaultZdq{}http://schemas.android.com/apk/res/android\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{xmlns:tools=}\PYGdefault{l+s}{\PYGdefaultZdq{}http://schemas.android.com/tools\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}vertical\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingLeft=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}horizontal\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingRight=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}horizontal\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{android:paddingTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}@dimen/activity\PYGdefaultZus{}vertical\PYGdefaultZus{}margin\PYGdefaultZdq{}}
+    \PYGdefault{n+na}{tools:context=}\PYGdefault{l+s}{\PYGdefaultZdq{}.activity.CheckpointActivity\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}ScrollView}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:fillViewport=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentStart=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+            \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointContainerLabel\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/checkpoint\PYGdefaultZus{}group\PYGdefaultZus{}secret\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceLarge\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:textStyle=}\PYGdefault{l+s}{\PYGdefaultZdq{}bold\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointContainer\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentStart=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
+                    \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/nextCheckpointTxt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceMedium\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
+                    \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/nextCheckpointHintTxt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceMedium\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}EditText}
+                    \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/hintAnswerEdTxt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}Button}
+                    \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/answerBtn\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}center|center\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/action\PYGdefaultZus{}answer\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointMapContainerLabel\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}horizontal\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}ImageView}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}20pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}20pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:clickable=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:onClick=}\PYGdefault{l+s}{\PYGdefaultZdq{}toggleVisibility\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:src=}\PYGdefault{l+s}{\PYGdefaultZdq{}@drawable/map\PYGdefaultZus{}icon\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginLeft=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:clickable=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}left|center\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:onClick=}\PYGdefault{l+s}{\PYGdefaultZdq{}toggleVisibility\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/checkpoint\PYGdefaultZus{}group\PYGdefaultZus{}map\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceLarge\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:textStyle=}\PYGdefault{l+s}{\PYGdefaultZdq{}bold\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointMapContainer\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}200dp\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}10pt\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentStart=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}fragment}
+                    \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointMap\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:name=}\PYGdefault{l+s}{\PYGdefaultZdq{}com.google.android.gms.maps.MapFragment\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointListContainerLabel\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}horizontal\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}ImageView}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}20pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}20pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:clickable=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:onClick=}\PYGdefault{l+s}{\PYGdefaultZdq{}toggleVisibility\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:src=}\PYGdefault{l+s}{\PYGdefaultZdq{}@drawable/list\PYGdefaultZus{}icon\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginLeft=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:clickable=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}left|center\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:onClick=}\PYGdefault{l+s}{\PYGdefaultZdq{}toggleVisibility\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/checkpoint\PYGdefaultZus{}group\PYGdefaultZus{}list\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceLarge\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:textStyle=}\PYGdefault{l+s}{\PYGdefaultZdq{}bold\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointListContainer\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentStart=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
+                \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+                \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
+                    \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointListView\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:layout\PYGdefaultZus{}below=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeListTitleTxt\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+            \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+        \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}/ScrollView\PYGdefaultZgt{}}
+\PYGdefault{n+nt}{\PYGdefaultZlt{}/RelativeLayout\PYGdefaultZgt{}}
+\end{Verbatim}

@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.task}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/25/2015.}
+\PYGdefault{c+cm}{ * This class represents an async task result which allows handling of any occurred exception}
+\PYGdefault{c+cm}{ * in the postExecute method instead of the doInBackground where we are not in the UI Thread.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{T}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{final} \PYGdefault{n}{T} \PYGdefault{n}{result}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{final} \PYGdefault{n}{Exception} \PYGdefault{n}{exception}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{AsyncTaskResult}\PYGdefault{o}{(}\PYGdefault{n}{T} \PYGdefault{n}{result}\PYGdefault{o}{,} \PYGdefault{n}{Exception} \PYGdefault{n}{exception}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{result} \PYGdefault{o}{=} \PYGdefault{n}{result}\PYGdefault{o}{;}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{o}{=} \PYGdefault{n}{exception}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

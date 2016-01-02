@@ -1,0 +1,63 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.Serializable}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.List}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.RouteModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.RouteRequestModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.CheckpointRequestModel}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/25/2015.}
+\PYGdefault{c+cm}{ * The specification of the service proxy}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{interface} \PYGdefault{n+nc}{ServiceProxy} \PYGdefault{k+kd}{extends} \PYGdefault{n}{Serializable} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Validates the given user credentials.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param model the model containing authentication data}
+\PYGdefault{c+cm}{     * @return true if the credentials are valid, false otherwise}
+\PYGdefault{c+cm}{     * @throws ServiceException if an service error occurs. See contained error code for details}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{validateCredentials}\PYGdefault{o}{(}\PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException}\PYGdefault{o}{;}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Validates the checkpoint secret.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param model the model containing the checkpoint data and authentication data}
+\PYGdefault{c+cm}{     * @return true if valid, false otherwise}
+\PYGdefault{c+cm}{     * @throws ServiceException if an service error occurs. See contained error code for details}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{validateCheckpointSecret}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException}\PYGdefault{o}{;}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Loads all routes.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param model the credentials model for authentication}
+\PYGdefault{c+cm}{     * @return the loaded routes}
+\PYGdefault{c+cm}{     * @throws ServiceException if an service error occurs. See contained error code for details}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n}{List}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{RouteModel}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n+nf}{loadRoutes}\PYGdefault{o}{(}\PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException}\PYGdefault{o}{;}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Resets the given route.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param model the model containing the route data and authentication data}
+\PYGdefault{c+cm}{     * @return true if reset, false otherwise}
+\PYGdefault{c+cm}{     * @throws ServiceException if an service error occurs. See contained error code for details}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{resetRoute}\PYGdefault{o}{(}\PYGdefault{n}{RouteRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException}\PYGdefault{o}{;}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Resets all routes.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param model the model containing the authentication data}
+\PYGdefault{c+cm}{     * @return true if reset, false otherwise}
+\PYGdefault{c+cm}{     * @throws ServiceException if an service error occurs. See contained error code for details}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{resetAllRoutes}\PYGdefault{o}{(}\PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException}\PYGdefault{o}{;}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

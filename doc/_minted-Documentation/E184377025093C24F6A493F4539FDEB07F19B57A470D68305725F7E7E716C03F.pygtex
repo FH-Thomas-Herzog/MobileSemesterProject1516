@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.view}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.Serializable}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Calendar}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Objects}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/24/2015.}
+\PYGdefault{c+cm}{ * This model represents an logged user for the application.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{UserContextModel} \PYGdefault{k+kd}{implements} \PYGdefault{n}{Serializable} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kd}{final} \PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kd}{final} \PYGdefault{n}{Calendar} \PYGdefault{n}{loginDate}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n+nf}{UserContextModel}\PYGdefault{o}{(}\PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{);}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{model} \PYGdefault{o}{=} \PYGdefault{n}{model}\PYGdefault{o}{;}
+        \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{loginDate} \PYGdefault{o}{=} \PYGdefault{n}{Calendar}\PYGdefault{o}{.}\PYGdefault{n+na}{getInstance}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+c1}{//region Getter and Setter}
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n+nf}{getCredentialsModel}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{model}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{Calendar} \PYGdefault{n+nf}{getLoginDate}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{loginDate}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

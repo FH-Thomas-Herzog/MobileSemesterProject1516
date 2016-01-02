@@ -1,12 +1,10 @@
-package at.fh.ooe.moc5.amazingrace.adaptor;
+package at.fh.ooe.moc5.amazingrace.adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import java.util.Objects;
 
 import at.fh.ooe.moc5.amazingrace.R;
 import at.fh.ooe.moc5.amazingrace.model.json.RouteModel;

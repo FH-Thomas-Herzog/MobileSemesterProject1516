@@ -1,0 +1,258 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.activity}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.app.ProgressDialog}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.content.Context}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.content.DialogInterface}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.content.Intent}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.net.ConnectivityManager}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.net.NetworkInfo}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.os.Bundle}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.support.v7.app.AppCompatActivity}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.util.Log}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.Toast}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.Serializable}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Objects}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.AmazingRaceApplication}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.R}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service.ServiceException}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.util.DialogUtil}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/28/2015.}
+\PYGdefault{c+cm}{ * \PYGdefaultZlt{}p/\PYGdefaultZgt{}}
+\PYGdefault{c+cm}{ * This is the base class for all activities which forces the activity to define one view model it uses.}
+\PYGdefault{c+cm}{ * This class provides common functionality usable by all activities.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{AbstractActivity}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{T} \PYGdefault{k+kd}{extends} \PYGdefault{n}{Serializable}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{k+kd}{extends} \PYGdefault{n}{AppCompatActivity} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{protected} \PYGdefault{n}{T} \PYGdefault{n}{viewModel}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{boolean} \PYGdefault{n}{restored} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{protected} \PYGdefault{n}{AmazingRaceApplication} \PYGdefault{n}{application}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{protected} \PYGdefault{n}{Boolean} \PYGdefault{n}{validViewModel} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{ProgressDialog} \PYGdefault{n}{progress}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{VIEW\PYGdefaultZus{}MODEL} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}AbstractActivity\PYGdefaultZsh{}VIEW\PYGdefaultZus{}MODEL\PYGdefaultZdq{}}\PYGdefault{o}{;}
+
+    \PYGdefault{c+c1}{// region Constants}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Enumeration for specifying the available menu group ids}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{enum} \PYGdefault{n}{MenuGroup} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{ROUTE\PYGdefaultZus{}ITEM}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{0}\PYGdefault{o}{),}
+        \PYGdefault{n}{OPTIONS}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{);}
+
+        \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{value}\PYGdefault{o}{;}
+
+        \PYGdefault{k+kd}{private} \PYGdefault{n+nf}{MenuGroup}\PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{value}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{value} \PYGdefault{o}{=} \PYGdefault{n}{value}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+
+        \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{n}{MenuGroup} \PYGdefault{n+nf}{getMenuGroupForValue}\PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{value}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{for} \PYGdefault{o}{(}\PYGdefault{n}{MenuGroup} \PYGdefault{n}{group} \PYGdefault{o}{:} \PYGdefault{n}{MenuGroup}\PYGdefault{o}{.}\PYGdefault{n+na}{values}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{group}\PYGdefault{o}{.}\PYGdefault{n+na}{value} \PYGdefault{o}{==} \PYGdefault{n}{value}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k}{return} \PYGdefault{n}{group}\PYGdefault{o}{;}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{IllegalArgumentException}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}MenuGroup with value \PYGdefaultZsq{}\PYGdefaultZdq{}} \PYGdefault{o}{+} \PYGdefault{n}{value} \PYGdefault{o}{+} \PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZsq{} not found\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Enumeration for specifying the available menu ids}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{enum} \PYGdefault{n}{MenuId} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{PLAY}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{0}\PYGdefault{o}{),}
+        \PYGdefault{n}{RESET}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{),}
+        \PYGdefault{n}{RESET\PYGdefaultZus{}ALL\PYGdefaultZus{}ROUTES}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{),}
+        \PYGdefault{n}{CLOSE}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{3}\PYGdefault{o}{),}
+        \PYGdefault{n}{RELOAD}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{4}\PYGdefault{o}{);}
+
+        \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{value}\PYGdefault{o}{;}
+
+        \PYGdefault{k+kd}{private} \PYGdefault{n+nf}{MenuId}\PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{value}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{value} \PYGdefault{o}{=} \PYGdefault{n}{value}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+
+        \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{n}{MenuId} \PYGdefault{n+nf}{getMenuIdForValue}\PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{value}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{for} \PYGdefault{o}{(}\PYGdefault{n}{MenuId} \PYGdefault{n}{id} \PYGdefault{o}{:} \PYGdefault{n}{MenuId}\PYGdefault{o}{.}\PYGdefault{n+na}{values}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{value} \PYGdefault{o}{==} \PYGdefault{n}{value}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k}{return} \PYGdefault{n}{id}\PYGdefault{o}{;}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{IllegalArgumentException}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}MenuGroup with value \PYGdefaultZsq{}\PYGdefaultZdq{}} \PYGdefault{o}{+} \PYGdefault{n}{value} \PYGdefault{o}{+} \PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZsq{} not found\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+
+    \PYGdefault{c+c1}{//region Lifecycle Methods}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Initializes the backed application so that it can be accessed by the concrete activity application.}
+\PYGdefault{c+cm}{     * It also tries to get the saved view model from the savedInstanceState which can be null here if haven\PYGdefaultZsq{}t been saved before.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param savedInstanceState}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onCreate}\PYGdefault{o}{(}\PYGdefault{n}{Bundle} \PYGdefault{n}{savedInstanceState}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onCreate}\PYGdefault{o}{(}\PYGdefault{n}{savedInstanceState}\PYGdefault{o}{);}
+        \PYGdefault{n}{application} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{AmazingRaceApplication}\PYGdefault{o}{)} \PYGdefault{n}{getApplication}\PYGdefault{o}{();}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{savedInstanceState} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{viewModel} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{T}\PYGdefault{o}{)} \PYGdefault{n}{savedInstanceState}\PYGdefault{o}{.}\PYGdefault{n+na}{get}\PYGdefault{o}{(}\PYGdefault{n}{VIEW\PYGdefaultZus{}MODEL}\PYGdefault{o}{);}
+            \PYGdefault{n}{restored} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{viewModel} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Re\PYGdefaultZhy{}initializes the application on resume of the activity.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onResume}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onResume}\PYGdefault{o}{();}
+        \PYGdefault{n}{application} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{AmazingRaceApplication}\PYGdefault{o}{)} \PYGdefault{n}{getApplication}\PYGdefault{o}{();}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{viewModel} \PYGdefault{o}{==} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{validViewModel} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{;}
+            \PYGdefault{n}{openInvalidUserAccountDialog}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Saves the backed view model.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param outState the out coming state}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onSaveInstanceState}\PYGdefault{o}{(}\PYGdefault{n}{Bundle} \PYGdefault{n}{outState}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onSaveInstanceState}\PYGdefault{o}{(}\PYGdefault{n}{outState}\PYGdefault{o}{);}
+        \PYGdefault{n}{outState}\PYGdefault{o}{.}\PYGdefault{n+na}{putSerializable}\PYGdefault{o}{(}\PYGdefault{n}{VIEW\PYGdefaultZus{}MODEL}\PYGdefault{o}{,} \PYGdefault{n}{viewModel}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Handles a service exception by displaying a toast with a proper message}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param exception the occurred ServiceException}
+\PYGdefault{c+cm}{     * @return true if handled here, false otherwise, which indicates that no error code or an unknown error occurred was set.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{handleServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceException} \PYGdefault{n}{exception}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{exception}\PYGdefault{o}{);}
+        \PYGdefault{k+kt}{boolean} \PYGdefault{n}{handled} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{;}
+        \PYGdefault{n}{ServiceException}\PYGdefault{o}{.}\PYGdefault{n+na}{ServiceErrorCode} \PYGdefault{n}{errorCode} \PYGdefault{o}{=} \PYGdefault{n}{exception}\PYGdefault{o}{.}\PYGdefault{n+na}{getErrorCode}\PYGdefault{o}{();}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{errorCode} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{switch} \PYGdefault{o}{(}\PYGdefault{n}{errorCode}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{k}{case} \PYGdefault{n}{INVALID\PYGdefaultZus{}REQUEST}\PYGdefault{o}{:}
+                    \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}request\PYGdefaultZus{}invalid}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                    \PYGdefault{n}{handled} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{;}
+                    \PYGdefault{k}{break}\PYGdefault{o}{;}
+                \PYGdefault{k}{case} \PYGdefault{n}{TIMEOUT}\PYGdefault{o}{:}
+                    \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}request\PYGdefaultZus{}timeout}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                    \PYGdefault{n}{handled} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{;}
+                    \PYGdefault{k}{break}\PYGdefault{o}{;}
+                \PYGdefault{k}{case} \PYGdefault{n}{UNKNOWN}\PYGdefault{o}{:}
+                    \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}unknown}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                    \PYGdefault{n}{handled} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{;}
+                    \PYGdefault{k}{break}\PYGdefault{o}{;}
+                \PYGdefault{k}{case} \PYGdefault{n}{INVALID\PYGdefaultZus{}CREDENTIALS}\PYGdefault{o}{:}
+                    \PYGdefault{n}{openInvalidUserAccountDialog}\PYGdefault{o}{();}
+                    \PYGdefault{n}{handled} \PYGdefault{o}{=} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{;}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}unknown}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{n}{Log}\PYGdefault{o}{.}\PYGdefault{n+na}{e}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{getClass}\PYGdefault{o}{().}\PYGdefault{n+na}{getSimpleName}\PYGdefault{o}{(),} \PYGdefault{l+s}{\PYGdefaultZdq{}ServiceException occurred\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{n}{exception}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{return} \PYGdefault{n}{handled}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Opens the invalid user dialog which indicates that the user has become invalid during application invocation.}
+\PYGdefault{c+cm}{     * After the user clicked ok the user will be logged out.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{openInvalidUserAccountDialog}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{DialogUtil}\PYGdefault{o}{.}\PYGdefault{n+na}{createErrorDialog}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}no\PYGdefaultZus{}network}\PYGdefault{o}{,} \PYGdefault{k}{new} \PYGdefault{n}{DialogInterface}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n+nd}{@Override}
+            \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onClick}\PYGdefault{o}{(}\PYGdefault{n}{DialogInterface} \PYGdefault{n}{dialog}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{which}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n}{dialog}\PYGdefault{o}{.}\PYGdefault{n+na}{dismiss}\PYGdefault{o}{();}
+                \PYGdefault{n}{application}\PYGdefault{o}{.}\PYGdefault{n+na}{setLoggedUser}\PYGdefault{o}{(}\PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+                \PYGdefault{n}{finishAffinity}\PYGdefault{o}{();}
+                \PYGdefault{n}{startActivity}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{Intent}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{LoginActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{class}\PYGdefault{o}{));}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{\PYGdefaultZcb{}).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * This method checks if an internet connection is available for the application.}
+\PYGdefault{c+cm}{     * If a network connection is not available then a dialog is shown to notify the user.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @return true if network is available false otherwise}
+\PYGdefault{c+cm}{     * @see AbstractActivity\PYGdefaultZsh{}isOnline()}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{checkAndDisplayAvailableNetwork}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{boolean} \PYGdefault{n}{online} \PYGdefault{o}{=} \PYGdefault{n}{isOnline}\PYGdefault{o}{();}
+        \PYGdefault{k}{if} \PYGdefault{o}{(!}\PYGdefault{n}{online}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{DialogUtil}\PYGdefault{o}{.}\PYGdefault{n+na}{createErrorDialog}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}no\PYGdefaultZus{}network}\PYGdefault{o}{,} \PYGdefault{k}{new} \PYGdefault{n}{DialogInterface}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onClick}\PYGdefault{o}{(}\PYGdefault{n}{DialogInterface} \PYGdefault{n}{dialog}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{which}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{n}{dialog}\PYGdefault{o}{.}\PYGdefault{n+na}{dismiss}\PYGdefault{o}{();}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{online}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Opens an dialog to ask the user if he really wants to quit the application.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{openCloseApplicationDialog}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{DialogUtil}\PYGdefault{o}{.}\PYGdefault{n+na}{createYesNoAlertDialog}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{dialog\PYGdefaultZus{}title\PYGdefaultZus{}warning}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{warning\PYGdefaultZus{}want\PYGdefaultZus{}quit}\PYGdefault{o}{,} \PYGdefault{k}{new} \PYGdefault{n}{DialogInterface}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n+nd}{@Override}
+            \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onClick}\PYGdefault{o}{(}\PYGdefault{n}{DialogInterface} \PYGdefault{n}{dialog}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{which}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n}{dialog}\PYGdefault{o}{.}\PYGdefault{n+na}{dismiss}\PYGdefault{o}{();}
+                \PYGdefault{k}{switch} \PYGdefault{o}{(}\PYGdefault{n}{which}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k}{case} \PYGdefault{n}{DialogInterface}\PYGdefault{o}{.}\PYGdefault{n+na}{BUTTON\PYGdefaultZus{}POSITIVE}\PYGdefault{o}{:}
+                        \PYGdefault{n}{application}\PYGdefault{o}{.}\PYGdefault{n+na}{setLoggedUser}\PYGdefault{o}{(}\PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+                        \PYGdefault{n}{finishAffinity}\PYGdefault{o}{();}
+                        \PYGdefault{k}{break}\PYGdefault{o}{;}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{\PYGdefaultZcb{}).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Opens a progress dialog with an custom message.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param messageId the resource id of the message}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{openProgressDialog}\PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{messageId}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{progress} \PYGdefault{o}{=} \PYGdefault{n}{ProgressDialog}\PYGdefault{o}{.}\PYGdefault{n+na}{show}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{getString}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{progress\PYGdefaultZus{}title}\PYGdefault{o}{),} \PYGdefault{n}{getString}\PYGdefault{o}{(}\PYGdefault{n}{messageId}\PYGdefault{o}{),} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Closes the progress dialog.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{closeProgressDialog}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{progress} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{progress}\PYGdefault{o}{.}\PYGdefault{n+na}{dismiss}\PYGdefault{o}{();}
+            \PYGdefault{n}{progress} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Helper method for checking if a network connection is available.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @return true if a network connection is available, false otherwise}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{isOnline}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{ConnectivityManager} \PYGdefault{n}{cm} \PYGdefault{o}{=}
+                \PYGdefault{o}{(}\PYGdefault{n}{ConnectivityManager}\PYGdefault{o}{)} \PYGdefault{n}{getSystemService}\PYGdefault{o}{(}\PYGdefault{n}{Context}\PYGdefault{o}{.}\PYGdefault{n+na}{CONNECTIVITY\PYGdefaultZus{}SERVICE}\PYGdefault{o}{);}
+        \PYGdefault{n}{NetworkInfo} \PYGdefault{n}{netInfo} \PYGdefault{o}{=} \PYGdefault{n}{cm}\PYGdefault{o}{.}\PYGdefault{n+na}{getActiveNetworkInfo}\PYGdefault{o}{();}
+        \PYGdefault{k}{return} \PYGdefault{n}{netInfo} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null} \PYGdefault{o}{\PYGdefaultZam{}\PYGdefaultZam{}} \PYGdefault{n}{netInfo}\PYGdefault{o}{.}\PYGdefault{n+na}{isConnected}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

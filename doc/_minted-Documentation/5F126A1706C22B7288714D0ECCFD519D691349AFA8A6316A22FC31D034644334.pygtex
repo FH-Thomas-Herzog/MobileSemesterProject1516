@@ -1,0 +1,418 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.activity}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.content.DialogInterface}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.content.Intent}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.graphics.Color}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.os.AsyncTask}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.os.Bundle}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.view.Menu}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.view.MenuItem}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.view.View}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.Button}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.EditText}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.LinearLayout}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.TextView}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.Toast}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.android.gms.maps.CameraUpdateFactory}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.android.gms.maps.GoogleMap}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.android.gms.maps.MapFragment}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.android.gms.maps.OnMapReadyCallback}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.android.gms.maps.model.BitmapDescriptorFactory}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.android.gms.maps.model.LatLng}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.android.gms.maps.model.MarkerOptions}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.android.gms.maps.model.PolylineOptions}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.AmazingRaceApplication}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.R}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.CheckpointModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.RouteModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.task.AsyncTaskResult}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.view.CheckpointViewModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service.ServiceException}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.util.DialogUtil}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.watcher.AnswerButtonTextWatcher}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.watcher.CheckpointViewModelBindingTextWatcher}\PYGdefault{o}{;}
+
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{CheckpointActivity} \PYGdefault{k+kd}{extends} \PYGdefault{n}{AbstractActivity}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{CheckpointViewModel}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{k+kd}{implements} \PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener}\PYGdefault{o}{,} \PYGdefault{n}{DialogInterface}\PYGdefault{o}{.}\PYGdefault{n+na}{OnClickListener} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{c+c1}{//region Lifecycle Methods}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Prepares the view model depending on the intent serialized route model}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param savedInstanceState the saved bundle instance}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onCreate}\PYGdefault{o}{(}\PYGdefault{n}{Bundle} \PYGdefault{n}{savedInstanceState}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onCreate}\PYGdefault{o}{(}\PYGdefault{n}{savedInstanceState}\PYGdefault{o}{);}
+        \PYGdefault{n}{setContentView}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{layout}\PYGdefault{o}{.}\PYGdefault{n+na}{activity\PYGdefaultZus{}checkpoint}\PYGdefault{o}{);}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{application}\PYGdefault{o}{.}\PYGdefault{n+na}{getLoggedUser}\PYGdefault{o}{()} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k+kd}{final} \PYGdefault{n}{Intent} \PYGdefault{n}{intent} \PYGdefault{o}{=} \PYGdefault{n}{getIntent}\PYGdefault{o}{();}
+            \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{intent}\PYGdefault{o}{.}\PYGdefault{n+na}{getExtras}\PYGdefault{o}{().}\PYGdefault{n+na}{containsKey}\PYGdefault{o}{(}\PYGdefault{n}{AmazingRaceApplication}\PYGdefault{o}{.}\PYGdefault{n+na}{INTENT\PYGdefaultZus{}EXTRA\PYGdefaultZus{}ROUTE}\PYGdefault{o}{))} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n}{RouteModel} \PYGdefault{n}{route} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{RouteModel}\PYGdefault{o}{)} \PYGdefault{n}{intent}\PYGdefault{o}{.}\PYGdefault{n+na}{getExtras}\PYGdefault{o}{().}\PYGdefault{n+na}{get}\PYGdefault{o}{(}\PYGdefault{n}{AmazingRaceApplication}\PYGdefault{o}{.}\PYGdefault{n+na}{INTENT\PYGdefaultZus{}EXTRA\PYGdefaultZus{}ROUTE}\PYGdefault{o}{);}
+                \PYGdefault{n}{viewModel} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{CheckpointViewModel}\PYGdefault{o}{(}\PYGdefault{n}{application}\PYGdefault{o}{.}\PYGdefault{n+na}{getLoggedUser}\PYGdefault{o}{(),} \PYGdefault{n}{route}\PYGdefault{o}{);}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Prepares this activity views if view mdoel is valid.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onResume}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onResume}\PYGdefault{o}{();}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{validViewModel}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{prepareView}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Creates the options menu items}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param menu the menu to add items too}
+\PYGdefault{c+cm}{     * @return true}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{onCreateOptionsMenu}\PYGdefault{o}{(}\PYGdefault{n}{Menu} \PYGdefault{n}{menu}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{menu}\PYGdefault{o}{.}\PYGdefault{n+na}{add}\PYGdefault{o}{(}\PYGdefault{n}{MenuGroup}\PYGdefault{o}{.}\PYGdefault{n+na}{OPTIONS}\PYGdefault{o}{.}\PYGdefault{n+na}{value}\PYGdefault{o}{,} \PYGdefault{n}{MenuId}\PYGdefault{o}{.}\PYGdefault{n+na}{RESET}\PYGdefault{o}{.}\PYGdefault{n+na}{value}\PYGdefault{o}{,} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{action\PYGdefaultZus{}reset}\PYGdefault{o}{);}
+        \PYGdefault{n}{menu}\PYGdefault{o}{.}\PYGdefault{n+na}{add}\PYGdefault{o}{(}\PYGdefault{n}{MenuGroup}\PYGdefault{o}{.}\PYGdefault{n+na}{OPTIONS}\PYGdefault{o}{.}\PYGdefault{n+na}{value}\PYGdefault{o}{,} \PYGdefault{n}{MenuId}\PYGdefault{o}{.}\PYGdefault{n+na}{CLOSE}\PYGdefault{o}{.}\PYGdefault{n+na}{value}\PYGdefault{o}{,} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{action\PYGdefaultZus{}close}\PYGdefault{o}{);}
+        \PYGdefault{k}{return} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Handles an options menu item select}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param item the selected menu item}
+\PYGdefault{c+cm}{     * @return true if items has been handled}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{onOptionsItemSelected}\PYGdefault{o}{(}\PYGdefault{n}{MenuItem} \PYGdefault{n}{item}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{switch} \PYGdefault{o}{(}\PYGdefault{n}{MenuId}\PYGdefault{o}{.}\PYGdefault{n+na}{getMenuIdForValue}\PYGdefault{o}{(}\PYGdefault{n}{item}\PYGdefault{o}{.}\PYGdefault{n+na}{getItemId}\PYGdefault{o}{()))} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{case} \PYGdefault{n}{RESET}\PYGdefault{o}{:}
+                \PYGdefault{n}{resetRoute}\PYGdefault{o}{();}
+                \PYGdefault{k}{return} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{;}
+            \PYGdefault{k}{case} \PYGdefault{n}{CLOSE}\PYGdefault{o}{:}
+                \PYGdefault{n}{openCloseApplicationDialog}\PYGdefault{o}{();}
+                \PYGdefault{k}{return} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{;}
+            \PYGdefault{k}{default}\PYGdefault{o}{:}
+                \PYGdefault{k}{return} \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onOptionsItemSelected}\PYGdefault{o}{(}\PYGdefault{n}{item}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+
+    \PYGdefault{c+c1}{//region Helper}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Prepares this acitivy views.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{prepareView}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{c+c1}{// set default container visibility}
+        \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointContainer}\PYGdefault{o}{).}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{(}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{VISIBLE}\PYGdefault{o}{);}
+        \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointMapContainer}\PYGdefault{o}{).}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{(}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{VISIBLE}\PYGdefault{o}{);}
+        \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointListContainer}\PYGdefault{o}{).}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{(}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{GONE}\PYGdefault{o}{);}
+
+        \PYGdefault{c+c1}{// prepare list view of visited checkpoints}
+        \PYGdefault{c+c1}{// ListView is not used because of outer wrapping ScrollView}
+        \PYGdefault{n}{LinearLayout} \PYGdefault{n}{listViewReplacement} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{LinearLayout}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointListView}\PYGdefault{o}{);}
+        \PYGdefault{n}{listViewReplacement}\PYGdefault{o}{.}\PYGdefault{n+na}{removeAllViews}\PYGdefault{o}{();}
+        \PYGdefault{n}{listViewReplacement}\PYGdefault{o}{.}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{(}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{VISIBLE}\PYGdefault{o}{);}
+        \PYGdefault{k}{for} \PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{i} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{;} \PYGdefault{n}{i} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getVisitedCheckpoints}\PYGdefault{o}{().}\PYGdefault{n+na}{size}\PYGdefault{o}{();} \PYGdefault{n}{i}\PYGdefault{o}{++)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{CheckpointModel} \PYGdefault{n}{model} \PYGdefault{o}{=} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getRoute}\PYGdefault{o}{().}\PYGdefault{n+na}{getVisitedCheckpoints}\PYGdefault{o}{().}\PYGdefault{n+na}{get}\PYGdefault{o}{(}\PYGdefault{n}{i}\PYGdefault{o}{);}
+            \PYGdefault{n}{View} \PYGdefault{n}{view} \PYGdefault{o}{=} \PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{inflate}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{layout}\PYGdefault{o}{.}\PYGdefault{n+na}{view\PYGdefaultZus{}checkpoint\PYGdefaultZus{}item}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+            \PYGdefault{o}{((}\PYGdefault{n}{TextView}\PYGdefault{o}{)} \PYGdefault{n}{view}\PYGdefault{o}{.}\PYGdefault{n+na}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{visitedCheckpointNameLabel}\PYGdefault{o}{)).}\PYGdefault{n+na}{setText}\PYGdefault{o}{((}\PYGdefault{n}{i} \PYGdefault{o}{+} \PYGdefault{l+m+mi}{1}\PYGdefault{o}{)} \PYGdefault{o}{+} \PYGdefault{l+s}{\PYGdefaultZdq{}. \PYGdefaultZdq{}} \PYGdefault{o}{+} \PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{getName}\PYGdefault{o}{());}
+            \PYGdefault{n}{listViewReplacement}\PYGdefault{o}{.}\PYGdefault{n+na}{addView}\PYGdefault{o}{(}\PYGdefault{n}{view}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{c+c1}{// Add next checkpoint to list with open marker}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{()} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k+kd}{final} \PYGdefault{n}{CheckpointModel} \PYGdefault{n}{model} \PYGdefault{o}{=} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{();}
+            \PYGdefault{n}{View} \PYGdefault{n}{view} \PYGdefault{o}{=} \PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{inflate}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{layout}\PYGdefault{o}{.}\PYGdefault{n+na}{view\PYGdefaultZus{}checkpoint\PYGdefaultZus{}item}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{);}
+            \PYGdefault{o}{((}\PYGdefault{n}{TextView}\PYGdefault{o}{)} \PYGdefault{n}{view}\PYGdefault{o}{.}\PYGdefault{n+na}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{visitedCheckpointNameLabel}\PYGdefault{o}{)).}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}
+                    \PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{getName}\PYGdefault{o}{()).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{} (\PYGdefaultZdq{}}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{getText}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{open}\PYGdefault{o}{)).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{})\PYGdefaultZdq{}}\PYGdefault{o}{).}\PYGdefault{n+na}{toString}\PYGdefault{o}{()}
+            \PYGdefault{o}{);}
+            \PYGdefault{n}{listViewReplacement}\PYGdefault{o}{.}\PYGdefault{n+na}{addView}\PYGdefault{o}{(}\PYGdefault{n}{view}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+
+        \PYGdefault{c+c1}{// route already finished}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{()} \PYGdefault{o}{==} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointContainerLabel}\PYGdefault{o}{).}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{(}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{GONE}\PYGdefault{o}{);}
+            \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointContainer}\PYGdefault{o}{).}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{(}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{GONE}\PYGdefault{o}{);}
+            \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointListContainer}\PYGdefault{o}{).}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{(}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{VISIBLE}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{c+c1}{// checkpoints still open}
+        \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{Button} \PYGdefault{n}{answerButton} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{Button}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{answerBtn}\PYGdefault{o}{);}
+            \PYGdefault{n}{answerButton}\PYGdefault{o}{.}\PYGdefault{n+na}{setEnabled}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+            \PYGdefault{n}{answerButton}\PYGdefault{o}{.}\PYGdefault{n+na}{setOnClickListener}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{);}
+
+            \PYGdefault{o}{((}\PYGdefault{n}{TextView}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{nextCheckpointTxt}\PYGdefault{o}{))}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{().}\PYGdefault{n+na}{getName}\PYGdefault{o}{());}
+            \PYGdefault{o}{((}\PYGdefault{n}{TextView}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{nextCheckpointHintTxt}\PYGdefault{o}{))}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{().}\PYGdefault{n+na}{getHint}\PYGdefault{o}{());}
+
+            \PYGdefault{n}{EditText} \PYGdefault{n}{answer} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{EditText}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{hintAnswerEdTxt}\PYGdefault{o}{);}
+            \PYGdefault{n}{answer}\PYGdefault{o}{.}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{answer}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{CheckpointViewModelBindingTextWatcher}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{));}
+            \PYGdefault{n}{answer}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{AnswerButtonTextWatcher}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{,} \PYGdefault{n}{viewModel}\PYGdefault{o}{));}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+
+        \PYGdefault{c+c1}{// Prepare maps}
+        \PYGdefault{n}{MapFragment} \PYGdefault{n}{mapFragment} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{MapFragment}\PYGdefault{o}{)} \PYGdefault{n}{getFragmentManager}\PYGdefault{o}{().}\PYGdefault{n+na}{findFragmentById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointMap}\PYGdefault{o}{);}
+        \PYGdefault{n}{mapFragment}\PYGdefault{o}{.}\PYGdefault{n+na}{getMapAsync}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{OnMapReadyCallback}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n+nd}{@Override}
+            \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onMapReady}\PYGdefault{o}{(}\PYGdefault{n}{GoogleMap} \PYGdefault{n}{map}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{c+c1}{// clear former set map properties}
+                \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{clear}\PYGdefault{o}{();}
+                \PYGdefault{c+c1}{// enable ui functions}
+                \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{getUiSettings}\PYGdefault{o}{().}\PYGdefault{n+na}{setZoomControlsEnabled}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+                \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{getUiSettings}\PYGdefault{o}{().}\PYGdefault{n+na}{setAllGesturesEnabled}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+                \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{getUiSettings}\PYGdefault{o}{().}\PYGdefault{n+na}{setCompassEnabled}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+                \PYGdefault{n}{LatLng} \PYGdefault{n}{zoomLocation} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                \PYGdefault{n}{PolylineOptions} \PYGdefault{n}{lineOptions} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                \PYGdefault{c+c1}{// Get visited points}
+                \PYGdefault{k}{if} \PYGdefault{o}{(!}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getRoute}\PYGdefault{o}{().}\PYGdefault{n+na}{getVisitedCheckpoints}\PYGdefault{o}{().}\PYGdefault{n+na}{isEmpty}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{n}{lineOptions} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{PolylineOptions}\PYGdefault{o}{();}
+                    \PYGdefault{k}{for} \PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{i} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{;} \PYGdefault{n}{i} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getRoute}\PYGdefault{o}{().}\PYGdefault{n+na}{getVisitedCheckpoints}\PYGdefault{o}{().}\PYGdefault{n+na}{size}\PYGdefault{o}{();} \PYGdefault{n}{i}\PYGdefault{o}{++)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{CheckpointModel} \PYGdefault{n}{model} \PYGdefault{o}{=} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getRoute}\PYGdefault{o}{().}\PYGdefault{n+na}{getVisitedCheckpoints}\PYGdefault{o}{().}\PYGdefault{n+na}{get}\PYGdefault{o}{(}\PYGdefault{n}{i}\PYGdefault{o}{);}
+                        \PYGdefault{n}{LatLng} \PYGdefault{n}{location} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{LatLng}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{getLatitude}\PYGdefault{o}{(),} \PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{getLongitude}\PYGdefault{o}{());}
+                        \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{addMarker}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{MarkerOptions}\PYGdefault{o}{().}\PYGdefault{n+na}{position}\PYGdefault{o}{(}\PYGdefault{n}{location}\PYGdefault{o}{)}
+                                        \PYGdefault{o}{.}\PYGdefault{n+na}{title}\PYGdefault{o}{((}\PYGdefault{n}{i} \PYGdefault{o}{+} \PYGdefault{l+m+mi}{1}\PYGdefault{o}{)} \PYGdefault{o}{+} \PYGdefault{l+s}{\PYGdefaultZdq{}. \PYGdefaultZdq{}} \PYGdefault{o}{+} \PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{getName}\PYGdefault{o}{())}
+                                        \PYGdefault{o}{.}\PYGdefault{n+na}{icon}\PYGdefault{o}{(}
+                                                \PYGdefault{n}{BitmapDescriptorFactory}\PYGdefault{o}{.}\PYGdefault{n+na}{defaultMarker}\PYGdefault{o}{(}
+                                                        \PYGdefault{n}{BitmapDescriptorFactory}\PYGdefault{o}{.}\PYGdefault{n+na}{HUE\PYGdefaultZus{}GREEN}
+                                                \PYGdefault{o}{)}
+                                        \PYGdefault{o}{)}
+                        \PYGdefault{o}{).}\PYGdefault{n+na}{showInfoWindow}\PYGdefault{o}{();}
+                        \PYGdefault{n}{lineOptions}\PYGdefault{o}{.}\PYGdefault{n+na}{add}\PYGdefault{o}{(}\PYGdefault{n}{location}\PYGdefault{o}{);}
+                        \PYGdefault{c+c1}{// Remember last for focusing on it}
+                        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{i} \PYGdefault{o}{==} \PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getVisitedCheckpoints}\PYGdefault{o}{().}\PYGdefault{n+na}{size}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{1}\PYGdefault{o}{))} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{zoomLocation} \PYGdefault{o}{=} \PYGdefault{n}{location}\PYGdefault{o}{;}
+                        \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{addPolyline}\PYGdefault{o}{(}\PYGdefault{n}{lineOptions}\PYGdefault{o}{.}\PYGdefault{n+na}{color}\PYGdefault{o}{(}\PYGdefault{n}{Color}\PYGdefault{o}{.}\PYGdefault{n+na}{GREEN}\PYGdefault{o}{));}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+                \PYGdefault{c+c1}{// Add next checkpoint which is not part of list and gets red line from it to the former marker}
+                \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getRoute}\PYGdefault{o}{().}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{()} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{n}{zoomLocation} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{LatLng}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getRoute}\PYGdefault{o}{().}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{().}\PYGdefault{n+na}{getLatitude}\PYGdefault{o}{(),} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getRoute}\PYGdefault{o}{().}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{().}\PYGdefault{n+na}{getLongitude}\PYGdefault{o}{());}
+                    \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{addMarker}\PYGdefault{o}{(}
+                            \PYGdefault{k}{new} \PYGdefault{n}{MarkerOptions}\PYGdefault{o}{()}
+                                    \PYGdefault{o}{.}\PYGdefault{n+na}{position}\PYGdefault{o}{(}\PYGdefault{n}{zoomLocation}\PYGdefault{o}{)}
+                                    \PYGdefault{o}{.}\PYGdefault{n+na}{title}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{().}\PYGdefault{n+na}{getName}\PYGdefault{o}{())}
+                                    \PYGdefault{o}{.}\PYGdefault{n+na}{icon}\PYGdefault{o}{(}\PYGdefault{n}{BitmapDescriptorFactory}
+                                            \PYGdefault{o}{.}\PYGdefault{n+na}{defaultMarker}\PYGdefault{o}{(}\PYGdefault{n}{BitmapDescriptorFactory}\PYGdefault{o}{.}\PYGdefault{n+na}{HUE\PYGdefaultZus{}RED}\PYGdefault{o}{))}
+                    \PYGdefault{o}{).}\PYGdefault{n+na}{showInfoWindow}\PYGdefault{o}{();}
+                    \PYGdefault{c+c1}{// If visited checkpoints exist}
+                    \PYGdefault{k}{if} \PYGdefault{o}{(!}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getRoute}\PYGdefault{o}{().}\PYGdefault{n+na}{getVisitedCheckpoints}\PYGdefault{o}{().}\PYGdefault{n+na}{isEmpty}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{addPolyline}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{PolylineOptions}\PYGdefault{o}{().}\PYGdefault{n+na}{add}\PYGdefault{o}{(}
+                                        \PYGdefault{n}{lineOptions}\PYGdefault{o}{.}\PYGdefault{n+na}{getPoints}\PYGdefault{o}{().}\PYGdefault{n+na}{get}\PYGdefault{o}{(}\PYGdefault{n}{lineOptions}\PYGdefault{o}{.}\PYGdefault{n+na}{getPoints}\PYGdefault{o}{().}\PYGdefault{n+na}{size}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{1}\PYGdefault{o}{),} \PYGdefault{n}{zoomLocation}\PYGdefault{o}{).}\PYGdefault{n+na}{color}\PYGdefault{o}{(}\PYGdefault{n}{Color}\PYGdefault{o}{.}\PYGdefault{n+na}{RED}\PYGdefault{o}{)}
+                        \PYGdefault{o}{);}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+                \PYGdefault{c+c1}{// move camera to last or next checkpoint}
+                \PYGdefault{n}{map}\PYGdefault{o}{.}\PYGdefault{n+na}{moveCamera}\PYGdefault{o}{(}\PYGdefault{n}{CameraUpdateFactory}\PYGdefault{o}{.}\PYGdefault{n+na}{newLatLngZoom}\PYGdefault{o}{(}\PYGdefault{n}{zoomLocation}\PYGdefault{o}{,} \PYGdefault{l+m+mi}{17}\PYGdefault{o}{));}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{\PYGdefaultZcb{});}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+
+    \PYGdefault{c+c1}{//region Listeners}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Toggles the visibility if one container header gets clicked}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param view the clicked view}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{toggleVisibility}\PYGdefault{o}{(}\PYGdefault{n}{View} \PYGdefault{n}{view}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{View} \PYGdefault{n}{checkpointListContainer} \PYGdefault{o}{=} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointListContainer}\PYGdefault{o}{);}
+        \PYGdefault{n}{View} \PYGdefault{n}{checkpointMapContainer} \PYGdefault{o}{=} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointMapContainer}\PYGdefault{o}{);}
+
+        \PYGdefault{c+c1}{// Always references to parent LinearLayout so not all clickable children need to be handled here}
+        \PYGdefault{k}{switch} \PYGdefault{o}{(((}\PYGdefault{n}{View}\PYGdefault{o}{)} \PYGdefault{n}{view}\PYGdefault{o}{.}\PYGdefault{n+na}{getParent}\PYGdefault{o}{()).}\PYGdefault{n+na}{getId}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{case} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointListContainerLabel}\PYGdefault{o}{:}
+                \PYGdefault{n}{checkpointListContainer}\PYGdefault{o}{.}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{((}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{VISIBLE} \PYGdefault{o}{==} \PYGdefault{n}{checkpointListContainer}\PYGdefault{o}{.}\PYGdefault{n+na}{getVisibility}\PYGdefault{o}{())} \PYGdefault{o}{?} \PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{GONE} \PYGdefault{o}{:} \PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{VISIBLE}\PYGdefault{o}{);}
+                \PYGdefault{k}{break}\PYGdefault{o}{;}
+            \PYGdefault{k}{case} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeCheckpointMapContainerLabel}\PYGdefault{o}{:}
+                \PYGdefault{n}{checkpointMapContainer}\PYGdefault{o}{.}\PYGdefault{n+na}{setVisibility}\PYGdefault{o}{((}\PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{VISIBLE} \PYGdefault{o}{==} \PYGdefault{n}{checkpointMapContainer}\PYGdefault{o}{.}\PYGdefault{n+na}{getVisibility}\PYGdefault{o}{())} \PYGdefault{o}{?} \PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{GONE} \PYGdefault{o}{:} \PYGdefault{n}{View}\PYGdefault{o}{.}\PYGdefault{n+na}{VISIBLE}\PYGdefault{o}{);}
+                \PYGdefault{k}{break}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Handles the button clicks by redirecting to proper method.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param v the clicked view}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onClick}\PYGdefault{o}{(}\PYGdefault{n}{View} \PYGdefault{n}{v}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{switch} \PYGdefault{o}{(}\PYGdefault{n}{v}\PYGdefault{o}{.}\PYGdefault{n+na}{getId}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{case} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{answerBtn}\PYGdefault{o}{:}
+                \PYGdefault{n}{onAnswerButtonClick}\PYGdefault{o}{((}\PYGdefault{n}{Button}\PYGdefault{o}{)} \PYGdefault{n}{v}\PYGdefault{o}{);}
+                \PYGdefault{k}{break}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onClick}\PYGdefault{o}{(}\PYGdefault{n}{DialogInterface} \PYGdefault{n}{dialog}\PYGdefault{o}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{which}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{dialog}\PYGdefault{o}{.}\PYGdefault{n+na}{dismiss}\PYGdefault{o}{();}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Handles the answer button click}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param button the clicked answer button}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onAnswerButtonClick}\PYGdefault{o}{(}\PYGdefault{n}{Button} \PYGdefault{n}{button}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{checkAndDisplayAvailableNetwork}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{new} \PYGdefault{n}{AsyncTask}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Object}\PYGdefault{o}{,} \PYGdefault{n}{Object}\PYGdefault{o}{,} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}()} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n+nf}{doInBackground}\PYGdefault{o}{(}\PYGdefault{n}{Object}\PYGdefault{o}{...} \PYGdefault{n}{params}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{n}{Boolean} \PYGdefault{n}{result} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                    \PYGdefault{n}{Exception} \PYGdefault{n}{exception} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                    \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{result} \PYGdefault{o}{=} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{validateSecret}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{exception} \PYGdefault{o}{=} \PYGdefault{n}{e}\PYGdefault{o}{;}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                    \PYGdefault{k}{return} \PYGdefault{k}{new} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}(}\PYGdefault{n}{result}\PYGdefault{o}{,} \PYGdefault{n}{exception}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onPreExecute}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onPreExecute}\PYGdefault{o}{();}
+                    \PYGdefault{n}{openProgressDialog}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{progress\PYGdefaultZus{}validating\PYGdefaultZus{}secred}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onPostExecute}\PYGdefault{o}{(}\PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n}{result}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onPostExecute}\PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{);}
+                    \PYGdefault{n}{closeProgressDialog}\PYGdefault{o}{();}
+                    \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{c+c1}{// ServiceException occurred}
+                        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{k}{instanceof} \PYGdefault{n}{ServiceException}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{handleServiceException}\PYGdefault{o}{(((}\PYGdefault{n}{ServiceException}\PYGdefault{o}{)} \PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception}\PYGdefault{o}{));}
+                        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}unknown}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                        \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{result}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{reloadRoute}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+                    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{info\PYGdefaultZus{}secret\PYGdefaultZus{}wrong}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}.}\PYGdefault{n+na}{execute}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Reloads the route}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{reloadRoute}\PYGdefault{o}{(}\PYGdefault{k+kd}{final} \PYGdefault{k+kt}{boolean} \PYGdefault{n}{checkIfFinished}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{checkAndDisplayAvailableNetwork}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{new} \PYGdefault{n}{AsyncTask}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Object}\PYGdefault{o}{,} \PYGdefault{n}{Object}\PYGdefault{o}{,} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}()} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n+nf}{doInBackground}\PYGdefault{o}{(}\PYGdefault{n}{Object}\PYGdefault{o}{...} \PYGdefault{n}{params}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{n}{Boolean} \PYGdefault{n}{found} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                    \PYGdefault{n}{Exception} \PYGdefault{n}{exception} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                    \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{found} \PYGdefault{o}{=} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{reloadRoute}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{exception} \PYGdefault{o}{=} \PYGdefault{n}{e}\PYGdefault{o}{;}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{k}{return} \PYGdefault{k}{new} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}(}\PYGdefault{n}{found}\PYGdefault{o}{,} \PYGdefault{n}{exception}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onPostExecute}\PYGdefault{o}{(}\PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n}{result}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onPostExecute}\PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{);}
+                    \PYGdefault{n}{closeProgressDialog}\PYGdefault{o}{();}
+                    \PYGdefault{c+c1}{// Exception occurred}
+                    \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{k}{instanceof} \PYGdefault{n}{ServiceException}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{handleServiceException}\PYGdefault{o}{(((}\PYGdefault{n}{ServiceException}\PYGdefault{o}{)} \PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception}\PYGdefault{o}{));}
+                        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}unknown}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}SHORT}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                        \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{c+c1}{// Route found}
+                    \PYGdefault{k}{else} \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{result}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{prepareView}\PYGdefault{o}{();}
+                        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{checkIfFinished}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{()} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                                \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{info\PYGdefaultZus{}secret\PYGdefaultZus{}ok}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                            \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                                \PYGdefault{n}{DialogUtil}\PYGdefault{o}{.}\PYGdefault{n+na}{createCustomContentDialog}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{layout}\PYGdefault{o}{.}\PYGdefault{n+na}{view\PYGdefaultZus{}congratulations\PYGdefaultZus{}dialog}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{dialog\PYGdefaultZus{}title\PYGdefaultZus{}info}\PYGdefault{o}{,} \PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                            \PYGdefault{o}{\PYGdefaultZcb{}}
+                        \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{c+c1}{// Route not found, go back to routes activity}
+                    \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{startActivity}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{Intent}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{RouteActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{class}\PYGdefault{o}{));}
+                        \PYGdefault{n}{finish}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onPreExecute}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onPreExecute}\PYGdefault{o}{();}
+                    \PYGdefault{n}{openProgressDialog}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{progress\PYGdefaultZus{}updating\PYGdefaultZus{}route}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}.}\PYGdefault{n+na}{execute}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Resets the current route.}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{resetRoute}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{checkAndDisplayAvailableNetwork}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{new} \PYGdefault{n}{AsyncTask}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Object}\PYGdefault{o}{,} \PYGdefault{n}{Object}\PYGdefault{o}{,} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}()} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n+nf}{doInBackground}\PYGdefault{o}{(}\PYGdefault{n}{Object}\PYGdefault{o}{...} \PYGdefault{n}{params}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{n}{Boolean} \PYGdefault{n}{result} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                    \PYGdefault{n}{Exception} \PYGdefault{n}{exception} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+                    \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{result} \PYGdefault{o}{=} \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{resetRoute}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{exception} \PYGdefault{o}{=} \PYGdefault{n}{e}\PYGdefault{o}{;}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                    \PYGdefault{k}{return} \PYGdefault{k}{new} \PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}(}\PYGdefault{n}{result}\PYGdefault{o}{,} \PYGdefault{n}{exception}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onPreExecute}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onPreExecute}\PYGdefault{o}{();}
+                    \PYGdefault{n}{openProgressDialog}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{progress\PYGdefaultZus{}resetting\PYGdefaultZus{}routes}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+
+                \PYGdefault{n+nd}{@Override}
+                \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onPostExecute}\PYGdefault{o}{(}\PYGdefault{n}{AsyncTaskResult}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Boolean}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n}{result}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onPostExecute}\PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{);}
+                    \PYGdefault{n}{closeProgressDialog}\PYGdefault{o}{();}
+                    \PYGdefault{c+c1}{// Error occurred}
+                    \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{c+c1}{// ServiceException occurred}
+                        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception} \PYGdefault{k}{instanceof} \PYGdefault{n}{ServiceException}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{handleServiceException}\PYGdefault{o}{(((}\PYGdefault{n}{ServiceException}\PYGdefault{o}{)} \PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{exception}\PYGdefault{o}{));}
+                        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                            \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}unknown}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                        \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{c+c1}{// Reset failed on rest method}
+                    \PYGdefault{k}{else} \PYGdefault{k}{if} \PYGdefault{o}{(!}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{result}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{makeText}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{error\PYGdefaultZus{}route\PYGdefaultZus{}reset\PYGdefaultZus{}failed}\PYGdefault{o}{,} \PYGdefault{n}{Toast}\PYGdefault{o}{.}\PYGdefault{n+na}{LENGTH\PYGdefaultZus{}LONG}\PYGdefault{o}{).}\PYGdefault{n+na}{show}\PYGdefault{o}{();}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                    \PYGdefault{c+c1}{// Reset ok}
+                    \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+                        \PYGdefault{n}{reloadRoute}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+                    \PYGdefault{o}{\PYGdefaultZcb{}}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}.}\PYGdefault{n+na}{execute}\PYGdefault{o}{();}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{//endregion}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}
