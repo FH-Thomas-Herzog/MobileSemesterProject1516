@@ -21,15 +21,6 @@
             android:layout_alignParentTop="true"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/routeCheckpointContainerLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5pt"
-                android:text="@string/checkpoint_group_secret"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold" />
-
             <LinearLayout
                 android:id="@+id/routeCheckpointContainer"
                 android:layout_width="match_parent"
@@ -79,7 +70,7 @@
                     android:layout_height="20pt"
                     android:clickable="true"
                     android:onClick="toggleVisibility"
-                    android:src="@drawable/map_icon" />
+                    android:src="@drawable/app_icon" />
 
                 <TextView
                     android:layout_width="match_parent"

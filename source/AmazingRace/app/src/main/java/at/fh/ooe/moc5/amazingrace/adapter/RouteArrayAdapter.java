@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import at.fh.ooe.moc5.amazingrace.R;
@@ -26,7 +27,13 @@ public class RouteArrayAdapter extends ArrayAdapter<RouteModel> {
         }
 
         RouteModel route = getItem(position);
-        ((TextView) convertView.findViewById(R.id.routeNameLabel)).setText(route.toItemString(getContext().getString(R.string.finished), getContext().getString(R.string.done)));
+        ImageView icon = ((ImageView) convertView.findViewById(R.id.routeItemImage));
+        if (route.getNextCheckpoint() == null) {
+            icon.setImageResource(R.drawable.done_icon);
+        } else {
+            icon.setImageResource(R.drawable.app_icon);
+        }
+        ((TextView) convertView.findViewById(R.id.routeItemText)).setText(route.toItemString(getContext().getString(R.string.done)));
 
         return convertView;
     }

@@ -33,8 +33,9 @@
 \setcounter{secnumdepth}{4}
 
 % the default java directory structure and the main packages
-\newcommand{\javaRoot}{../source/AmazingRace/app/src/main/java/at/fh/ooe/moc5/amazingrace}
-\newcommand{\resRoot}{../source/AmazingRace/app/src/main/res}
+\newcommand{\appRoot}{../source/AmazingRace/app}
+\newcommand{\javaRoot}{\appRoot/src/main/java/at/fh/ooe/moc5/amazingrace}
+\newcommand{\resRoot}{\appRoot/src/main/res}
 \newcommand{\activityRoot}{\javaRoot/activity}
 \newcommand{\adapterRoot}{\javaRoot/adapter}
 \newcommand{\jsonModelRoot}{\javaRoot/model/json}
@@ -44,6 +45,8 @@
 \newcommand{\utilRoot}{\javaRoot/util}
 \newcommand{\watcherRoot}{\javaRoot/watcher}
 \newcommand{\layoutRoot}{\resRoot/layout}
+\newcommand{\valuesRoot}{\resRoot/values}
+\newcommand{\manifestsRoot}{\appRoot/src/main}
 \newcommand{\imagesRoot}{images}
 
 % =============================================
@@ -183,11 +186,32 @@ Folgende Abbildung zeigt die Ressourcenverzeichnisse in denen alle Ressourcen wi
 \ \newline
 Des Weiteren wurde eine Klasse \emph{AmazingRaceApplication} eingeführt, die die unbehandelten Exceptions behandelt, den Benutzerkontext hält und gemeinsam verwendete Konstanten definiert.
 \newline
+\subsubsection{Setup}
+Da ein Google Android API-Key verwendet wird wurde ein eigenes Zertifikat erstellt welches bei Google-Developer-Console registriert wurde. Dieses Zertifikat muss im Android-Studio bei der debug und Release Konfiguration eingestellt werden ansonsten wird Google Maps nicht funktionieren. Es sollte zwar ein Zertifikat für Debug und Release erstellt werden, aber es wurde hierbei darauf verzichtet und es wird nur ein Zertifikat für beide Konfigurationen verwendet.
+\begin{enumerate}
+	\item\emph{Alias}
+	\newline
+	amazingrace
+	\item\emph{Key-Password}
+	\newline
+	amazingrace
+	\item\emph{Keystore-Password}
+	\newline
+	amazingrace
+\end{enumerate}
+\ \newline
+Der Keystore befindet s
 \newpage
 
 \subsection{Source}
 Im folgenden ist der gesamte Source der Anwendung aufgeführt.
 
+\subsubsection{Manifest}
+\begin{code}
+	\caption{AndroidManifest.xml}
+	\xmlSourceFile{\manifestsRoot/AndroidManifest.xml}
+\end{code}
+\newpage
 \subsubsection{Aktivitäten}
 \begin{code}
 	\caption{AmazingRaceApplication.java}
@@ -344,7 +368,6 @@ Im folgenden ist der gesamte Source der Anwendung aufgeführt.
 	\caption{activity\_checkpoint.xml}
 	\xmlSourceFile{\layoutRoot/activity_checkpoint.xml}
 \end{code}
-\newpage
 \begin{code}
 	\caption{view\_checkpoint\_item.xml}
 	\xmlSourceFile{\layoutRoot/view_checkpoint_item.xml}
@@ -354,7 +377,6 @@ Im folgenden ist der gesamte Source der Anwendung aufgeführt.
 	\caption{view\_route\_item.xml}
 	\xmlSourceFile{\layoutRoot/view_route_item.xml}
 \end{code}
-\newpage
 \begin{code}
 	\caption{view\_congratulations\_dialog.xml}
 	\xmlSourceFile{\layoutRoot/view_congratulations_dialog.xml}
@@ -363,8 +385,202 @@ Im folgenden ist der gesamte Source der Anwendung aufgeführt.
 
 \subsection{Values}
 \begin{code}
-	\caption{activity\_login.xml}
-	\xmlSourceFile{\layoutRoot/activity_login.xml}
+	\caption{strings.xml}
+	\xmlSourceFile{\valuesRoot/strings.xml}
 \end{code}
 \newpage
+
+\subsection{Tests}
+Folgend sind die Tests der Anwendung \emph{AmazingRace} angeführt.
+\subsubsection{Login Aktivität}
+Folgend sind die Tests des Login angeführt.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_login.PNG}
+	\caption
+	{Login Aktivität}
+\end{figure}
+\ \newline
+Der Button \emph{Login} ist hierbei solange deaktiviert solange eine der beiden Eingabefelder keinen Text beinhaltet. Dies bedeutet aber auch, das leere Passwörter nicht unterstützt werden.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_login_failed.PNG}
+	\caption
+	{Login fehlgeschlagen}
+\end{figure}
+\ \newline
+Sollte der Login fehlschlagen so werden beide Eingabefelder zurückgesetzt und eine Fehlermeldung in Form eines Toasts angezeigt.
+\newpage
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_login_no_network.PNG}
+	\caption
+	{Keine Internetverbindung}
+\end{figure}
+\ \newline
+Sollte keine Netzwerkverbindung vorhanden sein so wird ein entsprechender Dialog angezeigt.
+\newline
+\subsubsection{Routen Aktivität}
+Folgend sind die Tests für die Routen Aktivität angeführt.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_routes.PNG}
+	\caption
+	{Routen Aktivität}
+\end{figure}
+\ \newline
+Nach einem erfolgreichen Login oder durch drücken des \emph{Back Button} in der Checkpoint Aktivität gelangt man zur Übersicht der verfügbaren Routen. Hierbei werden die Routen wie folgt sortiert.
+\begin{enumerate}
+	\item Offene Routen
+	\begin{enumerate}
+		\item 
+	Anzahl der besuchten Checkpoints absteigend
+		\item Routenname aufsteigend
+	\end{enumerate}
+	\item Abgeschlossene Routen
+	\begin{enumerate}
+		\item Routenname aufsteigend
+	\end{enumerate}
+\end{enumerate}
+\ \newline
+Ist eine Route bereits abgeschlossen so wird eine entsprechender Icon angezeigt.
+\newpage
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_routes_item_open_menu.PNG}
+	\caption
+	{Kontextmenü einer offenen Route}
+\end{figure}
+\ \newline
+Ist eine Route offen so wird beim Kontextmenü lediglich eine Option \emph{Play} angezeigt.
+\newline
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_routes_item_progress_menu.PNG}
+	\caption
+	{Kontextmenü einer gestarteten Route}
+\end{figure}
+\ \newline
+Wurde eine Route bereits gestartet so werden beim Kontextmenü zwei Optionen \emph{Play, Reset} angezeigt.
+\newline
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_routes_item_finished_menu.PNG}
+	\caption
+	{Kontextmenü einer abgeschlossenen Route}
+\end{figure}
+\ \newline
+Ist eine Route bereits abgeschlossen so werden beim Kontextmenü zwei Optionen \emph{Open, Reset} angezeigt.
+\newpage
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_routes_menu.PNG}
+	\caption
+	{Routen Aktivität Menü}
+\end{figure}
+\ \newline
+Die Aktivität stellt zwei Optionen \emph{Reset All, Reload,  Close} über ein Menü zur Verfügung.
+\begin{enumerate}
+	\item\emph{Reset All}
+	\newline
+	Setzt alle zur Verfügung stehenden Routen zurück
+	\item\emph{Reload}
+	\newline
+	Lädt alle zur Verfügung stehenden Routen erneut
+	\item\emph{Close}
+	\newline
+	Öffnet einen Dialog, über den im Falle einer Bestätigung die Anwendung geschlossen wird.
+\end{enumerate}
+\ \newline
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_routes_no_network.PNG}
+	\caption
+	{Keine Netzwerkverbindung}
+\end{figure}
+\ \newline
+Sollte keine Netzwerkverbindung vorhanden sein so wird ein entsprechender Dialog angezeigt.
+\newpage
+\subsection{Checkpoint Aktivität}
+Folgend sind die Tests für die Checkpoint Aktivität angeführt.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_checkpoint_progress_1.PNG}
+	\caption
+	{Offene Route Teil 1}
+\end{figure}
+\ \newline
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_checkpoint_progress_2.PNG}
+	\caption
+	{Offene Route Teil 2}
+\end{figure}
+\ \newline
+Nachdem eine Route ausgewählt wurde wir auf die Checkpoint Aktivität gewechselt. Es gibt zwei Möglichkeiten die Checkpoints anzuzeigen.
+\begin{enumerate}
+	\item\emph{Google Map}
+	\newline 
+	Zeigt alle Checkpoints an wobei ein noch nicht besuchter Checkpoint rot markiert wird
+	\item\emph{Checkpoint Liste}
+	\newline 
+	Zeigt alle besuchten Checkpoints in Listenform an wobei ein nicht besuchter Checkpoint ebenfalls rot markiert wird.
+\end{enumerate}
+In diesem Fall ist die Route noch nicht abgeschlossen.
+\newpage
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_checkpoint_finished_progress_menu.PNG}
+	\caption
+	{Optionen einer abgeschlossene oder gestarteten Route}
+\end{figure}
+\ \newline
+Bei einer abgeschlossenen oder bereits gestarteten Route stehen zwei Optionen zur Verfügung \emph{Reset, Close}.
+\begin{enumerate}
+	\item\emph{Reset}
+	\newline
+	Setzt die aktuelle Route zurück
+	\item\emph{Close}
+	\newline
+	Öffnet einen Dialog wobei bei dessen Bestätigung die Anwendung geschlossen wird.
+\end{enumerate}
+\ \newline
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_checkpoint_open_menu.PNG}
+	\caption
+	{Optionen einer offenen Route}
+\end{figure}
+\ \newline
+Bei einer offene Route steht nur eine Option zur Verfügung \emph{Close}.
+\newpage
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_checkpoint_wrong_secret.PNG}
+	\caption
+	{Frage falsch beantwortet}
+\end{figure}
+\ \newline
+Sollte eine Frage falsch beantwortet worden sein so wird eine Meldung in Form eines Toast ausgegeben.
+\ \newline
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_checkpoint_correct_secret.PNG}
+	\caption
+	{Frage korrekt beantwortet}
+\end{figure}
+\ \newline
+Sollte eine Frage korrekt beantwortet worden sein so wird eine Meldung in Form eines Toast ausgegeben.
+\ \newline
+\newpage
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_checkpoint_congratulations.PNG}
+	\caption
+	{Route abgeschlossen}
+\end{figure}
+\ \newline
+Nachdem die letzte Frage korrekt beantwortet wurde  wird ein Dialog mit einer Erfolgsmeldung ausgegeben. Es wird auf der Checkpoint Aktivität verblieben wobei die Ansicht sich wie bei einer abgeschlossenen Route ändert.
+
 \end{document} 

@@ -83,16 +83,17 @@ public class LoginActivity extends AbstractActivity<LoginViewModel> implements V
      * Prepares the activity views.
      */
     private void prepareViews() {
-        viewModel.reset();
         // prepare username view
         EditText username = (EditText) findViewById(R.id.usernameEdTxt);
         username.addTextChangedListener(new LoginViewModelBindingTextWatcher(viewModel, username));
         username.addTextChangedListener(new LoginButtonTextWatcher(this, viewModel));
+        username.setText(viewModel.getPassword());
 
         // prepare password view
         EditText password = (EditText) findViewById(R.id.passwordEdTxt);
         password.addTextChangedListener(new LoginViewModelBindingTextWatcher(viewModel, password));
         password.addTextChangedListener(new LoginButtonTextWatcher(this, viewModel));
+        username.setText(viewModel.getPassword());
 
         // Prepare login button
         Button loginButton = (Button) findViewById(R.id.loginBtn);

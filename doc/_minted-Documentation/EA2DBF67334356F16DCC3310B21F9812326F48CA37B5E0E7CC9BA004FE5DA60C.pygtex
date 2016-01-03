@@ -189,6 +189,7 @@
     \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{prepareView}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
         \PYGdefault{c+c1}{// prepare route list view}
         \PYGdefault{n}{ListView} \PYGdefault{n}{listView} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{ListView}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{listRoute}\PYGdefault{o}{);}
+        \PYGdefault{n}{listView}\PYGdefault{o}{.}\PYGdefault{n+na}{removeAllViewsInLayout}\PYGdefault{o}{();}
         \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{listView}\PYGdefault{o}{.}\PYGdefault{n+na}{getAdapter}\PYGdefault{o}{()} \PYGdefault{o}{==} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
             \PYGdefault{k+kd}{final} \PYGdefault{n}{RouteArrayAdapter} \PYGdefault{n}{adapter} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{RouteArrayAdapter}\PYGdefault{o}{(}\PYGdefault{n}{RouteActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{);}
             \PYGdefault{n}{listView}\PYGdefault{o}{.}\PYGdefault{n+na}{setAdapter}\PYGdefault{o}{(}\PYGdefault{n}{adapter}\PYGdefault{o}{);}
@@ -295,7 +296,7 @@
                     \PYGdefault{o}{\PYGdefaultZcb{}}
                     \PYGdefault{c+c1}{// Reset ok}
                     \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
-                        \PYGdefault{n}{prepareView}\PYGdefault{o}{();}
+                        \PYGdefault{n}{loadRoutes}\PYGdefault{o}{();}
                     \PYGdefault{o}{\PYGdefaultZcb{}}
                 \PYGdefault{o}{\PYGdefaultZcb{}}
             \PYGdefault{o}{\PYGdefaultZcb{}.}\PYGdefault{n+na}{execute}\PYGdefault{o}{();}

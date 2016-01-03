@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +76,9 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(MenuGroup.OPTIONS.value, MenuId.RESET.value, 0, R.string.action_reset);
+        if (!viewModel.getVisitedCheckpoints().isEmpty()) {
+            menu.add(MenuGroup.OPTIONS.value, MenuId.RESET.value, 0, R.string.action_reset);
+        }
         menu.add(MenuGroup.OPTIONS.value, MenuId.CLOSE.value, 0, R.string.action_close);
         return Boolean.TRUE;
     }
@@ -120,22 +123,25 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
         for (int i = 0; i < viewModel.getVisitedCheckpoints().size(); i++) {
             CheckpointModel model = viewModel.getRoute().getVisitedCheckpoints().get(i);
             View view = View.inflate(CheckpointActivity.this, R.layout.view_checkpoint_item, null);
-            ((TextView) view.findViewById(R.id.visitedCheckpointNameLabel)).setText((i + 1) + ". " + model.getName());
+            ((TextView) view.findViewById(R.id.checkpointItemText)).setText(model.getName());
+            ((ImageView) view.findViewById(R.id.checkpointItemImage))
+                    .setImageResource(R.drawable.maps_marker_green_icon);
             listViewReplacement.addView(view);
         }
         // Add next checkpoint to list with open marker
         if (viewModel.getNextCheckpoint() != null) {
             final CheckpointModel model = viewModel.getNextCheckpoint();
             View view = View.inflate(CheckpointActivity.this, R.layout.view_checkpoint_item, null);
-            ((TextView) view.findViewById(R.id.visitedCheckpointNameLabel)).setText(
-                    new StringBuilder(model.getName()).append(" (").append(getText(R.string.open)).append(")").toString()
+            ((TextView) view.findViewById(R.id.checkpointItemText)).setText(
+                    model.getName()
             );
+            ((ImageView) view.findViewById(R.id.checkpointItemImage))
+                    .setImageResource(R.drawable.maps_marker_red_icon);
             listViewReplacement.addView(view);
         }
 
         // route already finished
         if (viewModel.getNextCheckpoint() == null) {
-            findViewById(R.id.routeCheckpointContainerLabel).setVisibility(View.GONE);
             findViewById(R.id.routeCheckpointContainer).setVisibility(View.GONE);
             findViewById(R.id.routeCheckpointListContainer).setVisibility(View.VISIBLE);
         }

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.14)  2 JAN 2016 17:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.14)  3 JAN 2016 17:59
 entering extended mode
 **Documentation.tex
 (C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\Documentation.tex
@@ -747,7 +747,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 150--155
 
  []
 
-<FHO_Logo_Students.jpg, id=63, 569.0058pt x 476.0184pt>
+<FHO_Logo_Students.jpg, id=83, 569.0058pt x 476.0184pt>
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
@@ -764,7 +764,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 
  <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/FHO_Logo_Students.jpg>]
 
-<images/abstract_activity_hierarchy.PNG, id=80, 536.0025pt x 220.4235pt>
+<images/abstract_activity_hierarchy.PNG, id=100, 536.0025pt x 220.4235pt>
 File: images/abstract_activity_hierarchy.PNG Graphic file (type png)
 
 <use images/abstract_activity_hierarchy.PNG>
@@ -772,7 +772,7 @@ Package pdftex.def Info: images/abstract_activity_hierarchy.PNG used on input l
 ine 164.
 (pdftex.def)             Requested size: 214.3972pt x 88.16783pt.
 
-<images/amazingrace_package_structure.PNG, id=82, 275.8305pt x 597.432pt>
+<images/amazingrace_package_structure.PNG, id=102, 275.8305pt x 597.432pt>
 File: images/amazingrace_package_structure.PNG Graphic file (type png)
 
 <use images/amazingrace_package_structure.PNG>
@@ -803,7 +803,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [2 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/abstract_activ
 ity_hierarchy.PNG> <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/image
 s/amazingrace_package_structure.PNG>]
-<images/amazingrace_resource_structure.PNG, id=93, 201.1515pt x 343.2825pt>
+<images/amazingrace_resource_structure.PNG, id=113, 201.1515pt x 343.2825pt>
 File: images/amazingrace_resource_structure.PNG Graphic file (type png)
 
 <use images/amazingrace_resource_structure.PNG>
@@ -815,9 +815,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--189
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--201
+
+ []
+
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 189.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 208.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -829,22 +834,17 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [3 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/amazingrace_re
 source_structure.PNG>]
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 196.
-runsystem(pygmentize -l xml -f latex -F tokenmerge -P style=default -P commandp
-refix=PYGdefault -o "_minted-Documentation/A2B98D16BAF2420867F2B7A51F1D89FB8F3A
-B97CB39F4C8121E7D15113ECDE6F.pygtex" "../source/AmazingRace/app/src/main/Androi
-dManifest.xml" )...executed.
+t line 215.
 
-
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/A2
-B98D16BAF2420867F2B7A51F1D89FB8F3AB97CB39F4C8121E7D15113ECDE6F.pygtex
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/16
+9E17DCD7009850F3EC03A4D49D54018F3AB97CB39F4C8121E7D15113ECDE6F.pygtex
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 3.
 )
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 199.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 218.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -878,7 +878,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [5])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 205.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 224.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -888,8 +888,8 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [6]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/69
-A460F1A0A6CEE8489FDA48948D9C51166A4D18CF221B6BDB3E5D7E50C2ACD7.pygtex
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/8B
+93D1C16552CC7D488EE84C3AAACADD166A4D18CF221B6BDB3E5D7E50C2ACD7.pygtex
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
@@ -950,7 +950,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [10])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 210.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 229.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -960,8 +960,8 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [11]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/CB
-45352165A257035F1058347E25488CDCB696D79B8BF5BB7595A29A61674711.pygtex
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/4F
+C6A27A48C470DEC01345AD03E503DDDCB696D79B8BF5BB7595A29A61674711.pygtex
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
@@ -992,7 +992,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [13])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 215.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 234.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1002,8 +1002,8 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [14]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/AB
-15F17A49B9C9F5D5A9C9530569BBE1326F48CA37B5E0E7CC9BA004FE5DA60C.pygtex
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/EA
+2DBF67334356F16DCC3310B21F9812326F48CA37B5E0E7CC9BA004FE5DA60C.pygtex
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
@@ -1079,7 +1079,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [19])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 220.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 239.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1089,8 +1089,8 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [20]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/5F
-126A1706C22B7288714D0ECCFD519D691349AFA8A6316A22FC31D034644334.pygtex
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/9E
+B932F241487876302A21FB877E7915691349AFA8A6316A22FC31D034644334.pygtex
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
@@ -1124,7 +1124,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 180.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 184.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1139,7 +1139,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 237.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 240.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1154,7 +1154,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 299.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 301.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1169,7 +1169,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 356.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 358.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1184,7 +1184,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 417.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 419.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1196,7 +1196,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [27])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 225.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 244.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1206,18 +1206,18 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [28]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/B2
-227EAC6270057A88B4302063D18BCBB3004C55C6BF7E899CF2B85AC757B616.pygtex
-Overfull \hbox (141.99106pt too wide) in paragraph at lines 30--30
-\OT1/cmtt/m/n/9 convertView[].[][]findViewById[][]([]R[].[][]id[][].[][]routeNa
-meLabel[][])).[][]setText[][]([]route[].[][]toItemString[][]([]getContext[]().[
-][]getString[][]([]R[].[][]string[][].[][]finished[][]),[] 
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/4F
+008B675708D677BB1AB5EA0E406A2DB3004C55C6BF7E899CF2B85AC757B616.pygtex
+Overfull \hbox (127.81622pt too wide) in paragraph at lines 37--37
+\OT1/cmtt/m/n/9 convertView[].[][]findViewById[][]([]R[].[][]id[][].[][]routeIt
+emText[][])).[][]setText[][]([]route[].[][]toItemString[][]([]getContext[]().[]
+[]getString[][]([]R[].[][]string[][].[][]done[][])));[]|  
  []
 
 )
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 232.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 251.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1246,7 +1246,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [30])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 239.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 258.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1261,7 +1261,7 @@ BE86627F52A3B44D0DB9B365FFF045D7B2E66B07C8DA901F7B7086042C72A4.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 244.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 263.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1276,7 +1276,7 @@ EF3DFED2EA3B4385CDF2F837A572C34B88F3805E772245FAC3B9C237DE2831.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 249.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 268.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1286,8 +1286,8 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [33]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/0E
-76B593724DCDC3A5A92B0981F1EAE1A862F2CF3740C1FF1629EA672B8393F9.pygtex
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/18
+D51E5C421670C78DBB6840C3C038AAA862F2CF3740C1FF1629EA672B8393F9.pygtex
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
@@ -1303,7 +1303,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [34])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 254.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 273.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1318,7 +1318,7 @@ A595AF2F05CAE1341EEA7D644082545CE3714A35AFAD9B9C21146C1C97246E.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 259.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 278.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1333,7 +1333,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 266.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 285.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1343,8 +1343,8 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [37]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/6B
-654F4DD828F365A0F98043B2DBD764C7F70C2112A20DCD017BED6F5756B4ED.pygtex
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/A6
+970F1816DB8A5781D80D03A98B7E60C7F70C2112A20DCD017BED6F5756B4ED.pygtex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
@@ -1362,7 +1362,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [38])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 273.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 292.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1372,12 +1372,17 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [39]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/39
-A80E5CEF596ED6C936E5AAE76D7BDB35471DF420C62C5A332A54198A454C72.pygtex
-File: FHO_Logo_Students.jpg Graphic file (type jpg)
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/57
+4CA1E87CA3074C90E67E88669B00B335471DF420C62C5A332A54198A454C72.pygtex
+Overfull \hbox (132.54117pt too wide) in paragraph at lines 50--50
+\OT1/cmtt/m/n/9 Integer[].[][]valueOf[][]([]rhs[].[][]getVisitedCheckpoints[][]
+().[][]size[][]()).[][]compareTo[][]([]lhs[].[][]getVisitedCheckpoints[][]().[]
+[]size[][]());[]|  
+ []
 
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 63.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 62.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1389,7 +1394,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [40])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 278.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 297.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1404,7 +1409,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 283.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 302.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1431,7 +1436,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [43])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 288.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 307.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1460,7 +1465,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [45])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 295.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 314.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1544,7 +1549,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [50])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 300.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 319.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1559,7 +1564,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 305.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 324.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1574,7 +1579,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 310.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 329.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1603,7 +1608,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [54])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 317.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 336.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1618,7 +1623,7 @@ FA058B9CFF16E6FC5934CE6C798138A6ADA3F7D33D0AF978088BA215CDE733.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 324.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 343.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1633,7 +1638,7 @@ D9A4599AF556914632101470D6A79F70A58BC9ADBE5D9FFB54A3ED4BEC23DE.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 329.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 348.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1648,7 +1653,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 334.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 353.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1663,7 +1668,7 @@ A1A1B3A141495376D6B179AE6E6A1C7C7F8D1C49EE9F7D32C9B8F42AECBAB9.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 339.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 358.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1692,7 +1697,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 [60])
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
  <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 346.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 365.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1707,7 +1712,7 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 351.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 370.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1717,8 +1722,8 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [62]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/30
-6A947C659DE583E6AD2102384746B023FB37A5BBB9776875400EEBB75E88F5.pygtex
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/BD
+586ADD0AABD30E221EA1192D6EEBFD23FB37A5BBB9776875400EEBB75E88F5.pygtex
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
@@ -1747,12 +1752,12 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [64])
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/4D
-2249AFF1E1B495755F784036C892191C82DA6C9EFBFFC3DD19293733039CB7.pygtex)
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/20
+556C708BFA55B4FC0E9684EAA4D04A1C82DA6C9EFBFFC3DD19293733039CB7.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 360.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 379.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1762,14 +1767,14 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [65]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/1F
-ADD06B5033162203B895AAC0D8D34906FE99EA6204BEDAA3CE2C841DD0D04F.pygtex)
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/5F
+B8CF46F72B3F607099D2720A81EB7706FE99EA6204BEDAA3CE2C841DD0D04F.pygtex)
 (C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/F9
 0EDF0E64E4CBE7F9EF483DA3B6871CCB32683881E724A82C45B48F588FC015.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 369.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 388.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1779,12 +1784,12 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [66]
-(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/4C
-395785E8E2D371DD458680FB69B9E6DF135C9574DFEF942E3482D4765EB22D.pygtex)
+(C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\_minted-Documentation/49
+D52FECF1E6377164603FBABBCF0E7FDF135C9574DFEF942E3482D4765EB22D.pygtex)
 File: FHO_Logo_Students.jpg Graphic file (type jpg)
 
 <use FHO_Logo_Students.jpg>
-Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 376.
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 395.
 (pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
 
 
@@ -1793,24 +1798,267 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[67] 
+[67] <images/activity_login.PNG, id=496, 356.532pt x 577.55775pt>
+File: images/activity_login.PNG Graphic file (type png)
+
+<use images/activity_login.PNG>
+Package pdftex.def Info: images/activity_login.PNG used on input line 403.
+(pdftex.def)             Requested size: 142.61026pt x 231.019pt.
+
+<images/activity_login_failed.PNG, id=497, 361.35pt x 569.7285pt>
+File: images/activity_login_failed.PNG Graphic file (type png)
+
+<use images/activity_login_failed.PNG>
+Package pdftex.def Info: images/activity_login_failed.PNG used on input line 41
+1.
+(pdftex.def)             Requested size: 144.53743pt x 227.88736pt.
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
+ <use FHO_Logo_Students.jpg>
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 417.
+(pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (42.67912pt): 
+ Make it at least 51.68465pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[68 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_logi
+n.PNG> <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_l
+ogin_failed.PNG>]
+<images/activity_login_no_network.PNG, id=507, 367.3725pt x 413.74574pt>
+File: images/activity_login_no_network.PNG Graphic file (type png)
+
+<use images/activity_login_no_network.PNG>
+Package pdftex.def Info: images/activity_login_no_network.PNG used on input lin
+e 421.
+(pdftex.def)             Requested size: 146.94638pt x 165.49536pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 425--428
+
+ []
+
+<images/activity_routes.PNG, id=508, 359.54324pt x 279.444pt>
+File: images/activity_routes.PNG Graphic file (type png)
+
+<use images/activity_routes.PNG>
+Package pdftex.def Info: images/activity_routes.PNG used on input line 432.
+(pdftex.def)             Requested size: 143.81474pt x 111.77562pt.
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
+ <use FHO_Logo_Students.jpg>
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 452.
+(pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (42.67912pt): 
+ Make it at least 51.68465pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[69 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_logi
+n_no_network.PNG> <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images
+/activity_routes.PNG>]
+<images/activity_routes_item_open_menu.PNG, id=523, 363.759pt x 329.43076pt>
+File: images/activity_routes_item_open_menu.PNG Graphic file (type png)
+
+<use images/activity_routes_item_open_menu.PNG>
+Package pdftex.def Info: images/activity_routes_item_open_menu.PNG used on inpu
+t line 455.
+(pdftex.def)             Requested size: 145.50102pt x 131.76996pt.
+
+<images/activity_routes_item_progress_menu.PNG, id=524, 363.15675pt x 360.74776
+pt>
+File: images/activity_routes_item_progress_menu.PNG Graphic file (type png)
+ <use images/activity_routes_item_progress_menu.PNG>
+Package pdftex.def Info: images/activity_routes_item_progress_menu.PNG used on 
+input line 464.
+(pdftex.def)             Requested size: 145.26012pt x 144.29654pt.
+
+<images/activity_routes_item_finished_menu.PNG, id=525, 361.35pt x 360.1455pt>
+File: images/activity_routes_item_finished_menu.PNG Graphic file (type png)
+
+<use images/activity_routes_item_finished_menu.PNG>
+Package pdftex.def Info: images/activity_routes_item_finished_menu.PNG used on 
+input line 473.
+(pdftex.def)             Requested size: 144.53743pt x 144.05563pt.
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
+
+<use FHO_Logo_Students.jpg>
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 479.
+(pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (42.67912pt): 
+ Make it at least 51.68465pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[70 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_rout
+es_item_open_menu.PNG> <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/i
+mages/activity_routes_item_progress_menu.PNG> <C:/Users/Thomas/Desktop/MobileSe
+mesterProject1516/doc/images/activity_routes_item_finished_menu.PNG>]
+<images/activity_routes_menu.PNG, id=537, 367.97475pt x 251.7405pt>
+File: images/activity_routes_menu.PNG Graphic file (type png)
+
+<use images/activity_routes_menu.PNG>
+Package pdftex.def Info: images/activity_routes_menu.PNG used on input line 482
+.
+(pdftex.def)             Requested size: 147.18729pt x 100.6944pt.
+
+<images/activity_routes_no_network.PNG, id=538, 369.17924pt x 393.26926pt>
+File: images/activity_routes_no_network.PNG Graphic file (type png)
+
+<use images/activity_routes_no_network.PNG>
+Package pdftex.def Info: images/activity_routes_no_network.PNG used on input li
+ne 502.
+(pdftex.def)             Requested size: 147.66908pt x 157.30492pt.
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
+ <use FHO_Logo_Students.jpg>
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 508.
+(pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (42.67912pt): 
+ Make it at least 51.68465pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[71 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_rout
+es_menu.PNG> <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/acti
+vity_routes_no_network.PNG>]
+<images/activity_checkpoint_progress_1.PNG, id=551, 365.56575pt x 568.524pt>
+File: images/activity_checkpoint_progress_1.PNG Graphic file (type png)
+
+<use images/activity_checkpoint_progress_1.PNG>
+Package pdftex.def Info: images/activity_checkpoint_progress_1.PNG used on inpu
+t line 513.
+(pdftex.def)             Requested size: 146.2237pt x 227.40556pt.
+
+<images/activity_checkpoint_progress_2.PNG, id=552, 353.52075pt x 446.8695pt>
+File: images/activity_checkpoint_progress_2.PNG Graphic file (type png)
+
+<use images/activity_checkpoint_progress_2.PNG>
+Package pdftex.def Info: images/activity_checkpoint_progress_2.PNG used on inpu
+t line 520.
+(pdftex.def)             Requested size: 141.40579pt x 178.74463pt.
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
+ <use FHO_Logo_Students.jpg>
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 535.
+(pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (42.67912pt): 
+ Make it at least 51.68465pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[72 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_chec
+kpoint_progress_1.PNG> <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/i
+mages/activity_checkpoint_progress_2.PNG>]
+<images/activity_checkpoint_finished_progress_menu.PNG, id=564, 363.759pt x 579
+.96675pt>
+File: images/activity_checkpoint_finished_progress_menu.PNG Graphic file (type 
+png)
+ <use images/activity_checkpoint_finished_progress_menu.PNG>
+Package pdftex.def Info: images/activity_checkpoint_finished_progress_menu.PNG 
+used on input line 538.
+(pdftex.def)             Requested size: 145.50102pt x 231.98259pt.
+
+<images/activity_checkpoint_open_menu.PNG, id=565, 368.577pt x 554.07pt>
+File: images/activity_checkpoint_open_menu.PNG Graphic file (type png)
+
+<use images/activity_checkpoint_open_menu.PNG>
+Package pdftex.def Info: images/activity_checkpoint_open_menu.PNG used on input
+ line 555.
+(pdftex.def)             Requested size: 147.42818pt x 221.62407pt.
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
+ <use FHO_Logo_Students.jpg>
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 561.
+(pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (42.67912pt): 
+ Make it at least 51.68465pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[73 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_chec
+kpoint_finished_progress_menu.PNG> <C:/Users/Thomas/Desktop/MobileSemesterProje
+ct1516/doc/images/activity_checkpoint_open_menu.PNG>]
+<images/activity_checkpoint_wrong_secret.PNG, id=578, 359.54324pt x 564.30824pt
+>
+File: images/activity_checkpoint_wrong_secret.PNG Graphic file (type png)
+ <use images/activity_checkpoint_wrong_secret.PNG>
+Package pdftex.def Info: images/activity_checkpoint_wrong_secret.PNG used on in
+put line 564.
+(pdftex.def)             Requested size: 143.81474pt x 225.71928pt.
+
+<images/activity_checkpoint_correct_secret.PNG, id=579, 369.7815pt x 567.3195pt
+>
+File: images/activity_checkpoint_correct_secret.PNG Graphic file (type png)
+ <use images/activity_checkpoint_correct_secret.PNG>
+Package pdftex.def Info: images/activity_checkpoint_correct_secret.PNG used on 
+input line 573.
+(pdftex.def)             Requested size: 147.90997pt x 226.92378pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 568--580
+
+ []
+
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
+<use FHO_Logo_Students.jpg>
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 580.
+(pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (42.67912pt): 
+ Make it at least 51.68465pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[74 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_chec
+kpoint_wrong_secret.PNG> <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc
+/images/activity_checkpoint_correct_secret.PNG>]
+<images/activity_checkpoint_congratulations.PNG, id=589, 360.74776pt x 569.7285
+pt>
+File: images/activity_checkpoint_congratulations.PNG Graphic file (type png)
+ <use images/activity_checkpoint_congratulations.PNG>
+Package pdftex.def Info: images/activity_checkpoint_congratulations.PNG used on
+ input line 583.
+(pdftex.def)             Requested size: 144.29654pt x 227.88736pt.
+
+
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 377.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 377.
+File: FHO_Logo_Students.jpg Graphic file (type jpg)
+<use FHO_Logo_Students.jpg>
+Package pdftex.def Info: FHO_Logo_Students.jpg used on input line 590.
+(pdftex.def)             Requested size: 56.9039pt x 47.60461pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (42.67912pt): 
+ Make it at least 51.68465pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[75 <C:/Users/Thomas/Desktop/MobileSemesterProject1516/doc/images/activity_chec
+kpoint_congratulations.PNG>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 590.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 590.
+
 (C:\Users\Thomas\Desktop\MobileSemesterProject1516\doc\Documentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 377.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 377.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 590.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 590.
 Package rerunfilecheck Info: File `Documentation.out' has not changed.
-(rerunfilecheck)             Checksum: 69028D694BFEEEB4F86C1E8FB169DF6C;999.
+(rerunfilecheck)             Checksum: 260324902D034DE6DFE76439B1F31473;1354.
  ) 
 Here is how much of TeX's memory you used:
- 10981 strings out of 493921
- 185847 string characters out of 3144873
- 315645 words of memory out of 3000000
- 13890 multiletter control sequences out of 15000+200000
+ 11112 strings out of 493921
+ 189773 string characters out of 3144873
+ 315677 words of memory out of 3000000
+ 13959 multiletter control sequences out of 15000+200000
  7685 words of font info for 29 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 37i,16n,43p,947b,687s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,16n,43p,881b,687s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:
@@ -1820,9 +2068,9 @@ am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program File
 s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files 
 (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on Documentation.pdf (67 pages, 1040008 bytes).
+Output written on Documentation.pdf (75 pages, 2076403 bytes).
 PDF statistics:
- 528 PDF objects out of 1000 (max. 8388607)
- 125 named destinations out of 1000 (max. 500000)
- 141 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 665 PDF objects out of 1000 (max. 8388607)
+ 172 named destinations out of 1000 (max. 500000)
+ 261 words of extra memory for PDF output out of 10000 (max. 10000000)
 

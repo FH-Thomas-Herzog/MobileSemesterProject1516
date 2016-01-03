@@ -64,17 +64,14 @@ public class RouteModel implements Serializable {
     }
     //endregion
 
-    public String toItemString(final String finishedString, final String doneString) {
-        Objects.requireNonNull(finishedString);
-        Objects.requireNonNull(doneString);
-
-        final StringBuilder sb = new StringBuilder(name).append(" (");
-        if (isDone()) {
-            sb.append(finishedString);
-        } else {
+    public String toItemString(final String doneString) {
+        final StringBuilder sb = new StringBuilder(name);
+        if (!isDone()) {
+            Objects.requireNonNull(doneString);
+            sb.append(" (");
             sb.append(visitedCheckpoints.size()).append("x").append(doneString);
+            sb.append(")");
         }
-        sb.append(")");
         return sb.toString();
     }
 

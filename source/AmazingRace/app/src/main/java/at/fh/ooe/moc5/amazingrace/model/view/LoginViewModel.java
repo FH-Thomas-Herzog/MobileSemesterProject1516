@@ -64,8 +64,16 @@ public class LoginViewModel implements Serializable {
         this.username = username;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
     //endregion
 }

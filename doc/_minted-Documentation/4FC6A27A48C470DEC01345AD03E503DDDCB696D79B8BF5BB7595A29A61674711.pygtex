@@ -84,16 +84,17 @@
 \PYGdefault{c+cm}{     * Prepares the activity views.}
 \PYGdefault{c+cm}{     */}
     \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{prepareViews}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
-        \PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{reset}\PYGdefault{o}{();}
         \PYGdefault{c+c1}{// prepare username view}
         \PYGdefault{n}{EditText} \PYGdefault{n}{username} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{EditText}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{usernameEdTxt}\PYGdefault{o}{);}
         \PYGdefault{n}{username}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{LoginViewModelBindingTextWatcher}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{,} \PYGdefault{n}{username}\PYGdefault{o}{));}
         \PYGdefault{n}{username}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{LoginButtonTextWatcher}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{,} \PYGdefault{n}{viewModel}\PYGdefault{o}{));}
+        \PYGdefault{n}{username}\PYGdefault{o}{.}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getPassword}\PYGdefault{o}{());}
 
         \PYGdefault{c+c1}{// prepare password view}
         \PYGdefault{n}{EditText} \PYGdefault{n}{password} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{EditText}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{passwordEdTxt}\PYGdefault{o}{);}
         \PYGdefault{n}{password}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{LoginViewModelBindingTextWatcher}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{,} \PYGdefault{n}{password}\PYGdefault{o}{));}
         \PYGdefault{n}{password}\PYGdefault{o}{.}\PYGdefault{n+na}{addTextChangedListener}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{LoginButtonTextWatcher}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{,} \PYGdefault{n}{viewModel}\PYGdefault{o}{));}
+        \PYGdefault{n}{username}\PYGdefault{o}{.}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{n}{viewModel}\PYGdefault{o}{.}\PYGdefault{n+na}{getPassword}\PYGdefault{o}{());}
 
         \PYGdefault{c+c1}{// Prepare login button}
         \PYGdefault{n}{Button} \PYGdefault{n}{loginButton} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{Button}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{loginBtn}\PYGdefault{o}{);}

@@ -229,7 +229,7 @@ public class AbstractActivity<T extends Serializable> extends AppCompatActivity 
      * @param messageId the resource id of the message
      */
     protected void openProgressDialog(int messageId) {
-        progress = ProgressDialog.show(AbstractActivity.this, getString(R.string.progress_title), getString(messageId), Boolean.TRUE);
+        progress = ProgressDialog.show(AbstractActivity.this, "", getString(messageId), Boolean.TRUE);
     }
 
     /**

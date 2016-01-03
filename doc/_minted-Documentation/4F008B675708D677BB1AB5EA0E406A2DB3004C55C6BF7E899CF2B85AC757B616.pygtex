@@ -5,6 +5,7 @@
 \PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.view.View}\PYGdefault{o}{;}
 \PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.view.ViewGroup}\PYGdefault{o}{;}
 \PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.ArrayAdapter}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.ImageView}\PYGdefault{o}{;}
 \PYGdefault{k+kn}{import} \PYGdefault{n+nn}{android.widget.TextView}\PYGdefault{o}{;}
 
 \PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.R}\PYGdefault{o}{;}
@@ -27,7 +28,13 @@
         \PYGdefault{o}{\PYGdefaultZcb{}}
 
         \PYGdefault{n}{RouteModel} \PYGdefault{n}{route} \PYGdefault{o}{=} \PYGdefault{n}{getItem}\PYGdefault{o}{(}\PYGdefault{n}{position}\PYGdefault{o}{);}
-        \PYGdefault{o}{((}\PYGdefault{n}{TextView}\PYGdefault{o}{)} \PYGdefault{n}{convertView}\PYGdefault{o}{.}\PYGdefault{n+na}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeNameLabel}\PYGdefault{o}{)).}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{n}{route}\PYGdefault{o}{.}\PYGdefault{n+na}{toItemString}\PYGdefault{o}{(}\PYGdefault{n}{getContext}\PYGdefault{o}{().}\PYGdefault{n+na}{getString}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{finished}\PYGdefault{o}{),} \PYGdefault{n}{getContext}\PYGdefault{o}{().}\PYGdefault{n+na}{getString}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{done}\PYGdefault{o}{)));}
+        \PYGdefault{n}{ImageView} \PYGdefault{n}{icon} \PYGdefault{o}{=} \PYGdefault{o}{((}\PYGdefault{n}{ImageView}\PYGdefault{o}{)} \PYGdefault{n}{convertView}\PYGdefault{o}{.}\PYGdefault{n+na}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeItemImage}\PYGdefault{o}{));}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{route}\PYGdefault{o}{.}\PYGdefault{n+na}{getNextCheckpoint}\PYGdefault{o}{()} \PYGdefault{o}{==} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{icon}\PYGdefault{o}{.}\PYGdefault{n+na}{setImageResource}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{drawable}\PYGdefault{o}{.}\PYGdefault{n+na}{done\PYGdefaultZus{}icon}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{icon}\PYGdefault{o}{.}\PYGdefault{n+na}{setImageResource}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{drawable}\PYGdefault{o}{.}\PYGdefault{n+na}{app\PYGdefaultZus{}icon}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{((}\PYGdefault{n}{TextView}\PYGdefault{o}{)} \PYGdefault{n}{convertView}\PYGdefault{o}{.}\PYGdefault{n+na}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{routeItemText}\PYGdefault{o}{)).}\PYGdefault{n+na}{setText}\PYGdefault{o}{(}\PYGdefault{n}{route}\PYGdefault{o}{.}\PYGdefault{n+na}{toItemString}\PYGdefault{o}{(}\PYGdefault{n}{getContext}\PYGdefault{o}{().}\PYGdefault{n+na}{getString}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{done}\PYGdefault{o}{)));}
 
         \PYGdefault{k}{return} \PYGdefault{n}{convertView}\PYGdefault{o}{;}
     \PYGdefault{o}{\PYGdefaultZcb{}}

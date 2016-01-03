@@ -22,15 +22,6 @@
             \PYGdefault{n+na}{android:layout\PYGdefaultZus{}alignParentTop=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
             \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
 
-            \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
-                \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointContainerLabel\PYGdefaultZdq{}}
-                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
-                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
-                \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
-                \PYGdefault{n+na}{android:text=}\PYGdefault{l+s}{\PYGdefaultZdq{}@string/checkpoint\PYGdefaultZus{}group\PYGdefaultZus{}secret\PYGdefaultZdq{}}
-                \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceLarge\PYGdefaultZdq{}}
-                \PYGdefault{n+na}{android:textStyle=}\PYGdefault{l+s}{\PYGdefaultZdq{}bold\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
-
             \PYGdefault{n+nt}{\PYGdefaultZlt{}LinearLayout}
                 \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeCheckpointContainer\PYGdefaultZdq{}}
                 \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
@@ -80,7 +71,7 @@
                     \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}20pt\PYGdefaultZdq{}}
                     \PYGdefault{n+na}{android:clickable=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
                     \PYGdefault{n+na}{android:onClick=}\PYGdefault{l+s}{\PYGdefaultZdq{}toggleVisibility\PYGdefaultZdq{}}
-                    \PYGdefault{n+na}{android:src=}\PYGdefault{l+s}{\PYGdefaultZdq{}@drawable/map\PYGdefaultZus{}icon\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+                    \PYGdefault{n+na}{android:src=}\PYGdefault{l+s}{\PYGdefaultZdq{}@drawable/app\PYGdefaultZus{}icon\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
 
                 \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
                     \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}

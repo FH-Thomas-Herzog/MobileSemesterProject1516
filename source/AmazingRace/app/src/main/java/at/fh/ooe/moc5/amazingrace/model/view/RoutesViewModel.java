@@ -1,6 +1,8 @@
 package at.fh.ooe.moc5.amazingrace.model.view;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +39,20 @@ public class RoutesViewModel implements Serializable {
      */
     public List<RouteModel> loadRoutes() throws ServiceException {
         routes = proxy.loadRoutes(userContext.getCredentialsModel());
+        Collections.sort(routes, new Comparator<RouteModel>() {
+            @Override
+            public int compare(RouteModel lhs, RouteModel rhs) {
+                if (lhs.isDone() == rhs.isDone()) {
+                    if (lhs.getVisitedCheckpoints().size() == rhs.getVisitedCheckpoints().size()) {
+                        return lhs.getName().toUpperCase().compareTo(rhs.getName().toUpperCase());
+                    } else {
+                        return Integer.valueOf(rhs.getVisitedCheckpoints().size()).compareTo(lhs.getVisitedCheckpoints().size());
+                    }
+                } else {
+                    return Boolean.valueOf(lhs.isDone()).compareTo(rhs.isDone());
+                }
+            }
+        });
         return routes;
     }
 

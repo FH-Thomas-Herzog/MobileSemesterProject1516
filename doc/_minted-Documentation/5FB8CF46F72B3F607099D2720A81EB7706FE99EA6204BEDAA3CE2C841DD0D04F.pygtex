@@ -4,15 +4,19 @@
     \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
     \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
     \PYGdefault{n+na}{android:layout\PYGdefaultZus{}centerVertical=}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}
-    \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}vertical\PYGdefaultZdq{}}
-    \PYGdefault{n+na}{android:weightSum=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+    \PYGdefault{n+na}{android:orientation=}\PYGdefault{l+s}{\PYGdefaultZdq{}horizontal\PYGdefaultZdq{}}\PYGdefault{n+nt}{\PYGdefaultZgt{}}
+
+    \PYGdefault{n+nt}{\PYGdefaultZlt{}ImageView}
+        \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeItemImage\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}15pt\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}15pt\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}3pt\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
 
     \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
-        \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeNameLabel\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/routeItemText\PYGdefaultZdq{}}
         \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
         \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
-        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
-        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}weight=}\PYGdefault{l+s}{\PYGdefaultZdq{}1\PYGdefaultZdq{}}
-        \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}left\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+        \PYGdefault{n+na}{android:layout\PYGdefaultZus{}margin=}\PYGdefault{l+s}{\PYGdefaultZdq{}3pt\PYGdefaultZdq{}}
+        \PYGdefault{n+na}{android:gravity=}\PYGdefault{l+s}{\PYGdefaultZdq{}left|center\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
 \PYGdefault{n+nt}{\PYGdefaultZlt{}/LinearLayout\PYGdefaultZgt{}}
 \end{Verbatim}

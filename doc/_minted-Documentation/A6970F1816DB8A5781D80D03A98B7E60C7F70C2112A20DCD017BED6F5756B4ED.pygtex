@@ -65,8 +65,16 @@
         \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{username} \PYGdefault{o}{=} \PYGdefault{n}{username}\PYGdefault{o}{;}
     \PYGdefault{o}{\PYGdefaultZcb{}}
 
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{String} \PYGdefault{n+nf}{getUsername}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{username}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
     \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{setPassword}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{password}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
         \PYGdefault{k}{this}\PYGdefault{o}{.}\PYGdefault{n+na}{password} \PYGdefault{o}{=} \PYGdefault{n}{password}\PYGdefault{o}{;}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{String} \PYGdefault{n+nf}{getPassword}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k}{return} \PYGdefault{n}{password}\PYGdefault{o}{;}
     \PYGdefault{o}{\PYGdefaultZcb{}}
     \PYGdefault{c+c1}{//endregion}
 \PYGdefault{o}{\PYGdefaultZcb{}}

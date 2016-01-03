@@ -65,17 +65,14 @@
     \PYGdefault{o}{\PYGdefaultZcb{}}
     \PYGdefault{c+c1}{//endregion}
 
-    \PYGdefault{k+kd}{public} \PYGdefault{n}{String} \PYGdefault{n+nf}{toItemString}\PYGdefault{o}{(}\PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{finishedString}\PYGdefault{o}{,} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{doneString}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
-        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{finishedString}\PYGdefault{o}{);}
-        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{doneString}\PYGdefault{o}{);}
-
-        \PYGdefault{k+kd}{final} \PYGdefault{n}{StringBuilder} \PYGdefault{n}{sb} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{name}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{} (\PYGdefaultZdq{}}\PYGdefault{o}{);}
-        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{isDone}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
-            \PYGdefault{n}{sb}\PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{finishedString}\PYGdefault{o}{);}
-        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{String} \PYGdefault{n+nf}{toItemString}\PYGdefault{o}{(}\PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{doneString}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{k+kd}{final} \PYGdefault{n}{StringBuilder} \PYGdefault{n}{sb} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{name}\PYGdefault{o}{);}
+        \PYGdefault{k}{if} \PYGdefault{o}{(!}\PYGdefault{n}{isDone}\PYGdefault{o}{())} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{doneString}\PYGdefault{o}{);}
+            \PYGdefault{n}{sb}\PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{} (\PYGdefaultZdq{}}\PYGdefault{o}{);}
             \PYGdefault{n}{sb}\PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{visitedCheckpoints}\PYGdefault{o}{.}\PYGdefault{n+na}{size}\PYGdefault{o}{()).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}x\PYGdefaultZdq{}}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{doneString}\PYGdefault{o}{);}
+            \PYGdefault{n}{sb}\PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{})\PYGdefaultZdq{}}\PYGdefault{o}{);}
         \PYGdefault{o}{\PYGdefaultZcb{}}
-        \PYGdefault{n}{sb}\PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{})\PYGdefaultZdq{}}\PYGdefault{o}{);}
         \PYGdefault{k}{return} \PYGdefault{n}{sb}\PYGdefault{o}{.}\PYGdefault{n+na}{toString}\PYGdefault{o}{();}
     \PYGdefault{o}{\PYGdefaultZcb{}}
 

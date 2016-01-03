@@ -230,7 +230,7 @@
 \PYGdefault{c+cm}{     * @param messageId the resource id of the message}
 \PYGdefault{c+cm}{     */}
     \PYGdefault{k+kd}{protected} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{openProgressDialog}\PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{messageId}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
-        \PYGdefault{n}{progress} \PYGdefault{o}{=} \PYGdefault{n}{ProgressDialog}\PYGdefault{o}{.}\PYGdefault{n+na}{show}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{n}{getString}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{string}\PYGdefault{o}{.}\PYGdefault{n+na}{progress\PYGdefaultZus{}title}\PYGdefault{o}{),} \PYGdefault{n}{getString}\PYGdefault{o}{(}\PYGdefault{n}{messageId}\PYGdefault{o}{),} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+        \PYGdefault{n}{progress} \PYGdefault{o}{=} \PYGdefault{n}{ProgressDialog}\PYGdefault{o}{.}\PYGdefault{n+na}{show}\PYGdefault{o}{(}\PYGdefault{n}{AbstractActivity}\PYGdefault{o}{.}\PYGdefault{n+na}{this}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{n}{getString}\PYGdefault{o}{(}\PYGdefault{n}{messageId}\PYGdefault{o}{),} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
     \PYGdefault{o}{\PYGdefaultZcb{}}
 
     \PYGdefault{c+cm}{/**}

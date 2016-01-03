@@ -188,6 +188,7 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
     private void prepareView() {
         // prepare route list view
         ListView listView = (ListView) findViewById(R.id.listRoute);
+        listView.removeAllViewsInLayout();
         if (listView.getAdapter() == null) {
             final RouteArrayAdapter adapter = new RouteArrayAdapter(RouteActivity.this);
             listView.setAdapter(adapter);
@@ -294,7 +295,7 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
                     }
                     // Reset ok
                     else {
-                        prepareView();
+                        loadRoutes();
                     }
                 }
             }.execute();
