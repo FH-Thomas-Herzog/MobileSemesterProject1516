@@ -64,7 +64,6 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
      */
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         openCloseApplicationDialog();
     }
 
