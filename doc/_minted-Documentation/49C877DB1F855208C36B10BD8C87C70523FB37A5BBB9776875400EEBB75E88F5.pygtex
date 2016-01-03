@@ -36,7 +36,8 @@
                     \PYGdefault{n+na}{android:layout\PYGdefaultZus{}width=}\PYGdefault{l+s}{\PYGdefaultZdq{}match\PYGdefaultZus{}parent\PYGdefaultZdq{}}
                     \PYGdefault{n+na}{android:layout\PYGdefaultZus{}height=}\PYGdefault{l+s}{\PYGdefaultZdq{}wrap\PYGdefaultZus{}content\PYGdefaultZdq{}}
                     \PYGdefault{n+na}{android:layout\PYGdefaultZus{}marginBottom=}\PYGdefault{l+s}{\PYGdefaultZdq{}5pt\PYGdefaultZdq{}}
-                    \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceMedium\PYGdefaultZdq{}} \PYGdefault{n+nt}{/\PYGdefaultZgt{}}
+                    \PYGdefault{n+na}{android:textAppearance=}\PYGdefault{l+s}{\PYGdefaultZdq{}?android:attr/textAppearanceMedium\PYGdefaultZdq{}}
+                    \PYGdefault{n+na}{android:textStyle=}\PYGdefault{l+s}{\PYGdefaultZdq{}bold\PYGdefaultZdq{}}\PYGdefault{n+nt}{/\PYGdefaultZgt{}}
 
                 \PYGdefault{n+nt}{\PYGdefaultZlt{}TextView}
                     \PYGdefault{n+na}{android:id=}\PYGdefault{l+s}{\PYGdefaultZdq{}@+id/nextCheckpointHintTxt\PYGdefaultZdq{}}

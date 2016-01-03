@@ -215,7 +215,7 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
                     }
                 }
                 // move camera to last or next checkpoint
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(zoomLocation, 17));
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(zoomLocation, 16));
             }
         });
     }
@@ -305,6 +305,8 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
                         reloadRoute(Boolean.TRUE);
                     } else {
                         Toast.makeText(CheckpointActivity.this, R.string.info_secret_wrong, Toast.LENGTH_LONG).show();
+                        ((TextView) CheckpointActivity.this
+                                .findViewById(R.id.nextCheckpointTxt)).setText("");
                     }
                 }
             }.execute();
@@ -344,6 +346,7 @@ public class CheckpointActivity extends AbstractActivity<CheckpointViewModel> im
                     // Route found
                     else if (result.result) {
                         prepareView();
+                        invalidateOptionsMenu();
                         if (checkIfFinished) {
                             if (viewModel.getNextCheckpoint() != null) {
                                 Toast.makeText(CheckpointActivity.this, R.string.info_secret_ok, Toast.LENGTH_LONG).show();

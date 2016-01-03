@@ -1,0 +1,251 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.gson.GsonBuilder}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.gson.JsonSyntaxException}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{com.google.gson.reflect.TypeToken}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.BufferedReader}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.BufferedWriter}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.InputStreamReader}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.io.OutputStreamWriter}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.net.SocketTimeoutException}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.net.URL}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.List}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Objects}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{javax.net.ssl.HttpsURLConnection}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.CredentialsRequestModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.RouteModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.RouteRequestModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.model.json.CheckpointRequestModel}\PYGdefault{o}{;}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{at.fh.ooe.moc5.amazingrace.service.ServiceException.ServiceErrorCode}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * Created by Thomas on 12/24/2015.}
+\PYGdefault{c+cm}{ * \PYGdefaultZlt{}p/\PYGdefaultZgt{}}
+\PYGdefault{c+cm}{ * Class for communicating with the rest backend.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{RestServiceProxyImpl} \PYGdefault{k+kd}{implements} \PYGdefault{n}{ServiceProxy} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{REST\PYGdefaultZus{}URL} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}https://demo.nexperts.com/MOC5/AmazingRaceService/AmazingRaceService.svc\PYGdefaultZdq{}}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{CHECK\PYGdefaultZus{}CREDENTIALS} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}/CheckCredentials\PYGdefaultZdq{}}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{GET\PYGdefaultZus{}ROUTES\PYGdefaultZus{}METHOD} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}/GetRoutes\PYGdefaultZdq{}}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{METHOD\PYGdefaultZus{}VISIT\PYGdefaultZus{}CHECKPOINT} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}/InformAboutVisitedCheckpoint\PYGdefaultZdq{}}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{METHOD\PYGdefaultZus{}RESET\PYGdefaultZus{}ALL\PYGdefaultZus{}ROUTES} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}/ResetAllRoutes\PYGdefaultZdq{}}\PYGdefault{o}{;}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{METHOD\PYGdefaultZus{}RESET\PYGdefaultZus{}ROUTE} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}/ResetRoute\PYGdefaultZdq{}}\PYGdefault{o}{;}
+
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{DEFAULT\PYGdefaultZus{}TIME\PYGdefaultZus{}OUT} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{3000}\PYGdefault{o}{;}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{validateCredentials}\PYGdefault{o}{(}\PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot check credentials for null model\PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{URL} \PYGdefault{n}{url} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{URL}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{REST\PYGdefaultZus{}URL}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{CHECK\PYGdefaultZus{}CREDENTIALS}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}?\PYGdefaultZdq{}}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{toQueryString}\PYGdefault{o}{()).}\PYGdefault{n+na}{toString}\PYGdefault{o}{());}
+            \PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection}\PYGdefault{o}{)} \PYGdefault{n}{url}\PYGdefault{o}{.}\PYGdefault{n+na}{openConnection}\PYGdefault{o}{();}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestMethod}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}GET\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setConnectTimeout}\PYGdefault{o}{(}\PYGdefault{n}{DEFAULT\PYGdefaultZus{}TIME\PYGdefaultZus{}OUT}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setUseCaches}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+
+            \PYGdefault{k}{return} \PYGdefault{n}{invokeBooleanResultMethod}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{k+kc}{null}\PYGdefault{o}{,} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{ServiceException} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{n}{e}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{UNKNOWN}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{validateCheckpointSecret}\PYGdefault{o}{(}\PYGdefault{n}{CheckpointRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot check checkpoint for null model\PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{URL} \PYGdefault{n}{url} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{URL}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{REST\PYGdefaultZus{}URL}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{METHOD\PYGdefaultZus{}VISIT\PYGdefaultZus{}CHECKPOINT}\PYGdefault{o}{).}\PYGdefault{n+na}{toString}\PYGdefault{o}{());}
+            \PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection}\PYGdefault{o}{)} \PYGdefault{n}{url}\PYGdefault{o}{.}\PYGdefault{n+na}{openConnection}\PYGdefault{o}{();}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestMethod}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}POST\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestProperty}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Content\PYGdefaultZhy{}Type\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}application/json\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setConnectTimeout}\PYGdefault{o}{(}\PYGdefault{n}{DEFAULT\PYGdefaultZus{}TIME\PYGdefaultZus{}OUT}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setUseCaches}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setDoInput}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setDoOutput}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+
+            \PYGdefault{k}{return} \PYGdefault{n}{invokeBooleanResultMethod}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{ServiceException} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{n}{e}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{UNKNOWN}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{n}{List}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{RouteModel}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n+nf}{loadRoutes}\PYGdefault{o}{(}\PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot get routes with missing credentials\PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{if} \PYGdefault{o}{(!}\PYGdefault{n}{validateCredentials}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{))} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{INVALID\PYGdefaultZus{}CREDENTIALS}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+
+        \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{URL} \PYGdefault{n}{url} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{URL}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{REST\PYGdefaultZus{}URL}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{GET\PYGdefaultZus{}ROUTES\PYGdefaultZus{}METHOD}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}?\PYGdefaultZdq{}}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{toQueryString}\PYGdefault{o}{()).}\PYGdefault{n+na}{toString}\PYGdefault{o}{());}
+            \PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection}\PYGdefault{o}{)} \PYGdefault{n}{url}\PYGdefault{o}{.}\PYGdefault{n+na}{openConnection}\PYGdefault{o}{();}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestMethod}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}GET\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setConnectTimeout}\PYGdefault{o}{(}\PYGdefault{n}{DEFAULT\PYGdefaultZus{}TIME\PYGdefaultZus{}OUT}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setUseCaches}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+
+            \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{response} \PYGdefault{o}{=} \PYGdefault{n}{readResponse}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{);}
+            \PYGdefault{n}{GsonBuilder} \PYGdefault{n}{builder} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{GsonBuilder}\PYGdefault{o}{();}
+            \PYGdefault{k}{return} \PYGdefault{n}{builder}\PYGdefault{o}{.}\PYGdefault{n+na}{create}\PYGdefault{o}{().}\PYGdefault{n+na}{fromJson}\PYGdefault{o}{(}\PYGdefault{n}{response}\PYGdefault{o}{,} \PYGdefault{k}{new} \PYGdefault{n}{TypeToken}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{List}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{RouteModel}\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}()} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{o}{\PYGdefaultZcb{}.}\PYGdefault{n+na}{getType}\PYGdefault{o}{());}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{JsonSyntaxException} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{INVALID\PYGdefaultZus{}REQUEST}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{UNKNOWN}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{resetRoute}\PYGdefault{o}{(}\PYGdefault{n}{RouteRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot reset route for null model\PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{URL} \PYGdefault{n}{url} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{URL}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{REST\PYGdefaultZus{}URL}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{METHOD\PYGdefaultZus{}RESET\PYGdefaultZus{}ROUTE}\PYGdefault{o}{).}\PYGdefault{n+na}{toString}\PYGdefault{o}{());}
+            \PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection}\PYGdefault{o}{)} \PYGdefault{n}{url}\PYGdefault{o}{.}\PYGdefault{n+na}{openConnection}\PYGdefault{o}{();}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestMethod}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}POST\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestProperty}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Content\PYGdefaultZhy{}Type\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}application/json\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setConnectTimeout}\PYGdefault{o}{(}\PYGdefault{n}{DEFAULT\PYGdefaultZus{}TIME\PYGdefaultZus{}OUT}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setUseCaches}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setDoInput}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setDoOutput}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+
+            \PYGdefault{k}{return} \PYGdefault{n}{invokeBooleanResultMethod}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{ServiceException} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{n}{e}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{UNKNOWN}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n+nd}{@Override}
+    \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{resetAllRoutes}\PYGdefault{o}{(}\PYGdefault{n}{CredentialsRequestModel} \PYGdefault{n}{model}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot reset all routes for null model\PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+        \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{URL} \PYGdefault{n}{url} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{URL}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{REST\PYGdefaultZus{}URL}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{METHOD\PYGdefaultZus{}RESET\PYGdefaultZus{}ALL\PYGdefaultZus{}ROUTES}\PYGdefault{o}{).}\PYGdefault{n+na}{toString}\PYGdefault{o}{());}
+            \PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection}\PYGdefault{o}{)} \PYGdefault{n}{url}\PYGdefault{o}{.}\PYGdefault{n+na}{openConnection}\PYGdefault{o}{();}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestMethod}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}POST\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestProperty}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Content\PYGdefaultZhy{}Type\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}application/json\PYGdefaultZdq{}}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setConnectTimeout}\PYGdefault{o}{(}\PYGdefault{n}{DEFAULT\PYGdefaultZus{}TIME\PYGdefaultZus{}OUT}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setUseCaches}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setDoInput}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+            \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setDoOutput}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+
+            \PYGdefault{k}{return} \PYGdefault{n}{invokeBooleanResultMethod}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{TRUE}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{ServiceException} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{n}{e}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{UNKNOWN}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+c1}{// region Helper}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Invokes a remote service method with an boolean result.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param connection       the connection to the service method}
+\PYGdefault{c+cm}{     * @param jsonModel        the jsonModel to write into the connection, maybe null.}
+\PYGdefault{c+cm}{     * @param checkCredentials true if the credentials shall be checked befor calling the actual service}
+\PYGdefault{c+cm}{     * @param \PYGdefaultZlt{}T\PYGdefaultZgt{}              the type of the json model which must be at least the CredentialsModel}
+\PYGdefault{c+cm}{     * @return true or false}
+\PYGdefault{c+cm}{     * @throws ServiceException if the request failed for any reason, see contained error code for details}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{T} \PYGdefault{k+kd}{extends} \PYGdefault{n}{CredentialsRequestModel}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{k+kt}{boolean} \PYGdefault{n+nf}{invokeBooleanResultMethod}\PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{n}{T} \PYGdefault{n}{jsonModel}\PYGdefault{o}{,} \PYGdefault{k+kt}{boolean} \PYGdefault{n}{checkCredentials}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot invoke method on null connection\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{checkCredentials}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{jsonModel}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot check credentials for null model\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{k}{if} \PYGdefault{o}{((}\PYGdefault{n}{checkCredentials}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZam{}\PYGdefaultZam{}} \PYGdefault{o}{(!}\PYGdefault{n}{validateCredentials}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{CredentialsRequestModel}\PYGdefault{o}{(}\PYGdefault{n}{jsonModel}\PYGdefault{o}{.}\PYGdefault{n+na}{userName}\PYGdefault{o}{,} \PYGdefault{n}{jsonModel}\PYGdefault{o}{.}\PYGdefault{n+na}{password}\PYGdefault{o}{))))} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{INVALID\PYGdefaultZus{}CREDENTIALS}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+
+        \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{c+c1}{// Write Data for Post requests}
+            \PYGdefault{k}{if} \PYGdefault{o}{((}\PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{getRequestMethod}\PYGdefault{o}{().}\PYGdefault{n+na}{equals}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}POST\PYGdefaultZdq{}}\PYGdefault{o}{))} \PYGdefault{o}{\PYGdefaultZam{}\PYGdefaultZam{}} \PYGdefault{o}{(}\PYGdefault{n}{jsonModel} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{))} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{n}{writeData}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{n}{jsonModel}\PYGdefault{o}{);}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{c+c1}{// Read response}
+            \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{response} \PYGdefault{o}{=} \PYGdefault{n}{readResponse}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{);}
+            \PYGdefault{k}{if} \PYGdefault{o}{((!}\PYGdefault{l+s}{\PYGdefaultZdq{}true\PYGdefaultZdq{}}\PYGdefault{o}{.}\PYGdefault{n+na}{equals}\PYGdefault{o}{(}\PYGdefault{n}{response}\PYGdefault{o}{))} \PYGdefault{o}{\PYGdefaultZam{}\PYGdefaultZam{}} \PYGdefault{o}{(!}\PYGdefault{l+s}{\PYGdefaultZdq{}false\PYGdefaultZdq{}}\PYGdefault{o}{.}\PYGdefault{n+na}{equals}\PYGdefault{o}{(}\PYGdefault{n}{response}\PYGdefault{o}{)))} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{INVALID\PYGdefaultZus{}REQUEST}\PYGdefault{o}{);}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{k}{return} \PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{parseBoolean}\PYGdefault{o}{(}\PYGdefault{n}{response}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{ServiceException} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{n}{e}\PYGdefault{o}{;}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{UNKNOWN}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Reads the response from the connection.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param connection the connection to read response from}
+\PYGdefault{c+cm}{     * @return the response string}
+\PYGdefault{c+cm}{     * @throws ServiceException if an error occurs}
+\PYGdefault{c+cm}{     * @see ServiceErrorCode for the ServiceException contained error code}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{n}{String} \PYGdefault{n+nf}{readResponse}\PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot read from null connection\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{if} \PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{getResponseCode}\PYGdefault{o}{()} \PYGdefault{o}{!=} \PYGdefault{l+m+mi}{200}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{REQUEST\PYGdefaultZus{}NOT\PYGdefaultZus{}OK}\PYGdefault{o}{);}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+            \PYGdefault{k}{try} \PYGdefault{o}{(}\PYGdefault{k+kd}{final} \PYGdefault{n}{BufferedReader} \PYGdefault{n}{reader} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{BufferedReader}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{InputStreamReader}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{getInputStream}\PYGdefault{o}{())))} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{k+kd}{final} \PYGdefault{n}{StringBuilder} \PYGdefault{n}{builder} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{();}
+                \PYGdefault{n}{String} \PYGdefault{n}{line}\PYGdefault{o}{;}
+                \PYGdefault{k}{while} \PYGdefault{o}{((}\PYGdefault{n}{line} \PYGdefault{o}{=} \PYGdefault{n}{reader}\PYGdefault{o}{.}\PYGdefault{n+na}{readLine}\PYGdefault{o}{())} \PYGdefault{o}{!=} \PYGdefault{k+kc}{null}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+                    \PYGdefault{n}{builder}\PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{line}\PYGdefault{o}{);}
+                \PYGdefault{o}{\PYGdefaultZcb{}}
+                \PYGdefault{k}{return} \PYGdefault{n}{builder}\PYGdefault{o}{.}\PYGdefault{n+na}{toString}\PYGdefault{o}{();}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{SocketTimeoutException} \PYGdefault{n}{ste}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{TIMEOUT}\PYGdefault{o}{,} \PYGdefault{n}{ste}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{UNKNOWN}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{     * Writes data to the connection.}
+\PYGdefault{c+cm}{     *}
+\PYGdefault{c+cm}{     * @param connection        the connection to write to}
+\PYGdefault{c+cm}{     * @param jsonModelInstance the json model instance}
+\PYGdefault{c+cm}{     * @throws ServiceException if the write fails, see contained error code for details}
+\PYGdefault{c+cm}{     */}
+    \PYGdefault{k+kd}{private} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{writeData}\PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{n}{Object} \PYGdefault{n}{jsonModelInstance}\PYGdefault{o}{)} \PYGdefault{k+kd}{throws} \PYGdefault{n}{ServiceException} \PYGdefault{o}{\PYGdefaultZob{}}
+        \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot write to null connection\PYGdefaultZdq{}}\PYGdefault{o}{);}
+        \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{try} \PYGdefault{o}{(}\PYGdefault{k+kd}{final} \PYGdefault{n}{BufferedWriter} \PYGdefault{n}{writer} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{BufferedWriter}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{OutputStreamWriter}\PYGdefault{o}{(}\PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{getOutputStream}\PYGdefault{o}{())))} \PYGdefault{o}{\PYGdefaultZob{}}
+                \PYGdefault{k+kd}{final} \PYGdefault{n}{String} \PYGdefault{n}{data} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{GsonBuilder}\PYGdefault{o}{().}\PYGdefault{n+na}{create}\PYGdefault{o}{().}\PYGdefault{n+na}{toJson}\PYGdefault{o}{(}\PYGdefault{n}{jsonModelInstance}\PYGdefault{o}{);}
+                \PYGdefault{n}{writer}\PYGdefault{o}{.}\PYGdefault{n+na}{write}\PYGdefault{o}{(}\PYGdefault{n}{data}\PYGdefault{o}{,} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{,} \PYGdefault{n}{data}\PYGdefault{o}{.}\PYGdefault{n+na}{length}\PYGdefault{o}{());}
+                \PYGdefault{n}{writer}\PYGdefault{o}{.}\PYGdefault{n+na}{flush}\PYGdefault{o}{();}
+            \PYGdefault{o}{\PYGdefaultZcb{}}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{JsonSyntaxException} \PYGdefault{n}{jse}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{INVALID\PYGdefaultZus{}REQUEST}\PYGdefault{o}{,} \PYGdefault{n}{jse}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{SocketTimeoutException} \PYGdefault{n}{ste}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{TIMEOUT}\PYGdefault{o}{,} \PYGdefault{n}{ste}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{catch} \PYGdefault{o}{(}\PYGdefault{n}{Exception} \PYGdefault{n}{e}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+            \PYGdefault{k}{throw} \PYGdefault{k}{new} \PYGdefault{n}{ServiceException}\PYGdefault{o}{(}\PYGdefault{n}{ServiceErrorCode}\PYGdefault{o}{.}\PYGdefault{n+na}{UNKNOWN}\PYGdefault{o}{,} \PYGdefault{n}{e}\PYGdefault{o}{);}
+        \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+    \PYGdefault{c+c1}{// endregion}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

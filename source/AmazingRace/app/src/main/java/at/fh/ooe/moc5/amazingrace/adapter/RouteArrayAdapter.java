@@ -33,7 +33,8 @@ public class RouteArrayAdapter extends ArrayAdapter<RouteModel> {
         } else {
             icon.setImageResource(R.drawable.app_icon);
         }
-        ((TextView) convertView.findViewById(R.id.routeItemText)).setText(route.toItemString(getContext().getString(R.string.done)));
+        ((TextView) convertView.findViewById(R.id.routeItemText))
+                .setText(route.toItemString(getContext().getString(R.string.done)));
 
         return convertView;
     }

@@ -53,7 +53,6 @@
 \PYGdefault{c+cm}{     */}
     \PYGdefault{n+nd}{@Override}
     \PYGdefault{k+kd}{public} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{onBackPressed}\PYGdefault{o}{()} \PYGdefault{o}{\PYGdefaultZob{}}
-        \PYGdefault{k+kd}{super}\PYGdefault{o}{.}\PYGdefault{n+na}{onBackPressed}\PYGdefault{o}{();}
         \PYGdefault{n}{openCloseApplicationDialog}\PYGdefault{o}{();}
     \PYGdefault{o}{\PYGdefaultZcb{}}
     \PYGdefault{c+c1}{// endregion}
@@ -98,7 +97,6 @@
 
         \PYGdefault{c+c1}{// Prepare login button}
         \PYGdefault{n}{Button} \PYGdefault{n}{loginButton} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{Button}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{loginBtn}\PYGdefault{o}{);}
-        \PYGdefault{n}{loginButton}\PYGdefault{o}{.}\PYGdefault{n+na}{setEnabled}\PYGdefault{o}{(}\PYGdefault{n}{Boolean}\PYGdefault{o}{.}\PYGdefault{n+na}{FALSE}\PYGdefault{o}{);}
         \PYGdefault{n}{loginButton}\PYGdefault{o}{.}\PYGdefault{n+na}{setOnClickListener}\PYGdefault{o}{(}\PYGdefault{k}{this}\PYGdefault{o}{);}
 
         \PYGdefault{c+c1}{// prepare cancel button}

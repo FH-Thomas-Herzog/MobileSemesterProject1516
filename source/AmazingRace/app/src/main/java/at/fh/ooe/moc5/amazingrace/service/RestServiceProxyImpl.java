@@ -42,7 +42,10 @@ public class RestServiceProxyImpl implements ServiceProxy {
         Objects.requireNonNull(model, "Cannot check credentials for null model");
 
         try {
-            URL url = new URL(new StringBuilder(REST_URL).append(CHECK_CREDENTIALS).append("?").append(model.toQueryString()).toString());
+            URL url = new URL(new StringBuilder(REST_URL)
+                    .append(CHECK_CREDENTIALS)
+                    .append("?")
+                    .append(model.toQueryString()).toString());
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(DEFAULT_TIME_OUT);
@@ -87,7 +90,10 @@ public class RestServiceProxyImpl implements ServiceProxy {
         }
 
         try {
-            URL url = new URL(new StringBuilder(REST_URL).append(GET_ROUTES_METHOD).append("?").append(model.toQueryString()).toString());
+            URL url = new URL(new StringBuilder(REST_URL)
+                    .append(GET_ROUTES_METHOD)
+                    .append("?")
+                    .append(model.toQueryString()).toString());
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(DEFAULT_TIME_OUT);

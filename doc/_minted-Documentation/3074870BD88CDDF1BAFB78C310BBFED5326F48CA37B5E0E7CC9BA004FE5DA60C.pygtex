@@ -240,6 +240,7 @@
                         \PYGdefault{n}{RouteArrayAdapter} \PYGdefault{n}{adapter} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{RouteArrayAdapter}\PYGdefault{o}{)} \PYGdefault{o}{((}\PYGdefault{n}{ListView}\PYGdefault{o}{)} \PYGdefault{n}{findViewById}\PYGdefault{o}{(}\PYGdefault{n}{R}\PYGdefault{o}{.}\PYGdefault{n+na}{id}\PYGdefault{o}{.}\PYGdefault{n+na}{listRoute}\PYGdefault{o}{)).}\PYGdefault{n+na}{getAdapter}\PYGdefault{o}{();}
                         \PYGdefault{n}{adapter}\PYGdefault{o}{.}\PYGdefault{n+na}{clear}\PYGdefault{o}{();}
                         \PYGdefault{n}{adapter}\PYGdefault{o}{.}\PYGdefault{n+na}{addAll}\PYGdefault{o}{(}\PYGdefault{n}{result}\PYGdefault{o}{.}\PYGdefault{n+na}{result}\PYGdefault{o}{);}
+                        \PYGdefault{n}{invalidateOptionsMenu}\PYGdefault{o}{();}
                     \PYGdefault{o}{\PYGdefaultZcb{}}
                 \PYGdefault{o}{\PYGdefaultZcb{}}
             \PYGdefault{o}{\PYGdefaultZcb{}.}\PYGdefault{n+na}{execute}\PYGdefault{o}{();}

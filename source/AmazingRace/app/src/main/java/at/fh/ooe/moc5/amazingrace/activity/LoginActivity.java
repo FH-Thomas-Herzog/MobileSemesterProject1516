@@ -52,7 +52,6 @@ public class LoginActivity extends AbstractActivity<LoginViewModel> implements V
      */
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         openCloseApplicationDialog();
     }
     // endregion
@@ -97,7 +96,6 @@ public class LoginActivity extends AbstractActivity<LoginViewModel> implements V
 
         // Prepare login button
         Button loginButton = (Button) findViewById(R.id.loginBtn);
-        loginButton.setEnabled(Boolean.FALSE);
         loginButton.setOnClickListener(this);
 
         // prepare cancel button

@@ -115,14 +115,14 @@
 	\section
 		{AmazingRace Android Anwendung}
 }
-Folgende Dokumentation dokumentiert die Entwicklung der mobilen Anwendung \emph{AmazingRace}, die in Java für die Android-Plattform \emph{API-Level 22, Android 5.1.1} entwickelt wurde.
+Folgende Dokumentation dokumentiert die Entwicklung der mobilen Anwendung \emph{AmazingRace}, die in \emph{Java 7} für die Android-Plattform \emph{API-Level 22, Android 5.1.1} entwickelt wurde.
 \newline
 
 \subsection{Lösungsidee}
-Die Anwendung soll in auf drei Aktivitäten aufgeteilt werden, wobei die Login-Aktivität als Launcher-Aktivität definiert werden soll. Über diese Aktivität wird die Anwendung gestartet. Nach einem erfolgreichem Login soll diese Aktivität beendet werden, da es keinen Grund gibt warum eine Benutzer wieder auf diese Aktivität zurückkehren sollte.
+Die Anwendung soll in auf drei Aktivitäten aufgeteilt werden, wobei die Login-Aktivität als Launcher-Aktivität definiert werden soll. Über diese Aktivität wird die Anwendung gestartet. Nach einem erfolgreichem Login soll diese Aktivität beendet werden, da es keinen Grund gibt warum ein Benutzer wieder auf diese Aktivität zurückkehren sollte.
 \newline
 \newline
-Nach dem Login wird der Benutzer zu einer Übersicht aller Routen weitergeleitet, wo er eine auswählen kann. In dieser Ansicht sollen die einzelnen Routen mit einem Kontext-Menu versehen werden, die je nach Zustand der Route folgende Optionen bereitstellen soll.
+Nach dem Login wird der Benutzer zu einer Übersicht aller Routen weitergeleitet, wo er eine Route auswählen kann. In dieser Ansicht sollen die einzelnen Routen mit einem Kontext-Menu versehen werden, die je nach Zustand der Route folgende Optionen bereitstellen soll.
 \begin{enumerate}
 	\item\emph{Play (Es gibt einen offenen Checkpoint)}
 	\newline
@@ -139,19 +139,19 @@ Ebenfalls soll eine Action-Bar implementiert werden, die folgende Optionen berei
 \begin{enumerate}
 	\item\emph{Reset}
 	\newline
-	Setzt alle Routen zurück und verbleibt auf dieser Aktivität
+	Setzt alle Routen zurück
 	\item\emph{Reload}
 	\newline
 	Lädt alle Routen neu.
 	\item\emph{Close}
 	\newline
-	Öffnet einen Dialog, den der Benutzer bestätigen muss und beendet die Anwendung
+	Öffnet einen Dialog der im Falle einer Bestätigung die Anwendung beendet
 \end{enumerate} 
 \ \newline
-Für alle Ladeoperationen soll ein ProgressDialog angezeigt werden, der eine dementsprechende Meldung beinhaltet (Z.b.: Load routes ...). Der verwendete Service soll über ein Interface abgebildet werden, somit beinhaltet die benutzenden Klasse keine Referenzen auf die konkrete Implementierung. Die Implementierung soll über eine \emph{Factory} bereitgestellt werden, die die Service Instanz als \emph{Singleton} verwaltet, da hier nur eine Instanz benötigt wird. Des Weiteren sollen \emph{ViewModels} implementiert werden, die die gesamte View-Logik beinhalteten und keine Referenzen auf Android-Ressourcen beinhalten sollen.
+Für alle Ladeoperationen soll ein \emph{ProgressDialog} angezeigt werden, der eine dementsprechende Meldung beinhaltet (Z.b.: Load routes ...). Der verwendete Service soll über ein Interface abgebildet werden, somit beinhaltet die benutzenden Klasse keine Referenzen auf die konkrete Implementierung. Die Implementierung soll über eine \emph{Factory} bereitgestellt werden, die die Service Instanz als \emph{Singleton} verwaltet, da hier nur eine Instanz benötigt wird. Des Weiteren sollen \emph{View-Models} implementiert werden, die die gesamte View-Logik beinhalteten und keine Referenzen auf Android-Ressourcen beinhalten sollen.
 \newline
 \newline
-Die Aktivitäten sollen die gesamte Interaktionslogik beinhalten und die möglichen \emph{ServiceExceptions} der Serviceaufrufe, die über die View-Model erfolgen und von diesen weitergereicht werden, behandeln, da hierbei Referenzen auf Android-Ressourcen benötigt werden. Diese \emph{ServiceException} soll in einer abstrakten Basisklasse behandelt werden, von der alle Aktivitäten ableiten. Somit ist diese Fehlerbehandlung (Anzeige für den Benutzer) in einer Klasse gekapselt und trotzdem können die Aktivitäten ihrerseits Fehlerbehandlungen durchführen.
+Die Aktivitäten sollen die gesamte Interaktionslogik beinhalten und die möglichen \emph{ServiceExceptions} der Serviceaufrufe, die über die View-Model erfolgen sollen und von diesen weitergereicht werden, behandeln, da hierbei Referenzen auf Android-Ressourcen benötigt werden. Diese \emph{ServiceException} soll in einer abstrakten Basisklasse behandelt werden, von der alle Aktivitäten ableiten sollen. Somit ist diese Fehlerbehandlung (Anzeige für den Benutzer) in einer Klasse gekapselt und trotzdem können die Aktivitäten ihrerseits Fehlerbehandlungen durchführen.
 \newpage
 
 \subsubsection{Architektur}
@@ -176,7 +176,7 @@ Folgende Abbildung zeigt die Paketstruktur der Anwendung \emph{AmazingRace}. Als
 \ \newline
 \newpage
 
-Folgende Abbildung zeigt die Ressourcenverzeichnisse in denen alle Ressourcen wie \emph{Layout} usw. liegen. Es wurde hierbei darauf verzichtet, die Ressourcen für mehrere Endgeräte und Sprachen zu definieren.
+Folgende Abbildung zeigt die Ressourcenverzeichnisse in denen alle Ressourcen wie \emph{Layout} usw. liegen. Es wurde hierbei darauf verzichtet, die Ressourcen für mehrere Auflösungen und Sprachen zu definieren.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.65]{\imagesRoot/amazingrace_resource_structure.PNG}
@@ -184,23 +184,27 @@ Folgende Abbildung zeigt die Ressourcenverzeichnisse in denen alle Ressourcen wi
 	{Ressourcen der Anwendung}
 \end{figure}
 \ \newline
-Des Weiteren wurde eine Klasse \emph{AmazingRaceApplication} eingeführt, die die unbehandelten Exceptions behandelt, den Benutzerkontext hält und gemeinsam verwendete Konstanten definiert.
+Des Weiteren wurde eine Klasse \emph{AmazingRaceApplication} eingeführt, die die nicht abgefangene Exceptions behandelt, den Benutzerkontext hält und gemeinsam verwendete Konstanten definiert.
 \newline
 \subsubsection{Setup}
-Da ein Google Android API-Key verwendet wird wurde ein eigenes Zertifikat erstellt welches bei Google-Developer-Console registriert wurde. Dieses Zertifikat muss im Android-Studio bei der debug und Release Konfiguration eingestellt werden ansonsten wird Google Maps nicht funktionieren. Es sollte zwar ein Zertifikat für Debug und Release erstellt werden, aber es wurde hierbei darauf verzichtet und es wird nur ein Zertifikat für beide Konfigurationen verwendet.
+Da ein Google Android API-Key verwendet wird wurde ein eigenes Zertifikat erstellt welches bei Google-Developer-Console registriert wurde. Dieses Zertifikat muss im Android-Studio bei der \emph{Debug} und \emph{Release} Konfiguration eingestellt werden, da ansonsten Google Maps nicht funktionieren wird. Es sollte zwar ein Zertifikat für die \emph{Debug} und \emph{Release} Konfiguration erstellt werden, aber es wurde hierbei darauf verzichtet und es wird nur ein Zertifikat für beide Konfigurationen verwendet.
 \begin{enumerate}
-	\item\emph{Alias}
-	\newline
-	amazingrace
-	\item\emph{Key-Password}
-	\newline
-	amazingrace
-	\item\emph{Keystore-Password}
-	\newline
-	amazingrace
+	\item\emph{Alias:} amazingrace
+	\item\emph{Key-Password:} amazingrace
+	\item\emph{Keystore-Password:} amazingrace
 \end{enumerate}
 \ \newline
-Der Keystore befindet s
+Der Keystore befindet sich im Android-Studio-Projekt Wurzelverzeichnis und trägt den Name \emph{amazingrace.jks}
+\newline
+\newline
+Des Weiteren wurde folgender Emulator verwendet
+\begin{enumerate}
+	\item\emph{Device:} Nexus 5
+	\item\emph{API-Level:} 22
+	\item\emph{Architektur:} x86\_64 (schneller und \emph{ARM}  hatte falsche Play-Service Version)
+\end{enumerate}
+\ \newline
+Die Applikation wurde ebenfalls auf eine \emph{Samsung S6-Edge} getestet.
 \newpage
 
 \subsection{Source}
@@ -393,7 +397,7 @@ Im folgenden ist der gesamte Source der Anwendung aufgeführt.
 \subsection{Tests}
 Folgend sind die Tests der Anwendung \emph{AmazingRace} angeführt.
 \subsubsection{Login Aktivität}
-Folgend sind die Tests des Login angeführt.
+Folgend sind die Tests der Login Aktivität angeführt.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{\imagesRoot/activity_login.PNG}
@@ -409,9 +413,8 @@ Der Button \emph{Login} ist hierbei solange deaktiviert solange eine der beiden 
 	{Login fehlgeschlagen}
 \end{figure}
 \ \newline
-Sollte der Login fehlschlagen so werden beide Eingabefelder zurückgesetzt und eine Fehlermeldung in Form eines Toasts angezeigt.
+Sollte der Login fehlschlagen so werden beide Eingabefelder zurückgesetzt und eine Fehlermeldung in Form eines \emph{Toasts} angezeigt.
 \newpage
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{\imagesRoot/activity_login_no_network.PNG}
@@ -419,7 +422,7 @@ Sollte der Login fehlschlagen so werden beide Eingabefelder zurückgesetzt und e
 	{Keine Internetverbindung}
 \end{figure}
 \ \newline
-Sollte keine Netzwerkverbindung vorhanden sein so wird ein entsprechender Dialog angezeigt.
+Sollte keine Netzwerkverbindung vorhanden sein so wird ein entsprechender \emph{Dialog} angezeigt.
 \newline
 \subsubsection{Routen Aktivität}
 Folgend sind die Tests für die Routen Aktivität angeführt.
@@ -430,7 +433,7 @@ Folgend sind die Tests für die Routen Aktivität angeführt.
 	{Routen Aktivität}
 \end{figure}
 \ \newline
-Nach einem erfolgreichen Login oder durch drücken des \emph{Back Button} in der Checkpoint Aktivität gelangt man zur Übersicht der verfügbaren Routen. Hierbei werden die Routen wie folgt sortiert.
+Nach einem erfolgreichen Login oder durch Drücken des \emph{Back Button} in der Checkpoint Aktivität gelangt man zur Übersicht der verfügbaren Routen. Hierbei werden die Routen wie folgt sortiert.
 \begin{enumerate}
 	\item Offene Routen
 	\begin{enumerate}
@@ -480,7 +483,7 @@ Ist eine Route bereits abgeschlossen so werden beim Kontextmenü zwei Optionen \
 	{Routen Aktivität Menü}
 \end{figure}
 \ \newline
-Die Aktivität stellt zwei Optionen \emph{Reset All, Reload,  Close} über ein Menü zur Verfügung.
+Die Aktivität stellt drei Optionen \emph{Reset All, Reload,  Close} über ein Menü zur Verfügung.
 \begin{enumerate}
 	\item\emph{Reset All}
 	\newline
@@ -492,17 +495,23 @@ Die Aktivität stellt zwei Optionen \emph{Reset All, Reload,  Close} über ein M
 	\newline
 	Öffnet einen Dialog, über den im Falle einer Bestätigung die Anwendung geschlossen wird.
 \end{enumerate}
-\ \newline
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{\imagesRoot/activity_routes_no_network.PNG}
 	\caption
 	{Keine Netzwerkverbindung}
 \end{figure}
-\ \newline
 Sollte keine Netzwerkverbindung vorhanden sein so wird ein entsprechender Dialog angezeigt.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{\imagesRoot/activity_routes_close_dialog.PNG}
+	\caption
+	{Anwendung schließen Dialog}
+\end{figure}
+\ \newline
+Wird \emph{Yes} gedrückt wird die Anwendung geschlossen, im Falle von \emph{No} wir lediglich der \emph{Dialog} geschlossen.
 \newpage
-\subsection{Checkpoint Aktivität}
+\subsubsection{Checkpoint Aktivität}
 Folgend sind die Tests für die Checkpoint Aktivität angeführt.
 \begin{figure}[h]
 	\centering
@@ -518,7 +527,7 @@ Folgend sind die Tests für die Checkpoint Aktivität angeführt.
 	{Offene Route Teil 2}
 \end{figure}
 \ \newline
-Nachdem eine Route ausgewählt wurde wir auf die Checkpoint Aktivität gewechselt. Es gibt zwei Möglichkeiten die Checkpoints anzuzeigen.
+Nachdem eine Route ausgewählt wurde wird auf die Checkpoint Aktivität gewechselt. Es gibt zwei Möglichkeiten die Checkpoints anzuzeigen.
 \begin{enumerate}
 	\item\emph{Google Map}
 	\newline 
@@ -536,7 +545,7 @@ In diesem Fall ist die Route noch nicht abgeschlossen.
 	{Optionen einer abgeschlossene oder gestarteten Route}
 \end{figure}
 \ \newline
-Bei einer abgeschlossenen oder bereits gestarteten Route stehen zwei Optionen zur Verfügung \emph{Reset, Close}.
+Bei einer abgeschlossenen oder bereits gestarteten Route stehen die zwei Optionen \emph{Reset, Close} zur Verfügung.
 \begin{enumerate}
 	\item\emph{Reset}
 	\newline
@@ -553,7 +562,7 @@ Bei einer abgeschlossenen oder bereits gestarteten Route stehen zwei Optionen zu
 	{Optionen einer offenen Route}
 \end{figure}
 \ \newline
-Bei einer offene Route steht nur eine Option zur Verfügung \emph{Close}.
+Bei einer offene Route steht nur die eine Option \emph{Close} zur Verfügung.
 \newpage
 \begin{figure}[h]
 	\centering
@@ -571,7 +580,7 @@ Sollte eine Frage falsch beantwortet worden sein so wird eine Meldung in Form ei
 	{Frage korrekt beantwortet}
 \end{figure}
 \ \newline
-Sollte eine Frage korrekt beantwortet worden sein so wird eine Meldung in Form eines Toast ausgegeben.
+Sollte eine Frage korrekt beantwortet worden sein so wird eine Meldung in Form eines \emph{Toast} ausgegeben.
 \ \newline
 \newpage
 \begin{figure}[h]
@@ -581,6 +590,6 @@ Sollte eine Frage korrekt beantwortet worden sein so wird eine Meldung in Form e
 	{Route abgeschlossen}
 \end{figure}
 \ \newline
-Nachdem die letzte Frage korrekt beantwortet wurde  wird ein Dialog mit einer Erfolgsmeldung ausgegeben. Es wird auf der Checkpoint Aktivität verblieben wobei die Ansicht sich wie bei einer abgeschlossenen Route ändert.
+Nachdem die letzte Frage korrekt beantwortet wurde  wird ein \emph{Dialog} mit einer Erfolgsmeldung ausgegeben. Es wird auf der Checkpoint Aktivität verblieben wobei die Ansicht sich wie bei einer abgeschlossenen Route ändert.
 
 \end{document} 

@@ -46,7 +46,8 @@ public class RoutesViewModel implements Serializable {
                     if (lhs.getVisitedCheckpoints().size() == rhs.getVisitedCheckpoints().size()) {
                         return lhs.getName().toUpperCase().compareTo(rhs.getName().toUpperCase());
                     } else {
-                        return Integer.valueOf(rhs.getVisitedCheckpoints().size()).compareTo(lhs.getVisitedCheckpoints().size());
+                        return Integer.valueOf(rhs.getVisitedCheckpoints().size())
+                                .compareTo(lhs.getVisitedCheckpoints().size());
                     }
                 } else {
                     return Boolean.valueOf(lhs.isDone()).compareTo(rhs.isDone());

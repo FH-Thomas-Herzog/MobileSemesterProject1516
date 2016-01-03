@@ -239,6 +239,7 @@ public class RouteActivity extends AbstractActivity<RoutesViewModel> implements 
                         RouteArrayAdapter adapter = (RouteArrayAdapter) ((ListView) findViewById(R.id.listRoute)).getAdapter();
                         adapter.clear();
                         adapter.addAll(result.result);
+                        invalidateOptionsMenu();
                     }
                 }
             }.execute();

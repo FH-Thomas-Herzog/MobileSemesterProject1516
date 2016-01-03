@@ -43,7 +43,10 @@
         \PYGdefault{n}{Objects}\PYGdefault{o}{.}\PYGdefault{n+na}{requireNonNull}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot check credentials for null model\PYGdefaultZdq{}}\PYGdefault{o}{);}
 
         \PYGdefault{k}{try} \PYGdefault{o}{\PYGdefaultZob{}}
-            \PYGdefault{n}{URL} \PYGdefault{n}{url} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{URL}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{REST\PYGdefaultZus{}URL}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{CHECK\PYGdefaultZus{}CREDENTIALS}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}?\PYGdefaultZdq{}}\PYGdefault{o}{).}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{toQueryString}\PYGdefault{o}{()).}\PYGdefault{n+na}{toString}\PYGdefault{o}{());}
+            \PYGdefault{n}{URL} \PYGdefault{n}{url} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{URL}\PYGdefault{o}{(}\PYGdefault{k}{new} \PYGdefault{n}{StringBuilder}\PYGdefault{o}{(}\PYGdefault{n}{REST\PYGdefaultZus{}URL}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{CHECK\PYGdefaultZus{}CREDENTIALS}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}?\PYGdefaultZdq{}}\PYGdefault{o}{)}
+                    \PYGdefault{o}{.}\PYGdefault{n+na}{append}\PYGdefault{o}{(}\PYGdefault{n}{model}\PYGdefault{o}{.}\PYGdefault{n+na}{toQueryString}\PYGdefault{o}{()).}\PYGdefault{n+na}{toString}\PYGdefault{o}{());}
             \PYGdefault{n}{HttpsURLConnection} \PYGdefault{n}{connection} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{HttpsURLConnection}\PYGdefault{o}{)} \PYGdefault{n}{url}\PYGdefault{o}{.}\PYGdefault{n+na}{openConnection}\PYGdefault{o}{();}
             \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setRequestMethod}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}GET\PYGdefaultZdq{}}\PYGdefault{o}{);}
             \PYGdefault{n}{connection}\PYGdefault{o}{.}\PYGdefault{n+na}{setConnectTimeout}\PYGdefault{o}{(}\PYGdefault{n}{DEFAULT\PYGdefaultZus{}TIME\PYGdefaultZus{}OUT}\PYGdefault{o}{);}
